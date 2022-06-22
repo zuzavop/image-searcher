@@ -6,4 +6,6 @@ Popisovaný projekt bude realizován jako webová aplikace, ve které bude možn
 
 Podrobnější specifikace je v [pdf](Project_specification.pdf).
 
-Samotný projekt je v [této složce](gasearcher).
+Samotný projekt webové aplikace GASearcher je v [této složce](gasearcher).
+
+Pomocný kód na zpracování snímků je přiložený v [složce src](src).
