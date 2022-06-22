@@ -18,9 +18,7 @@ def get_data_from_clip_text_search(query):
         text_features = np.transpose(model.encode_text(text))
         text_features /= np.linalg.norm(text_features)
 
-    scores = np.zeros(len(clip_data))
-    for i in range(len(clip_data)):
-        scores[i] = cosine_distance(clip_data[i], text_features)
+    scores = [cosine_distance(clip_data[i], text_features) for i in range(len(clip_data))]
 
     return np.argsort(scores)
 
@@ -30,8 +28,6 @@ def get_data_from_clip_image_search(image_query):
     image_query_index = int((image_query[-9:])[:5]) - 1
     image_query = np.transpose(clip_data[image_query_index])
 
-    scores = np.zeros(len(clip_data))
-    for i in range(len(clip_data)):
-        scores[i] = cosine_distance(clip_data[i], image_query)
+    scores = [cosine_distance(clip_data[i], image_query) for i in range(len(clip_data))]
 
     return np.argsort(scores)
