@@ -11,8 +11,8 @@ clip_data = []
 
 def get_clip_data():
     global clip_data
-    for fn in sorted(os.listdir("clip")):
-        clip_data.append(torch.load(f"clip/{fn}"))
+    for fn in sorted(os.listdir("data/clip")):
+        clip_data.append(torch.load(f"data/clip/{fn}"))
         clip_data[-1] = clip_data[-1]/np.linalg.norm(clip_data[-1])
 
 
