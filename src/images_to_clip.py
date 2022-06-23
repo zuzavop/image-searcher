@@ -15,6 +15,7 @@ for fn in os.listdir(path):
     
     with torch.no_grad():
         image_feat = model.encode_image(image)
+	image_feat = image_feat/np.linalg.norm(image_feat)
         torch.save(image_feat, f"clip/{fn[:-4]}.pt")
 
 

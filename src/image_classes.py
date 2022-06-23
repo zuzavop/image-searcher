@@ -10,6 +10,7 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 
 path = "..\\..\\data\\photos"
 text_path = "..\\nounlist.txt"
+accuracy = 0.95
 
 idx2label = []
 with open(text_path) as f:
@@ -29,7 +30,7 @@ for fn in os.listdir(path):
         logits_per_image, logits_per_text = model(image, text)
         probs = logits_per_image.softmax(dim=-1).cpu().numpy()
 
-        result = np.where(probs > 0.95)
+        result = np.where(probs > accuracy)
         img_classes = [idx2label[result]]
         print(img_classes)
 	#cl = Image(index=int(fn[:-4]), classes=img_classes)
