@@ -25,7 +25,7 @@ def get_image(index):
 def get_data():
     global clip_data, filenames
     for fn in sorted(os.listdir(path_data + "clip")):
-        clip_data.append(torch.load(f"clip/{fn}"))
+        clip_data.append(torch.load(path_data + f"clip/{fn}"))
 
     for fn in sorted(os.listdir(path_data + "photos")):
         filenames.append(fn)
