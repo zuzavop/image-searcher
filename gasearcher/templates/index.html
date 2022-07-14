@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
-    <form id="form" method="post">
-      <label for="query">Text query:</label>
-      <input type="text" id="query" name="query"><br><br>
-      <input type="submit" value="Submit">
-    </form>
-    {% block content %}
-
-    {% endblock %}
+    <div class="sidebar">
+        <input type="search" class="bar-item">
+        <input type="button" class="bar-item button" value="Text search">
+        <input type="button" class="bar-item button" value="Similarity search">
+    </div>
+    <div class="container">
+    </div>
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </body>
 </html>

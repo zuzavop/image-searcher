@@ -8,15 +8,15 @@ import os
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
-path = "photos"
+path = "..//..//data//photos"
 for fn in os.listdir(path):
     filename = path + "/" + fn
     image = preprocess(Image.open(filename)).unsqueeze(0).to(device)
     
     with torch.no_grad():
         image_feat = model.encode_image(image)
-	image_feat = image_feat/np.linalg.norm(image_feat)
-        torch.save(image_feat, f"clip/{fn[:-4]}.pt")
+        image_feat = image_feat/np.linalg.norm(image_feat)
+        torch.save(image_feat, f"../../data/clip/{fn[:-4]}.pt")
 
 
 #clip = [] 
