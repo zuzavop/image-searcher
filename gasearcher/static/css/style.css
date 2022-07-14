@@ -1,29 +1,15 @@
 html {
     font-size: 1.2em;
-    padding: 10px 10%;
+    padding: 2% 5%;
 }
 
 div.sidebar {
-    width: 25%;
+    width: 20%;
+    float: left;
 }
 
-div.content {
-  margin: 5px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 180px;
-}
-
-div.content:hover {
-  border: 1px solid #777;
-}
-
-div.content img {
-  width: 100%;
-  height: auto;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
+div.container {
+    width: 80%;
+    float: right;
+    padding: 0px;
 }
