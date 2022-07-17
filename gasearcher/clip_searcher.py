@@ -1,3 +1,5 @@
+import sys
+
 import clip
 import numpy as np
 import torch
@@ -13,14 +15,21 @@ def cosine_distance(h1, h2):
 
 @jit(nopython=True)
 def get_data_from_clip_text_search(query):
+    old_stdout = sys.stdout
+    log_file = open("message.log", "w")
+    sys.stdout = log_file
     text = clip.tokenize(query).to(device)
     with torch.no_grad():
         text_features = np.transpose(model.encode_text(text))
         text_features /= np.linalg.norm(text_features)
 
-    scores = [cosine_distance(clip_data[i], text_features) for i in range(len(clip_data))]
+    scores = np.argsort([cosine_distance(clip_data[i], text_features) for i in range(len(clip_data))])
 
-    return np.argsort(scores)
+    print('"' + query + '";' + scores)
+    sys.stdout = old_stdout
+    log_file.close()
+
+    return scores
 
 
 @jit(nopython=True)
