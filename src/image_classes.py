@@ -10,7 +10,7 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 
 path = "..\\..\\data\\photos"
 text_path = "..\\nounlist.txt"
-accuracy = 0.95
+accuracy = 0.8
 
 idx2label = []
 with open(text_path) as f:
@@ -23,16 +23,14 @@ for fn in os.listdir(path):
     filename = path + "/" + fn
     image = preprocess(Image.open(filename)).unsqueeze(0).to(device)
     
-    with torch.no_grad():
-        image_features = model.encode_image(image)
-        text_features = model.encode_text(text)
-    
+    with torch.no_grad():    
         logits_per_image, logits_per_text = model(image, text)
         probs = logits_per_image.softmax(dim=-1).cpu().numpy()
 
-        result = np.where(probs > accuracy)
-        img_classes = [idx2label[result]]
-        print(img_classes)
-	#cl = Image(index=int(fn[:-4]), classes=img_classes)
-	#cl.save()
+        result = [i for i in range(len(probs[0])) if probs[0][i] > accuracy]
+        #img_classes = [idx2label[result]]
+        #print(img_classes)
+        
+	with open('result.csv', 'a') as f:
+		f.write(fn[:-4] + ':' + str(result) + ',/n')
 

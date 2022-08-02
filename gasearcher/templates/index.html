@@ -23,10 +23,10 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </body>
 <script>
-    for (let i = 0; i < 64; i++) {
+    for (let i = 1; i < 65; i++) {
         const image = document.createElement("img");
         image.id = i.toString();
-        image.setAttribute('src', 'http://bobbyhadz.com/images/blog/javascript-show-div-on-select-option/banner.webp');
+        image.setAttribute('src', '../static/data/photos/' + ("0000" + i).slice(-5) + '.jpg');
         image.setAttribute('height', 90); // height in px
         image.setAttribute('width', 90); // width in px
         document.getElementsByClassName("container")[0].appendChild(image);
