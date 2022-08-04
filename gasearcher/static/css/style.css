@@ -1,15 +1,56 @@
 html {
     font-size: 1.2em;
-    padding: 2% 5%;
+    padding: 2%;
+}
+
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    margin: 5px;
+}
+
+.left {
+    left: 0;
+    width: 20%;
+}
+
+.right {
+    right: 0;
+    width: 80%;
 }
 
 div.sidebar {
-    width: 20%;
-    float: left;
+    position: absolute;
+    text-align: center;
 }
 
 div.container {
-    width: 80%;
-    float: right;
-    padding: 0px;
+    position: absolute;
+}
+
+div.context {
+    position: absolute;
+    bottom: 0;
+    height: 9%;
+    overflow:hidden;
+    white-space:nowrap;
+    left: 0;
+}
+
+img {
+    margin: 3px;
+    width: 9%;
+    height: 9%;
+}
+
+img.unselected {
+    border-style: none;
+}
+
+img.selected {
+    border-style: solid;
+    border-color: yellow;
 }
