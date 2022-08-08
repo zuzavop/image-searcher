@@ -1,5 +1,6 @@
 import secrets
 import sys
+from collections import Counter
 
 import clip
 import numpy as np
@@ -56,9 +57,12 @@ def search(request):
         if int(request.GET['answer']) == finding[gas.models.finded]:
             gas.models.finded += 1
     data_to_display = {i: ([] if i not in class_data else [a for a in class_data[i]]) for i in dat}
+    top_classes = [word for word, word_count in
+                   Counter(np.concatenate([a for a in data_to_display.values()], axis=None)).most_common(5)]
     data = {
         'list_photo': data_to_display,
         'classes': ','.join(classes),
+        'top_classes': top_classes[::-1],
         'find_id': finding[gas.models.finded]
     }
     return HttpResponse(template.render(data, request))

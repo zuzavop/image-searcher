@@ -25,7 +25,20 @@
     </div>
 </div>
 <div class="split right">
-    <div class="container"></div>
+    <div class="container">
+        <table>
+            <tbody class="div_table">
+                <script>
+                    const tb = document.getElementsByClassName('div_table')[0];
+                    for (let i = 0; i < 6; i++) {
+                        const tr = document.createElement('tr');
+                        tr.id = i.toString() + 'tr';
+                        tb.appendChild(tr);
+                    }
+                </script>
+            </tbody>
+        </table>
+    </div>
     <div class="context"></div>
 </div>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
@@ -38,9 +51,12 @@
     {% endif %}
     {% if list_photo %}
         let list_photo = {{ list_photo }};
-        console.log(list_photo);
+        let num = 0
         for (let i in list_photo) {
+            const div = document.createElement('td');
+            div.className = 'img_div';
             const image = document.createElement("img");
+            div.appendChild(image);
             image.id = i.toString();
             image.setAttribute('src', '../static/data/photos/' + ("0000" + (parseInt(i) + 1)).slice(-5) + '.jpg');
             image.addEventListener("click", function () {
@@ -49,15 +65,18 @@
             image.addEventListener('dblclick', function () {
                 control_and_send(i);
             });
-            document.getElementsByClassName("container")[0].appendChild(image);
+            document.getElementById(Math.floor(num/12) + 'tr').appendChild(div);
+            const buttons = document.createElement('div');
+            div.appendChild(buttons);
             for (let e in list_photo[i]) {
                 const but = document.createElement("button");
-                but.value = classes[parseInt(list_photo[i][e])];
+                buttons.appendChild(but)
+                but.textContent = classes[parseInt(list_photo[i][e]) - 1];
                 but.addEventListener("click", function () {
-                    add_text(but.value);
+                    add_text(but.textContent);
                 });
-                document.getElementsByClassName("container")[0].appendChild(but);
             }
+            num++;
         }
     {% else %}
         throw "Loading of photos went wrong.";
@@ -68,6 +87,19 @@
             searching();
         }
     });
+
+    {% if top_classes %}
+        let top_classes = {{ top_classes }};
+        for (let c in top_classes) {
+            const but = document.createElement("button");
+            but.textContent = classes[parseInt(top_classes[c]) - 1];
+            but.addEventListener("click", function () {
+                add_text(but.textContent);
+            });
+            document.getElementById("search_text").after(but);
+        }
+        document.getElementById("search_text").after(document.createElement('br'));
+    {% endif %}
 
     let fin = {{ find_id }};
     const image = document.createElement("img");
