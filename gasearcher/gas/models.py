@@ -24,7 +24,7 @@ clip_data = []
 class_data = {}
 classes = []
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
-finding = [100, 595, 1206, 2058, 120, 642]
+finding = [4156, 7522, 9373, 3877, 1821, 912, 11850, 3977, 2416, 101]
 finded = 0
 
 

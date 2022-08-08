@@ -28,14 +28,14 @@
     <div class="container">
         <table>
             <tbody class="div_table">
-                <script>
-                    const tb = document.getElementsByClassName('div_table')[0];
-                    for (let i = 0; i < 6; i++) {
-                        const tr = document.createElement('tr');
-                        tr.id = i.toString() + 'tr';
-                        tb.appendChild(tr);
-                    }
-                </script>
+            <script>
+                const tb = document.getElementsByClassName('div_table')[0];
+                for (let i = 0; i < 6; i++) {
+                    const tr = document.createElement('tr');
+                    tr.id = i.toString() + 'tr';
+                    tb.appendChild(tr);
+                }
+            </script>
             </tbody>
         </table>
     </div>
@@ -50,34 +50,40 @@
         throw "Loading of photos went wrong.";
     {% endif %}
     {% if list_photo %}
-        let list_photo = {{ list_photo }};
-        let num = 0
-        for (let i in list_photo) {
-            const div = document.createElement('td');
-            div.className = 'img_div';
-            const image = document.createElement("img");
-            div.appendChild(image);
-            image.id = i.toString();
-            image.setAttribute('src', '../static/data/photos/' + ("0000" + (parseInt(i) + 1)).slice(-5) + '.jpg');
-            image.addEventListener("click", function () {
-                select(i);
-            });
-            image.addEventListener('dblclick', function () {
-                control_and_send(i);
-            });
-            document.getElementById(Math.floor(num/12) + 'tr').appendChild(div);
-            const buttons = document.createElement('div');
-            div.appendChild(buttons);
-            for (let e in list_photo[i]) {
-                const but = document.createElement("button");
-                buttons.appendChild(but)
-                but.textContent = classes[parseInt(list_photo[i][e]) - 1];
-                but.addEventListener("click", function () {
-                    add_text(but.textContent);
+        let num = 0;
+        {% for i,v in list_photo.items %}
+            {
+                id = '{{i}}';
+                const div = document.createElement('td');
+                div.className = 'img_div';
+                document.getElementById(Math.floor(num / 12) + 'tr').appendChild(div);
+                const image = document.createElement("img");
+                div.appendChild(image);
+                image.id = id.toString();
+                image.setAttribute('src', '../static/data/photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
+                image.addEventListener("click", function () {
+                    select(image.id);
                 });
+                image.addEventListener('dblclick', function () {
+                    control_and_send(image.id);
+                });
+
+                const buttons = document.createElement('div');
+                div.appendChild(buttons);
+                values = {{v}};
+                console.log(values);
+                for(let e in values) {
+                    console.log(e);
+                    const but = document.createElement("button");
+                    buttons.appendChild(but);
+                    but.textContent = classes[parseInt(values[e]) - 1];
+                    but.addEventListener("click", function () {
+                        add_text(but.textContent);
+                    });
+                }
+                num++;
             }
-            num++;
-        }
+        {% endfor %}
     {% else %}
         throw "Loading of photos went wrong.";
     {% endif %}
@@ -102,10 +108,10 @@
     {% endif %}
 
     let fin = {{ find_id }};
-    const image = document.createElement("img");
-    image.id = fin.toString() + 'r';
-    image.setAttribute("class", "find_img");
-    image.setAttribute('src', '../static/data/photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
-    document.getElementsByClassName("sidebar")[0].appendChild(image);
+    const img = document.createElement("img");
+    img.id = fin.toString() + 'r';
+    img.setAttribute("class", "find_img");
+    img.setAttribute('src', '../static/data/photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
+    document.getElementsByClassName("sidebar")[0].appendChild(img);
 </script>
 </html>

@@ -20,19 +20,24 @@ function show_context(id) {
         image.id = (parseInt(id) + i).toString();
         image.setAttribute('src', '../static/data/photos/' + ("0000" + (parseInt(id) + i + 1)).slice(-5) + '.jpg');
         image.addEventListener('dblclick', function () {
-            control_and_send(i);
+            control_and_send(image.id);
+        });
+        image.addEventListener("click", function () {
+            select(image.id, false);
         });
         document.getElementsByClassName("context")[0].appendChild(image);
     }
 }
 
-function select(id) {
+function select(id, new_c=true) {
     if (selected > -1) {
         document.getElementById(selected).setAttribute("class", "unselected");
     }
     selected = id;
     document.getElementById(id).setAttribute("class", "selected");
-    show_context(id)
+    if (new_c) {
+        show_context(id);
+    }
 }
 
 function control_and_send(id) {
