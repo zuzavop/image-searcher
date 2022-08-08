@@ -28,8 +28,6 @@ for fn in os.listdir(path):
         probs = logits_per_image.softmax(dim=-1).cpu().numpy()
 
         result = [i for i in range(len(probs[0])) if probs[0][i] > accuracy]
-        #img_classes = [idx2label[result]]
-        #print(img_classes)
         
 	with open('result.csv', 'a') as f:
 		f.write(fn[:-4] + ':' + str(result) + ',/n')

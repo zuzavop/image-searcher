@@ -29,12 +29,13 @@ div.sidebar {
 
 div.container {
     position: absolute;
+    height: 85%;
 }
 
 div.context {
     position: absolute;
     bottom: 0;
-    height: 9%;
+    height: 15%;
     overflow:hidden;
     white-space:nowrap;
     left: 0;
@@ -43,11 +44,11 @@ div.context {
 img {
     margin: 3px;
     width: 9%;
-    height: 9%;
+    height: auto;
 }
 
 img.unselected {
-    border-style: none;
+    border-style: hidden;
 }
 
 img.selected {
