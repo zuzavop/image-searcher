@@ -1,6 +1,8 @@
 let selected = -1
+let middle = -1
 
 function searching() {
+    // send text query
     let query = document.getElementById('search_text').value;
     if (query.length > 0) {
         location.href = '?query="' + query + '"';
@@ -8,12 +10,15 @@ function searching() {
 }
 
 function sim_search() {
+    // send query for similarity search
     if (selected > -1) {
         location.href = '?id=' + selected;
     }
 }
 
 function show_context(id) {
+    // show images in context of database
+    middle = id;
     document.getElementsByClassName("context")[0].innerHTML = '';
     for (let i = -5; i < 6; i++) {
         const image = document.createElement("img");
@@ -29,18 +34,23 @@ function show_context(id) {
     }
 }
 
-function select(id, new_c=true) {
+function select(id, new_c = true) {
+    // select image and show it context
     if (selected > -1) {
         document.getElementById(selected).setAttribute("class", "unselected");
+        // todo - selecting on context
     }
     selected = id;
     document.getElementById(id).setAttribute("class", "selected");
     if (new_c) {
+        document.getElementsByClassName('previous')[0].style.visibility = 'visible';
+        document.getElementsByClassName('next')[0].style.visibility = 'visible';
         show_context(id);
     }
 }
 
 function control_and_send(id) {
+    // control result and if correct send query for new image
     let find_id = parseInt(document.getElementsByClassName("find_img")[0].id.slice(0, -1));
     if (id == find_id) {
         alert("Right answer. New image will be generate...")
@@ -51,8 +61,9 @@ function control_and_send(id) {
 }
 
 function add_text(text) {
+    // add text to text search
     if (document.getElementById('search_text').value.length > 0) {
-        document.getElementById('search_text').value += ' '  + text;
+        document.getElementById('search_text').value += ' ' + text;
     } else {
         document.getElementById('search_text').value += text;
     }

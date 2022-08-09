@@ -29,7 +29,8 @@ def get_data_from_clip_text_search(query, session):
     old_stdout = sys.stdout
     log_file = open(path_data + "message.csv", "a")
     sys.stdout = log_file
-    print(query + ';' + str(finding[gas.models.finded]) + ';' + session + ';' + str(scores.index(finding[gas.models.finded]) + 1))
+    print(query + ';' + str(finding[gas.models.finded]) + ';' + session + ';' + str(
+        scores.index(finding[gas.models.finded]) + 1))
     sys.stdout = old_stdout
     log_file.close()
 
@@ -60,7 +61,8 @@ def search(request):
                 return redirect('/end')
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in dat}
     top_classes = [word for word, word_count in
-                   Counter(np.concatenate([a for a in data_to_display.values()], axis=None)).most_common(5)]
+                   Counter(np.concatenate([a for a in data_to_display.values()], axis=None)).most_common(5) if
+                   word_count > 5]
     data = {
         'list_photo': data_to_display,
         'classes': ','.join(classes),

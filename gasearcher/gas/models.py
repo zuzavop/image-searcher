@@ -1,10 +1,11 @@
 import os
+from ast import literal_eval
 
 import clip
+import pandas as pd
 import torch as torch
 from django.db import models
-import pandas as pd
-from ast import literal_eval
+import numpy as np
 
 from gasearcher.settings import STATICFILES_DIRS
 
@@ -41,5 +42,6 @@ def get_data():
     with open(path_data + 'nounlist.txt', 'r') as f:
         for line in f:
             classes.append(line[:-1].replace("'", '"'))
+
 
 get_data()

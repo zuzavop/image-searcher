@@ -17,7 +17,7 @@ for fn in os.listdir(path):
 
         with torch.no_grad():
             image_features = model.encode_image(image_input)
-        image_features /= image_features.norm(dim=-1, keepdim=True)
+            image_features /= image_features.norm(dim=-1, keepdim=True)
 
         text_features = torch.load('result.pt')
         similarity = (100.0 * image_features @ text_features.T).softmax(dim=-1)

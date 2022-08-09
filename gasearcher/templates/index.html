@@ -71,12 +71,10 @@
                 const buttons = document.createElement('div');
                 div.appendChild(buttons);
                 values = {{v}};
-                console.log(values);
-                for(let e in values) {
-                    console.log(e);
+                for (let e in values) {
                     const but = document.createElement("button");
                     buttons.appendChild(but);
-                    but.textContent = classes[parseInt(values[e]) - 1];
+                    but.textContent = classes[parseInt(values[e]) + 1];
                     but.addEventListener("click", function () {
                         add_text(but.textContent);
                     });
@@ -98,7 +96,7 @@
         let top_classes = {{ top_classes }};
         for (let c in top_classes) {
             const but = document.createElement("button");
-            but.textContent = classes[parseInt(top_classes[c]) - 1];
+            but.textContent = classes[parseInt(top_classes[c]) + 1];
             but.addEventListener("click", function () {
                 add_text(but.textContent);
             });
@@ -113,5 +111,21 @@
     img.setAttribute("class", "find_img");
     img.setAttribute('src', '../static/data/photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
     document.getElementsByClassName("sidebar")[0].appendChild(img);
+
+    const butt_p = document.createElement("button");
+    butt_p.setAttribute("class", "previous cont_butt");
+    butt_p.textContent = '<';
+    butt_p.addEventListener("click", function () {
+        show_context(parseInt(middle) - 1);
+    });
+    document.getElementsByClassName("right")[0].appendChild(butt_p);
+
+    const butt_n = document.createElement("button");
+    butt_n.setAttribute("class", "next cont_butt");
+    butt_n.textContent = '>';
+    butt_n.addEventListener("click", function () {
+        show_context(parseInt(middle) + 1);
+    });
+    document.getElementsByClassName("right")[0].appendChild(butt_n);
 </script>
 </html>

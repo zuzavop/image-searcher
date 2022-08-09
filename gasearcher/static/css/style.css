@@ -38,10 +38,9 @@ html {
     position: absolute;
     bottom: 0;
     height: 15%;
-    overflow:hidden;
     white-space:nowrap;
-    left: 0;
     background: white;
+    margin: 0 0 0 3%;
 }
 
 img {
@@ -120,4 +119,19 @@ button:focus {
     float: left;
     font-size: 50%;
     bottom: -20%;
+}
+
+.cont_butt {
+    position: absolute;
+    bottom: 0;
+    visibility: hidden;
+    padding: 3% 1% 3% 1%;
+}
+
+.next {
+    right: 2%;
+}
+
+.previous {
+    left: -1%;
 }

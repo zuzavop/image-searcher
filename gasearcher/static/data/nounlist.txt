@@ -7,7 +7,6 @@ abacus
 abbey
 abbreviation
 abdomen
-ability
 abnormality
 abolishment
 abortion
@@ -2126,8 +2125,6 @@ epee
 ephemera
 ephemeris
 ephyra
-epic
-episode
 epithelium
 epoch
 eponym
@@ -3061,7 +3058,6 @@ illiteracy
 illness
 illusion
 illustration
-image
 imagination
 imbalance
 imitation
@@ -5363,7 +5359,6 @@ sentiment
 sepal
 separation
 septicaemia
-sequel
 sequence
 serial
 series
@@ -5618,7 +5613,6 @@ somewhere
 son
 sonar
 sonata
-song
 songbird
 sonnet
 soot
@@ -6112,7 +6106,6 @@ test
 testament
 testimonial
 testimony
-testing
 text
 textbook
 textual
@@ -6266,7 +6259,6 @@ traffic
 trafficker
 tragedy
 trail
-trailer
 trailpatrol
 train
 trainer
@@ -6505,7 +6497,6 @@ vice
 vicinity
 victim
 victory
-video
 view
 viewer
 vignette
