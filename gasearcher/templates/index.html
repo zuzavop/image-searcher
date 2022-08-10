@@ -20,8 +20,8 @@
         <input class="bar-item" id="search_text" placeholder="search text" minlength="1"><br>
         <button class="bar-item" onclick="searching()">Text search</button>
         <br>
-        <button class="bar-item" onclick="sim_search()">Similarity search</button>
-        <br>
+{#        <button class="bar-item" onclick="sim_search()">Similarity search</button>#}
+{#        <br>#}
     </div>
 </div>
 <div class="split right">
@@ -74,7 +74,7 @@
                 for (let e in values) {
                     const but = document.createElement("button");
                     buttons.appendChild(but);
-                    but.textContent = classes[parseInt(values[e]) + 1];
+                    but.textContent = classes[parseInt(values[e])];
                     but.addEventListener("click", function () {
                         add_text(but.textContent);
                     });
@@ -96,7 +96,7 @@
         let top_classes = {{ top_classes }};
         for (let c in top_classes) {
             const but = document.createElement("button");
-            but.textContent = classes[parseInt(top_classes[c]) + 1];
+            but.textContent = classes[parseInt(top_classes[c])];
             but.addEventListener("click", function () {
                 add_text(but.textContent);
             });

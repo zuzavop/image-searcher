@@ -37,7 +37,7 @@ def get_data():
 
     class_data = pd.read_csv(path_data + "result.csv", sep=';').set_index('id')
     class_data = class_data.to_dict()['top']
-    class_data = {int(key): literal_eval(value) for key, value in class_data.items()}
+    class_data = {int(key) - 1: literal_eval(value)[:4] for key, value in class_data.items()}
 
     with open(path_data + 'nounlist.txt', 'r') as f:
         for line in f:

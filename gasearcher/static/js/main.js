@@ -34,7 +34,7 @@ function show_context(id) {
     }
 }
 
-function select(id, new_c = true) {
+function select(id, new_c = false) {
     // select image and show it context
     if (selected > -1) {
         document.getElementById(selected).setAttribute("class", "unselected");
