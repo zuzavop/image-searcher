@@ -25,7 +25,8 @@ clip_data = []
 class_data = {}
 classes = []
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
-finding = [4156, 7522, 9373, 3877, 1821, 912, 11850, 3977, 2416, 101]
+finding = np.random.randint(1, 11860, 10)
+    #[4156, 7522, 9373, 3877, 1821, 912, 11850, 3977, 2416, 101]
 finded = 0
 
 
@@ -37,7 +38,7 @@ def get_data():
 
     class_data = pd.read_csv(path_data + "result.csv", sep=';').set_index('id')
     class_data = class_data.to_dict()['top']
-    class_data = {int(key) - 1: literal_eval(value)[:4] for key, value in class_data.items()}
+    class_data = {int(key) - 1: literal_eval(value) for key, value in class_data.items()}
 
     with open(path_data + 'nounlist.txt', 'r') as f:
         for line in f:

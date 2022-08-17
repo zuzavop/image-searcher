@@ -61,11 +61,14 @@ function control_and_send(id) {
 }
 
 function add_text(text) {
-    // add text to text search
-    if (document.getElementById('search_text').value.length > 0) {
-        document.getElementById('search_text').value += ' ' + text;
+    // add text to text search and set focus to end
+    const input = document.getElementById('search_text');
+    const end = input.value.length;
+    if (end > 0) {
+        input.value += ' ' + text;
     } else {
-        document.getElementById('search_text').value += text;
+        input.value += text;
     }
-
+    input.setSelectionRange(end, end);
+    input.focus();
 }

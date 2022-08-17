@@ -8,4 +8,4 @@ Podrobnější specifikace je v [pdf](Project_specification.pdf).
 
 Samotný projekt webové aplikace GASearcher je v [této složce](gasearcher).
 
-Pomocný kód na zpracování snímků je přiložený v [složce src](src).
+Pomocný kód na zpracování snímků a jejich klasifikaci je přiložený v [složce src](src).

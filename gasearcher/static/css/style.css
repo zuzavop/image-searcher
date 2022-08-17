@@ -119,7 +119,8 @@ button:focus {
     position: absolute;
     float: left;
     font-size: 50%;
-    bottom: -20%;
+    bottom: -46%;
+    left: 5%;
 }
 
 .cont_butt {
