@@ -1,12 +1,12 @@
 ATM
 CD
 SUV
-TV
 aardvark
 abacus
 abbey
 abbreviation
 abdomen
+ability
 abnormality
 abolishment
 abortion
@@ -126,6 +126,7 @@ airspace
 alarm
 alb
 albatross
+album
 alcohol
 alcove
 alder
@@ -226,6 +227,8 @@ antiquity
 antler
 antling
 anxiety
+anybody
+anyone
 anything
 anywhere
 apartment
@@ -363,6 +366,7 @@ author
 authorisation
 authority
 authorization
+auto
 autoimmunity
 automation
 automaton
@@ -549,6 +553,7 @@ bidder
 bidding
 bidet
 bifocals
+big
 bijou
 bike
 bikini
@@ -597,6 +602,7 @@ blister
 blizzard
 block
 blocker
+blog
 blogger
 blood
 bloodflow
@@ -1362,6 +1368,7 @@ container
 content
 contention
 contest
+context
 continent
 contingency
 continuity
@@ -2119,6 +2126,8 @@ epee
 ephemera
 ephemeris
 ephyra
+epic
+episode
 epithelium
 epoch
 eponym
@@ -2283,6 +2292,7 @@ fatigue
 fatigues
 faucet
 fault
+fav
 fava
 favor
 favorite
@@ -3051,6 +3061,7 @@ illiteracy
 illness
 illusion
 illustration
+image
 imagination
 imbalance
 imitation
@@ -3550,6 +3561,7 @@ logo
 loincloth
 lollipop
 loneliness
+long
 longboat
 longitude
 look
@@ -3589,6 +3601,7 @@ lymphocyte
 lynx
 lyocell
 lyre
+lyrics
 lysine
 mRNA
 macadamia
@@ -3940,8 +3953,10 @@ mousse
 moustache
 mouth
 mouton
+move
 movement
 mover
+movie
 mower
 mozzarella
 mud
@@ -4188,6 +4203,7 @@ ornament
 osmosis
 osprey
 ostrich
+other
 otter
 ottoman
 ounce
@@ -5349,6 +5365,7 @@ sentiment
 sepal
 separation
 septicaemia
+sequel
 sequence
 serial
 series
@@ -5481,6 +5498,7 @@ simvastatin
 sin
 singer
 singing
+single
 singular
 sink
 sinuosity
@@ -5603,6 +5621,7 @@ somewhere
 son
 sonar
 sonata
+song
 songbird
 sonnet
 soot
@@ -6092,9 +6111,11 @@ territory
 terror
 terrorism
 terrorist
+test
 testament
 testimonial
 testimony
+testing
 text
 textbook
 textual
@@ -6248,6 +6269,7 @@ traffic
 trafficker
 tragedy
 trail
+trailer
 trailpatrol
 train
 trainer
@@ -6351,6 +6373,7 @@ tusk
 tussle
 tutu
 tuxedo
+tweet
 tweezers
 twig
 twilight
@@ -6485,6 +6508,7 @@ vice
 vicinity
 victim
 victory
+video
 view
 viewer
 vignette
