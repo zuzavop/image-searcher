@@ -18,11 +18,11 @@
 <body>
 <div class="split left">
     <div class="sidebar">
-        <input class="bar-item" id="search_text" placeholder="search text" minlength="1"><br>
+        <label for="search_text"></label><input class="bar-item" id="search_text" placeholder="text query" minlength="1"><br>
         <button class="bar-item" onclick="searching()">Text search</button>
         <br>
-{#        <button class="bar-item" onclick="sim_search()">Similarity search</button>#}
-{#        <br>#}
+        {#        <button class="bar-item" onclick="sim_search()">Similarity search</button>#}
+        {#        <br>#}
     </div>
 </div>
 <div class="split right">
@@ -50,6 +50,7 @@
     {% else %}
         throw "Loading of photos went wrong.";
     {% endif %}
+
     {% if list_photo %}
         let num = 0;
         {% for i,v in list_photo.items %}
@@ -58,9 +59,10 @@
                 div = create_image(id, num);
 
                 const buttons = document.createElement('div');
+                buttons.className = "image_buttons";
                 div.appendChild(buttons);
                 values = {{v}};
-                //create_buttons(buttons, values);
+                create_buttons(buttons, values);
                 num++;
             }
         {% endfor %}
@@ -75,8 +77,10 @@
 
     create_context();
 
-    let wanted_id = {{ find_id }};
-    create_wanted(wanted_id);
+    {% if find_id %}
+        let wanted_id = {{ find_id }};
+        create_wanted(wanted_id);
+    {% endif %}
 
     document.getElementById("search_text").addEventListener("keyup", ({key}) => {
         if (key === "Enter") {

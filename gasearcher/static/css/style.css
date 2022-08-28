@@ -6,7 +6,6 @@ html {
 .split {
     height: 100%;
     position: fixed;
-    z-index: 1;
     top: 0;
     overflow-x: hidden;
     margin: 5px;
@@ -23,14 +22,13 @@ html {
 }
 
 .sidebar {
-    position: absolute;
     text-align: center;
     margin: 0 2% 0 0;
 }
 
 .container {
     position: absolute;
-    height: 85%;
+    height: 100%;
     float: left;
     margin: 0 3%;
 }
@@ -39,7 +37,7 @@ html {
     position: absolute;
     bottom: 0;
     height: 15%;
-    white-space:nowrap;
+    white-space: nowrap;
     background: white;
     margin: 0 0 0 3%;
 }
@@ -79,20 +77,14 @@ button {
     color: #0f1111;
     cursor: pointer;
     display: inline-block;
-    font-family: "Amazon Ember",sans-serif;
     padding: 2% 5%;
     position: relative;
     text-align: center;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
-    touch-action: manipulation;
     vertical-align: middle;
     margin: 1%;
-}
-
-button:hover {
-    background-color: #f7fafa;
 }
 
 button:focus {
@@ -101,26 +93,32 @@ button:focus {
     outline: 0;
 }
 
+button:hover {
+    background-color: #f7fafa;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .bar-item {
     margin: 5% 0;
     border-color: #05b4cd;
 }
-
 
 .img_div {
     float: left;
     width: 8%;
     height: auto;
     position: relative;
-    margin: 0 0 4% 0;
+    margin: 0 0 calc(19vh - 6.4vw) 0;
 }
 
 .img_div div {
     position: absolute;
     float: left;
     font-size: 50%;
-    bottom: -46%;
     left: 5%;
+    z-index: 1;
+    bottom: calc(-20vh + 7vw);
 }
 
 .cont_butt {
@@ -136,4 +134,21 @@ button:focus {
 
 .previous {
     left: -1%;
+}
+
+.image_buttons .hidden {
+    display: none;
+}
+
+.image_buttons {
+    display: block;
+}
+
+.plus_but {
+    border-radius: 12px;
+}
+
+#search_text {
+    width: 90%;
+    margin: 5% 5%;
 }

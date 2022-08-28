@@ -1,18 +1,33 @@
 let selected = -1
 let middle = -1
+let found = -1
+let trying = -1
+
+if (found == -1) {
+    let co = document.cookie.split(';');
+    console.log(co);
+    if (co.length > 1) {
+        found = parseInt(co[1].split('=')[1]);
+        // trying = parseInt(co[1].split('=')[2]) + 1;
+    } else {
+        document.cookie = 'index=' + 0;
+        found = 0;
+        trying = 0;
+    }
+}
 
 function searching() {
     // send text query
     let query = document.getElementById('search_text').value;
     if (query.length > 0) {
-        location.href = '?query="' + query + '"';
+        location.href = '?query="' + query + '"&found=' + found;
     }
 }
 
 function sim_search() {
     // send query for similarity search
     if (selected > -1) {
-        location.href = '?id=' + selected;
+        location.href = '?id=' + selected + '&found' + found;
     }
 }
 
@@ -54,7 +69,9 @@ function control_and_send(id) {
     let find_id = parseInt(document.getElementsByClassName("find_img")[0].id.slice(0, -1));
     if (id == find_id) {
         alert("Right answer. New image will be generate...")
-        location.href = '?answer=' + id;
+        found++;
+        document.cookie = 'index=' + found;
+        location.href = '?answer=' + id + '&found=' + found;
     } else {
         alert("Wrong answer. Try again...");
     }
@@ -63,12 +80,13 @@ function control_and_send(id) {
 function add_text(text) {
     // add text to text search and set focus to end
     const input = document.getElementById('search_text');
-    const end = input.value.length;
+    let end = input.value.length;
     if (end > 0) {
         input.value += ' ' + text;
     } else {
         input.value += text;
     }
+    end = input.value.length;
     input.setSelectionRange(end, end);
     input.focus();
 }

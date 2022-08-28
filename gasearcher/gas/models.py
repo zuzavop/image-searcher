@@ -1,11 +1,11 @@
 import os
+import random
 from ast import literal_eval
 
 import clip
 import pandas as pd
 import torch as torch
 from django.db import models
-import numpy as np
 
 from gasearcher.settings import STATICFILES_DIRS
 
@@ -25,9 +25,9 @@ clip_data = []
 class_data = {}
 classes = []
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
-finding = np.random.randint(1, 11860, 10)
-    #[4156, 7522, 9373, 3877, 1821, 912, 11850, 3977, 2416, 101]
-finded = 0
+finding = [111, 198, 214, 300, 838, 900, 1216, 1840, 2315, 2416, 3558, 3658, 3977, 4477, 4952, 6735, 7051, 7531, 7581,
+           7977, 8378, 8637, 8956, 9138, 11850]
+random.shuffle(finding)
 
 
 def get_data():

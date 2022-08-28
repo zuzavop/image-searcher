@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-import gas
 from gas.models import device, model, clip_data, path_data, finding, class_data, classes
 
 
@@ -17,7 +16,7 @@ def cosine_distance(h1, h2):
     return 1 - np.dot(h1, h2)
 
 
-def get_data_from_clip_text_search(query, session):
+def get_data_from_clip_text_search(query, session, found):
     text = clip.tokenize(query).to(device)
     with torch.no_grad():
         text_features = np.transpose(model.encode_text(text))
@@ -29,8 +28,7 @@ def get_data_from_clip_text_search(query, session):
     old_stdout = sys.stdout
     log_file = open(path_data + "message.csv", "a")
     sys.stdout = log_file
-    print(query + ';' + str(finding[gas.models.finded]) + ';' + session + ';' + str(
-        scores.index(finding[gas.models.finded]) + 1))
+    # print(query + ';' + str(finding[found]) + ';' + session + ';' + str(scores.index(finding[found]) + 1))
     sys.stdout = old_stdout
     log_file.close()
 
@@ -49,15 +47,16 @@ def get_data_from_clip_image_search(image_query):
 
 def search(request):
     template = loader.get_template('index.html')
+    found = int(request.GET['found']) if request.GET.get('found') else 0
     dat = [i for i in range(2, 62)]
     if request.GET.get('query'):
-        dat = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'])[:60]
+        dat = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)[:60]
     elif request.GET.get('id'):
         dat = get_data_from_clip_image_search(request.GET['id'])[:60]
     elif request.GET.get('answer'):
-        if int(request.GET['answer']) == finding[gas.models.finded]:
-            gas.models.finded += 1
-            if gas.models.finded >= len(finding):
+        if int(request.GET['answer']) == finding[found]:
+            print(found)
+            if int(request.GET['found']) >= len(finding):
                 return redirect('/end')
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in dat}
     top_classes = [word for word, word_count in
@@ -67,7 +66,7 @@ def search(request):
         'list_photo': data_to_display,
         'classes': ','.join(classes),
         'top_classes': top_classes[::-1],
-        'find_id': finding[gas.models.finded]
+        'find_id': finding[found]
     }
     return HttpResponse(template.render(data, request))
 

@@ -15,15 +15,39 @@ function create_image(id, num) {
     return div;
 }
 
+function pop_up(buttons, button) {
+    const butt = buttons.getElementsByClassName("more_b");
+    for (let b of butt) {
+        b.classList.toggle("hidden");
+    }
+    if (button.textContent == "+") {
+        button.textContent = "-";
+    } else {
+        button.textContent = "+";
+    }
+}
+
 function create_buttons(buttons, values) {
+    let i = 1;
     for (let e in values) {
         const but = document.createElement("button");
         buttons.appendChild(but);
+        if (i > 3) {
+            but.className = "more_b hidden";
+        }
         but.textContent = classes[values[e]];
         but.addEventListener("click", function () {
             add_text(but.textContent);
         });
+        i++;
     }
+    const but = document.createElement("button");
+    but.textContent = '+';
+    but.className = "plus_but";
+    but.addEventListener("click", function () {
+        pop_up(buttons, but);
+    });
+    buttons.appendChild(but);
 }
 
 function create_top_classes(top_classes) {
