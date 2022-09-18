@@ -8,6 +8,7 @@ import os
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
+# path of current dataset folder
 path = "..//gasearcher//static//data//photos"
 for fn in os.listdir(path):
     filename = path + "/" + fn
@@ -20,6 +21,7 @@ for fn in os.listdir(path):
         torch.save(image_feat, f"../gasearcher/static/data/clip/{fn[:-4]}.pt")
 
 
+# loading of clip data
 #clip = [] 
 #for fn in sorted(os.listdir("clip")):
     #clip.append(torch.load(f"clip/{fn}"))

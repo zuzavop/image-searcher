@@ -1,3 +1,5 @@
+# not used - problems with classification of images with damage
+
 import torch
 import clip
 from PIL import Image

@@ -85,6 +85,8 @@ function select(id, new_c = false) {
         document.getElementsByClassName('next')[0].style.visibility = 'visible';
         show_context(id);
     }
+    // let parent = document.querySelector(".modal-parent");
+    // parent.style.display = "block";
 }
 
 function control_and_send(id) {
