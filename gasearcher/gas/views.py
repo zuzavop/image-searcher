@@ -41,28 +41,31 @@ def get_data_from_clip_image_search(image_query):
 
 def search(request):
     template = loader.get_template('index.html')
+
+    # load index of currently searching image from cookies
     found = int(request.COOKIES.get('index')) if request.COOKIES.get('index') is not None else 0
     data = [i for i in range(1, 61)]
 
     if request.GET.get('query'):
         data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)[:60]
-        last_search[request.session['session_id']] = data
     elif request.GET.get('id'):
         data = get_data_from_clip_image_search(request.GET['id'])[:60]
     elif request.GET.get('answer'):
-        if int(request.GET['answer']) == finding[found] and found >= len(finding):
+        if int(request.GET['answer']) == finding[found] and found >= len(finding):  # control of end
             return redirect('/end')
 
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in data}
     top_classes = [word for word, word_count in
                    Counter(np.concatenate([a for a in data_to_display.values()], axis=None)).most_common(5) if
                    word_count > 5]
+
     send_data = {
         'list_photo': data_to_display,
         'classes': ','.join(classes),
         'top_classes': top_classes[::-1],
         'find_id': finding[found]
     }
+
     return HttpResponse(template.render(send_data, request))
 
 

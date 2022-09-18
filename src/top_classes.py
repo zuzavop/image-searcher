@@ -1,34 +1,47 @@
 import os
 import clip
 import torch
+import json
 from PIL import Image
+from collections import Counter
 
-# Load the model
+# load the model
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load('ViT-B/32', device)
 
-path = "../photos"
-text_path = "../nounlist.txt"
+path = "../clip"
 
 for fn in os.listdir(path):
-    if (int(fn[:-4]) > 0):
-        filename = path + "/" + fn
-        image_input = preprocess(Image.open(filename)).unsqueeze(0).to(device)
+    filename = path + "/" + fn
+    # load image features get from clip
+    image_features = torch.load(filename)
 
-        with torch.no_grad():
-            image_features = model.encode_image(image_input)
-            image_features /= image_features.norm(dim=-1, keepdim=True)
+    # load nounlist (text dataset) features
+    text_features = torch.load('result.pt')
 
-        text_features = torch.load('result.pt')
-        similarity = (100.0 * image_features @ text_features.T).softmax(dim=-1)
-        values, indices = similarity[0].topk(5)
+    # get top 10 classes for image
+    similarity = (100.0 * image_features @ text_features.T)
+    values, indices = similarity[0].topk(10)
 
-        if not os.path.exists('result/' + fn[:-4] + '.txt'):
-            os.mknod('result/' + fn[:-4] + '.txt')
+    # save classes to file
+    if not os.path.exists('result/' + fn[:-3] + '.txt'):
+        os.mknod('result/' + fn[:-3] + '.txt')
 
-        with open('result/' + fn[:-4] + '.txt', 'a') as f:
-            for value, index in zip(values, indices):
-                f.write(f"{index}: {100 * value.item():.2f},\n")
+    with open('result/' + fn[:-3] + '.txt', 'a') as f:
+        for value, index in zip(values, indices):
+            f.write(f"{index}: {100 * value.item():.2f},\n")
 
+# get classes of images to one csv file
+path = 'result/'
+for fn in os.listdir(path):
+    data = {}
+    with open(path + fn) as f:
+        for line in f:
+            (k,v) = line.split(':')
+            data[int(k)] = float(v[1:-2])
 
-        print(str(fn[:-4]))
+    new_data = dict(Counter(data).most_common(10))
+    data = list(new_data.keys())
+
+    with open('result.csv', 'a') as f:
+        f.write(fn[:-4] + ';' + str(data) + '\n')

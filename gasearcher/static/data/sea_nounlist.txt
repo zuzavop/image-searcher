@@ -1,66 +1,258 @@
+albacore tune
+alfonsino
 almaco jack
 atlantic bonito
 atlantic croaker
 atlantic menhaden
 atlantic spadefish
+anchovy
+angelfish
+antarctic starry skate
+antarctic toothfish
+atlantic salmon
+arrow squid
+ballonfish
+banded wrasse
 bank sea bass
+barracouta
+bass groper
+bat ray
+baxters lantern dogfish
+bigeye cardinalfish
 bigeye tuna
+black cod
 black drum
+black flounder
+black marlin
+black oreo
 black sea bass
+black shark
+black stingray
 blackfin tuna
+blue cod
+blue mackerel
+blue maomao
 blue marlin
+blue moki
+blue shark
+blue warehou
 bluefin tuna
 bluefish
 blueline tilefish
+bluenose
+brill
+broad squid
+broadbill swordfish
+broadnose sevengill shark
+brown bullhead catfish
+brown stargazer
+brown trout
+bronzewhaler shark
 butterfish
+butterfly perch
+butterfly tuna
+cancer crab
+cardinal fish
+chambered nautilidae
+clam
+clown
 cobia
-doplhinfish
+cockle
+conch
+conger eel
+dog cockle
+doplhin fish
+dredge oyster
+eagle ray
+elephant fish
+escolar
+fan shell
 florida pompano
 flounder
+freshwater crayfish
+frostfish
 gag grouper
+garfish
+gemfish
+ghost shark
+giant boarfish
+giant spider crab
+gilthead sea bream
+golden prawn
 gray triggerfish
 grat barracuda
 greater amberjack
-hogfish
+greenback flounder
+grenadier
+grey mullet
+grey shark
+grey spiny dogfish
+hagfish
+hake
+hammerhead shark
+hapuku
+hoki
+inanga
 inshore lizardfish
-king mackerel
+jack mackerel
+jack-knife prawn
+javelin fish
+jellyfish
+john dory
+kahawai
+kelpfish
+king tarakihi
+king crab
 kingfishes
 knobbed porgy
+knobbed whelk
+koheru
+lamprey
+leatherjacket
+lemon sole
+limpet
+ling
 little tunny
+lobster krill
+longfin eel
+longfinned boarfish
+longnosed chimaera
+lookdown dory
+lucifer dogfish
+mako shark
+maori chief
+marblefish
+mirror dory
+monkfish
+moonfish
+moorish idol
+mussel
 northern puffer
+northern tuna
+octopus
+oilfish
+orange perch
+orange roughy
+otter clam
 oyster toadfish
+packhorse rock lobster
+pacific bluefin tuna
+paddle crab
+parore
+parrotfish
+patagonian toothfish
+paua
 pigfish
+pilchard
 pinfish
+pink maomao
+pipi
+porae
+porbeagle shark
+porcupine fish
+portuguese dogfish
+prawn killer
+prickly dogfish
+prickly shark
+quinnat salmon
+red baitfish
+red cod
 red drum
 red grouper
+red gurnard
+red moki
+red mullet
 red porgy
+red rock crab
 red snapper
-rock sea bass
+red swimming crab
+ribaldo
+rig
+rock cod
+roughy
+royal red prawn
+ruby fish
+rudderfish
 sailfish
-scamp
+sand flounder
+saury
+scallop
+scampi
+scarlet wrasse
+scarpee
+scorpionfish
+sea anemone
+sea cucumber
+sea dragon
+sea horse
+sea lion
+sea perch
+sea star
+sea turtle
+sea urchin
+seal
 searobin
 shad
-shark
 sheepshead
+shortfin eel
+shortjawed kokopu
+shovelnose spiny dogfish
+silver dory
+silver drummer
 silver perch
+silver roughy
+silver warehou
+silverside
 skate
 skipjack tuna
+slender tuna
+slickhead
+smelt
+smooth oreo
+snapper
+sockeye salmon
+sole
 spanish mackerel
 speckled hind
+spiny dogfish
+splendid perch
+sponge
 spot
 spottail pinfish
+spotted gurnard
 spotted seatrout
+spotted smoothhound
+spotted stargazer
+sprat
 stingray
 striped bass
+striped marlin
 striped mullet
 swordfish
+sunfish
+surf clam
+tarakihi
+toheroa
+tuatua
+trevally
+trumpeter
+turbot
+velvet dogfish
 vermilion snapper
 wahoo
+whitebait
 weakfish
+whale
 white grunt
 white marlin
+white warehou
+witch
+yellowbelly flounder
+yelloweye mullet
 yellowedge grouper
 yellowfin tuna
+yellowfoot paua
+yellowtail kingfish
 yellowtail snapper
 stanghorn coral
 elkhorn coral
@@ -77,3 +269,20 @@ great star coral
 rough cactus coral
 lettuce coral
 ivory bush coral
+algea
+buoy
+diver
+gulfweed
+kelp
+seagrass
+coral snake
+The Great Barrier Reef
+The Mesoamerican Barrier Reef System
+The New Caledonia Barrier Reef
+The Andros
+The Red Sea
+The Florida Reef Tract
+Pulley Ridge
+The Philippines coral reef area
+The Raja Ampat Islands
+Bermuda
