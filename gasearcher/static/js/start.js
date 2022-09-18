@@ -5,7 +5,7 @@ function create_image(id, num) {
     const image = document.createElement("img");
     div.appendChild(image);
     image.id = id.toString();
-    image.setAttribute('src', '../static/data/photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
+    image.setAttribute('src', '../static/data/old_photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
     image.addEventListener("click", function () {
         select(image.id);
     });
@@ -84,6 +84,6 @@ function create_wanted(fin) {
     const img = document.createElement("img");
     img.id = fin.toString() + 'r';
     img.setAttribute("class", "find_img");
-    img.setAttribute('src', '../static/data/photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
+    img.setAttribute('src', '../static/data/old_photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
     document.getElementsByClassName("sidebar")[0].appendChild(img);
 }

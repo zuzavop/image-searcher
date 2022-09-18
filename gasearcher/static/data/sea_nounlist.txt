@@ -1,0 +1,79 @@
+almaco jack
+atlantic bonito
+atlantic croaker
+atlantic menhaden
+atlantic spadefish
+bank sea bass
+bigeye tuna
+black drum
+black sea bass
+blackfin tuna
+blue marlin
+bluefin tuna
+bluefish
+blueline tilefish
+butterfish
+cobia
+doplhinfish
+florida pompano
+flounder
+gag grouper
+gray triggerfish
+grat barracuda
+greater amberjack
+hogfish
+inshore lizardfish
+king mackerel
+kingfishes
+knobbed porgy
+little tunny
+northern puffer
+oyster toadfish
+pigfish
+pinfish
+red drum
+red grouper
+red porgy
+red snapper
+rock sea bass
+sailfish
+scamp
+searobin
+shad
+shark
+sheepshead
+silver perch
+skate
+skipjack tuna
+spanish mackerel
+speckled hind
+spot
+spottail pinfish
+spotted seatrout
+stingray
+striped bass
+striped mullet
+swordfish
+vermilion snapper
+wahoo
+weakfish
+white grunt
+white marlin
+yellowedge grouper
+yellowfin tuna
+yellowtail snapper
+stanghorn coral
+elkhorn coral
+clubbed finger coral
+pillar coral
+brain coral
+grooved brain coral
+rose coral
+mustard hill coral
+massive starlet coral
+lobed star coral
+mountainous star coral
+great star coral
+rough cactus coral
+lettuce coral
+ivory bush coral
