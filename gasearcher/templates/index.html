@@ -27,6 +27,8 @@
         {#        <br>#}
         <button class="bar-item" id="clear" onclick="clear_search()">Clear text</button>
         <br>
+        <button class="bar-item" id="next_button" onclick="next_search()">Next</button>
+        <br>
     </div>
 </div>
 <div class="split right">
@@ -106,10 +108,11 @@
     if (trying == att) {
         document.getElementById('search_text').style.visibility = 'hidden';
         document.getElementById('clear').style.visibility = 'hidden';
+        document.getElementById('next_button').style.visibility = 'hidden';
         document.getElementById('text_searcher').innerText = 'Next';
     }
 
     {# load last text query to searcher #}
-    document.getElementById("search_text").value = last_query;
+    {#document.getElementById("search_text").value = last_query;#}
 </script>
 </html>

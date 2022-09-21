@@ -39,7 +39,6 @@ acetate
 achievement
 achiever
 acid
-acknowledgment
 acorn
 acoustics
 acquaintance
@@ -135,7 +134,6 @@ alert
 alfalfa
 algebra
 algorithm
-alias
 alibi
 alien
 allegation
@@ -443,7 +441,6 @@ banyan
 baobab
 bar
 barbecue
-barbeque
 barber
 barbiturate
 bargain
@@ -688,7 +685,6 @@ boxspring
 boy
 boycott
 boyfriend
-boyhood
 boysenberry
 bra
 brace
@@ -893,7 +889,6 @@ care
 career
 cargo
 caribou
-carload
 carnation
 carnival
 carol
@@ -1363,7 +1358,6 @@ consumer
 consumption
 contact
 contact lens
-contagion
 container
 content
 contention
@@ -1400,7 +1394,6 @@ cooperation
 coordination
 coordinator
 cop
-cop-out
 cope
 copper
 copy
@@ -1443,14 +1436,11 @@ councilman
 councilor
 councilperson
 counsel
-counseling
-counselling
 counsellor
 counselor
 count
 counter
 counter-force
-counterpart
 counterterrorism
 countess
 country
@@ -1703,7 +1693,6 @@ dependency
 dependent
 deployment
 deposit
-deposition
 depot
 depression
 depressive
@@ -1867,7 +1856,6 @@ doctor
 doctorate
 doctrine
 document
-documentary
 documentation
 doe
 dog
@@ -1936,7 +1924,6 @@ dressing
 drill
 drink
 drinking
-drive
 driver
 driveway
 driving
@@ -1960,7 +1947,6 @@ duffel
 dugout
 dulcimer
 dumbwaiter
-dump
 dump truck
 dune
 dune buggy
@@ -2049,7 +2035,6 @@ element
 elephant
 elevation
 elevator
-eleventh
 elf
 elicit
 eligibility
@@ -2126,8 +2111,6 @@ epee
 ephemera
 ephemeris
 ephyra
-epic
-episode
 epithelium
 epoch
 eponym
@@ -2332,7 +2315,6 @@ fiberglass
 fibre
 fibroblast
 fibrosis
-ficlet
 fiction
 fiddle
 field
@@ -2437,7 +2419,6 @@ food
 foodstuffs
 fool
 foot
-footage
 football
 footnote
 footprint
@@ -2934,8 +2915,6 @@ holder
 hole
 holiday
 home
-homeland
-homeownership
 hometown
 homework
 homicide
@@ -3204,7 +3183,6 @@ internet
 interpretation
 interpreter
 interval
-intervenor
 intervention
 interview
 interviewer
@@ -3468,7 +3446,6 @@ letter
 lettuce
 level
 lever
-leverage
 leveret
 liability
 liar
@@ -3661,7 +3638,6 @@ mandolin
 mangle
 mango
 mangrove
-manhunt
 maniac
 manicure
 manifestation
@@ -4424,8 +4400,6 @@ perfection
 performance
 perfume
 period
-periodical
-peripheral
 permafrost
 permission
 permit
@@ -4635,7 +4609,6 @@ porthole
 portion
 portrait
 position
-possession
 possibility
 possible
 post
@@ -5951,8 +5924,6 @@ surname
 surplus
 surprise
 surround
-surroundings
-surrounds
 survey
 survival
 survivor
@@ -5966,7 +5937,6 @@ swallow
 swamp
 swan
 swanling
-swath
 sweat
 sweater
 sweatshirt
@@ -6096,7 +6066,6 @@ tensor
 tent
 tentacle
 tenth
-tepee
 teriyaki
 term
 terminal
@@ -6270,7 +6239,6 @@ trafficker
 tragedy
 trail
 trailer
-trailpatrol
 train
 trainer
 training
@@ -6508,7 +6476,6 @@ vice
 vicinity
 victim
 victory
-video
 view
 viewer
 vignette

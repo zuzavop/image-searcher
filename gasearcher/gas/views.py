@@ -18,16 +18,19 @@ def get_data_from_clip_text_search(query, session, found):
         text_features = np.transpose(model.encode_text(text))
         text_features /= np.linalg.norm(text_features)
 
-    scores = list(np.argsort(np.concatenate([1 - (torch.cat(clip_data) @ text_features)], axis=None)))
+    scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features)], axis=None))
+    new_score = scores + last_search[session]
+    last_search[session] = scores
+    new_score = list(np.argsort(new_score))
 
     old_stdout = sys.stdout
     log_file = open(path_data + "message.csv", "a")
     sys.stdout = log_file
-    print(query + ';' + str(finding[found]) + ';' + session + ';' + str(scores.index(finding[found]) + 1))
+    print(query + ';' + str(finding[found]) + ';' + session + ';' + str(new_score.index(finding[found]) + 1))
     sys.stdout = old_stdout
     log_file.close()
 
-    return scores
+    return new_score
 
 
 def get_data_from_clip_image_search(image_query):
@@ -48,11 +51,12 @@ def search(request):
 
     if request.GET.get('query'):
         data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)[:60]
-    elif request.GET.get('id'):
-        data = get_data_from_clip_image_search(request.GET['id'])[:60]
-    elif request.GET.get('answer'):
-        if found >= len(finding):  # control of end
-            if int(request.GET['answer']) == finding[found]:
+    else:
+        last_search[request.session['session_id']] = np.zeros(len(clip_data))
+        if request.GET.get('id'):
+            data = get_data_from_clip_image_search(request.GET['id'])[:60]
+        elif request.GET.get('answer'):
+            if found >= len(finding):  # control of end
                 return redirect('/end')
 
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in data}
