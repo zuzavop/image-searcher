@@ -8,4 +8,4 @@ Podrobnější specifikace je v [pdf](Project_specification.pdf) a aktuální ve
 
 Samotný projekt webové aplikace GASearcher je v [této složce](gasearcher) i s popisem funkčnosti.
 
-Pomocný kód na zpracování snímků a jejich klasifikaci je přiložený v [složce src](src).
+Pomocný kód na zpracování snímků a jejich klasifikaci je přiložený v [složce src](src). Složka obsahuje [kód](src/parse_video.py) na zpracování videí na jednotlivé snímky, [klasifikaci](src/top_classes.py) snímků do classes a [kód](src/images_to_clip.py) na získání feature snímků ze sítě CLIP.

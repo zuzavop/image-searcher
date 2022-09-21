@@ -109,7 +109,7 @@ function add_text(text) {
     const input = document.getElementById('search_text');
     let end = input.value.length;
     if (end > 0) {
-        input.value += ', ' + text;
+        input.value += ' ' + text;
     } else {
         input.value += text;
     }

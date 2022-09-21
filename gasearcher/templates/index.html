@@ -25,7 +25,7 @@
         <br>
         {#        <button class="bar-item" onclick="sim_search()">Similarity search</button>#}
         {#        <br>#}
-        <button class="bar-item" onclick="clear_search()">Clear text</button>
+        <button class="bar-item" id="clear" onclick="clear_search()">Clear text</button>
         <br>
     </div>
 </div>
@@ -105,6 +105,7 @@
     {# hide searcher - last attempt allows only showing of results #}
     if (trying == att) {
         document.getElementById('search_text').style.visibility = 'hidden';
+        document.getElementById('clear').style.visibility = 'hidden';
         document.getElementById('text_searcher').innerText = 'Next';
     }
 

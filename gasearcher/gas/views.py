@@ -51,8 +51,9 @@ def search(request):
     elif request.GET.get('id'):
         data = get_data_from_clip_image_search(request.GET['id'])[:60]
     elif request.GET.get('answer'):
-        if int(request.GET['answer']) == finding[found] and found >= len(finding):  # control of end
-            return redirect('/end')
+        if found >= len(finding):  # control of end
+            if int(request.GET['answer']) == finding[found]:
+                return redirect('/end')
 
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in data}
     top_classes = [word for word, word_count in

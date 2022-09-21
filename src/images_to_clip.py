@@ -9,7 +9,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
 # path of current dataset folder
-path = "..//gasearcher//static//data//photos"
+path = "..//..//sea_photos" # "..//gasearcher//static//data//photos"
 for fn in os.listdir(path):
     filename = path + "/" + fn
     
@@ -18,7 +18,9 @@ for fn in os.listdir(path):
     with torch.no_grad():
         image_feat = model.encode_image(image)
         image_feat = image_feat/np.linalg.norm(image_feat)
-        torch.save(image_feat, f"../gasearcher/static/data/clip/{fn[:-4]}.pt")
+        torch.save(image_feat, f"../../sea_clip/{fn[:-4]}.pt")
+
+    print(fn)
 
 
 # loading of clip data

@@ -1,5 +1,5 @@
 import os
-# import random
+import random
 from ast import literal_eval
 
 import clip
@@ -25,9 +25,15 @@ clip_data = []
 class_data = {}
 classes = []
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
-finding = [109, 198, 214, 300, 838, 900, 1215, 1840, 2315, 2416, 3558, 3658, 3977, 4477, 4952, 6735, 7051, 7531, 7581,
-           7977, 8378, 8637, 8956, 9138, 11850]
-# random.shuffle(finding)
+finding = [144, 198, 214, 300, 838, 870, 900, 1031, 1181, 1215, 1840, 2315, 2416, 3558, 3658, 3977, 4477, 4952,
+           6735, 7051, 7479, 7531, 7541, 7581, 7682, 7977, 8108, 8378, 8486, 8527, 8598, 8637, 8687, 8956, 9138, 9180,
+           9287, 9404, 9818, 9883, 10151, 11850]
+random.shuffle(finding)
+# finding = []
+for i in range(30):
+    new_int = random.randint(1, 11870)
+    if new_int not in finding:
+        finding.append(new_int)
 last_search = {}
 
 
