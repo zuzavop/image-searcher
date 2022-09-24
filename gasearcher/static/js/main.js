@@ -6,9 +6,9 @@ let last_query = ""; // text of last query
 const att = 3; // number of trying before next search image
 
 function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
 // setting cookies and local variables about attempts
@@ -17,7 +17,7 @@ if (found == -1) {
     if (co.length > 1) {
         found = parseInt(getCookie("index"));
         trying = parseInt(getCookie("trying")) + 1;
-        last_query = getCookie("last_query").slice(1,-1);
+        last_query = getCookie("last_query").slice(1, -1);
     } else {
         document.cookie = 'index=0';
         document.cookie = 'trying=0';
@@ -37,7 +37,7 @@ function searching() {
         document.cookie = 'last_query=""';
         location.href = '?s=0';
     } else if (query.length > 0) {
-        if (trying == (att-1)) { // display alert - last search
+        if (trying == (att - 1)) { // display alert - last search
             if (!confirm("Last search before displaying new search image...")) {
                 return;
             }
@@ -71,7 +71,7 @@ function show_context(id) {
         image.id = "w" + (new_id).toString();
         image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
         image.addEventListener("click", function (e) {
-            if(e.ctrlKey) {
+            if (e.ctrlKey) {
                 if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
             } else {
                 select(image.id, false);
@@ -98,7 +98,6 @@ function select(id, new_c = true) {
 }
 
 function control_and_send(id) {
-    console.log(id)
     // control result and if correct send query for new image
     let find_id = parseInt(document.getElementsByClassName("find_img")[0].id.slice(0, -1));
     if (id == find_id) {
@@ -128,6 +127,7 @@ function add_text(text) {
 }
 
 function next_search() {
+    // showing next image for search
     found++;
     document.cookie = 'index=' + found;
     document.cookie = 'trying=-1';
@@ -136,6 +136,7 @@ function next_search() {
 }
 
 function close_window() {
+    // closing of context window
     let parent = document.querySelector(".modal_parent");
     parent.style.display = "none";
 }

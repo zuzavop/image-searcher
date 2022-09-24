@@ -7,7 +7,7 @@ function create_image(id, num) {
     image.id = id.toString();
     image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
     image.addEventListener("click", function (e) {
-        if(e.ctrlKey) {
+        if (e.ctrlKey) {
             control_and_send(image.id);
         } else {
             select(image.id);
@@ -17,6 +17,7 @@ function create_image(id, num) {
 }
 
 function pop_up(buttons, button) {
+    // create button for showing more labels
     const butt = buttons.getElementsByClassName("more_b");
     for (let b of butt) {
         b.classList.toggle("hidden");
@@ -29,6 +30,7 @@ function pop_up(buttons, button) {
 }
 
 function create_buttons(buttons, values) {
+    // create buttons with labels/classes
     let i = 1;
     for (let e in values) {
         const but = document.createElement("button");
@@ -82,6 +84,7 @@ function create_context() {
 }
 
 function create_wanted(fin) {
+    // create image of currently search image
     const img = document.createElement("img");
     img.id = fin.toString() + 'r';
     img.setAttribute("class", "find_img");
