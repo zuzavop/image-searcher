@@ -5,12 +5,13 @@ function create_image(id, num) {
     const image = document.createElement("img");
     div.appendChild(image);
     image.id = id.toString();
-    image.setAttribute('src', '../static/data/old_photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
-    image.addEventListener("click", function () {
-        select(image.id);
-    });
-    image.addEventListener('dblclick', function () {
-        control_and_send(image.id);
+    image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
+    image.addEventListener("click", function (e) {
+        if(e.ctrlKey) {
+            control_and_send(image.id);
+        } else {
+            select(image.id);
+        }
     });
     return div;
 }
@@ -69,7 +70,7 @@ function create_context() {
     butt_p.addEventListener("click", function () {
         show_context(parseInt(middle) - 1);
     });
-    document.getElementsByClassName("right")[0].appendChild(butt_p);
+    document.getElementsByClassName("popup_window")[0].appendChild(butt_p);
 
     const butt_n = document.createElement("button");
     butt_n.setAttribute("class", "next cont_butt");
@@ -77,13 +78,13 @@ function create_context() {
     butt_n.addEventListener("click", function () {
         show_context(parseInt(middle) + 1);
     });
-    document.getElementsByClassName("right")[0].appendChild(butt_n);
+    document.getElementsByClassName("popup_window")[0].appendChild(butt_n);
 }
 
 function create_wanted(fin) {
     const img = document.createElement("img");
     img.id = fin.toString() + 'r';
     img.setAttribute("class", "find_img");
-    img.setAttribute('src', '../static/data/old_photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
+    img.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
     document.getElementsByClassName("sidebar")[0].appendChild(img);
 }

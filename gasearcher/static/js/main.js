@@ -64,38 +64,41 @@ function show_context(id) {
     // show images in context of database
     middle = id;
     document.getElementsByClassName("context")[0].innerHTML = '';
-    for (let i = -5; i < 6; i++) {
+    let new_id;
+    for (let i = -7; i < 8; i++) {
+        new_id = parseInt(id) + i
         const image = document.createElement("img");
-        image.id = (parseInt(id) + i).toString();
-        image.setAttribute('src', '../static/data/old_photos/' + ("0000" + (parseInt(id) + i + 1)).slice(-5) + '.jpg');
-        image.addEventListener('dblclick', function () {
-            control_and_send(image.id);
-        });
-        image.addEventListener("click", function () {
-            select(image.id, false);
+        image.id = "w" + (new_id).toString();
+        image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
+        image.addEventListener("click", function (e) {
+            if(e.ctrlKey) {
+                if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
+            } else {
+                select(image.id, false);
+            }
         });
         document.getElementsByClassName("context")[0].appendChild(image);
     }
 }
 
-function select(id, new_c = false) {
+function select(id, new_c = true) {
     // select image and show it context
-    if (selected > -1) {
+    if (selected != -1) {
         document.getElementById(selected).setAttribute("class", "unselected");
-        // todo - selecting on context
+    }
+    if (new_c & selected == id) {
+        let parent = document.querySelector(".modal_parent");
+        parent.style.display = "block";
+        // document.getElementsByClassName('previous')[0].style.visibility = 'visible';
+        // document.getElementsByClassName('next')[0].style.visibility = 'visible';
+        show_context(id);
     }
     selected = id;
     document.getElementById(id).setAttribute("class", "selected");
-    if (new_c) {
-        document.getElementsByClassName('previous')[0].style.visibility = 'visible';
-        document.getElementsByClassName('next')[0].style.visibility = 'visible';
-        show_context(id);
-    }
-    // let parent = document.querySelector(".modal-parent");
-    // parent.style.display = "block";
 }
 
 function control_and_send(id) {
+    console.log(id)
     // control result and if correct send query for new image
     let find_id = parseInt(document.getElementsByClassName("find_img")[0].id.slice(0, -1));
     if (id == find_id) {
@@ -130,4 +133,9 @@ function next_search() {
     document.cookie = 'trying=-1';
     document.cookie = 'last_query=""';
     location.href = '?s=0';
+}
+
+function close_window() {
+    let parent = document.querySelector(".modal_parent");
+    parent.style.display = "none";
 }

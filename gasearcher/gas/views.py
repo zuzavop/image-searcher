@@ -9,7 +9,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from gas.models import device, model, clip_data, path_data, finding, class_data, classes, last_search
+from gas.models import device, model, clip_data, path_data, finding, class_data, classes, last_search, same_video, \
+    showing
 
 
 def get_data_from_clip_text_search(query, session, found):
@@ -19,18 +20,20 @@ def get_data_from_clip_text_search(query, session, found):
         text_features /= np.linalg.norm(text_features)
 
     scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features)], axis=None))
-    new_score = scores + last_search[session]
-    last_search[session] = scores
-    new_score = list(np.argsort(new_score))
+    # new_scores = scores + last_search[session]
+    # last_search[session] = new_scores
+    new_scores = list(np.argsort(scores))
 
     old_stdout = sys.stdout
     log_file = open(path_data + "message.csv", "a")
     sys.stdout = log_file
-    print(query + ';' + str(finding[found]) + ';' + session + ';' + str(new_score.index(finding[found]) + 1))
+    same = 1 if len(list(set(new_scores[:showing]) & set(same_video[finding[found]]))) > 0 else 0
+    print(query + ';' + str(finding[found]) + ';' + session + ';' + str(new_scores.index(finding[found]) + 1) + ';'
+          + str(same))
     sys.stdout = old_stdout
     log_file.close()
 
-    return new_score
+    return new_scores
 
 
 def get_data_from_clip_image_search(image_query):
@@ -47,17 +50,16 @@ def search(request):
 
     # load index of currently searching image from cookies
     found = int(request.COOKIES.get('index')) if request.COOKIES.get('index') is not None else 0
-    data = [i for i in range(1, 61)]
+    if found >= len(finding):  # control of end
+        return redirect('/end')
+    data = [i for i in range(1, showing + 1)]
 
     if request.GET.get('query'):
-        data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)[:60]
+        data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)[:showing]
     else:
         last_search[request.session['session_id']] = np.zeros(len(clip_data))
         if request.GET.get('id'):
-            data = get_data_from_clip_image_search(request.GET['id'])[:60]
-        elif request.GET.get('answer'):
-            if found >= len(finding):  # control of end
-                return redirect('/end')
+            data = get_data_from_clip_image_search(request.GET['id'])[:showing]
 
     data_to_display = {str(i): ([] if i not in class_data else [a for a in class_data[i]]) for i in data}
     top_classes = [word for word, word_count in

@@ -48,11 +48,11 @@
         </table>
     </div>
     {# show context of selected image#}
-    <div class="modal-parent">
-        <div class="modal">
-            <span class="X" draggable="true">&times;</span>
-            <div class="context"></div>
-        </div>
+</div>
+<div class="modal_parent">
+    <div class="popup_window">
+        <span class="close_button" draggable="true" onclick="close_window()">&times;</span>
+        <div class="context"></div>
     </div>
 </div>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
@@ -90,7 +90,7 @@
         create_top_classes(top_classes);
     {% endif %}
 
-    create_context();
+    {#create_context();#}
 
     {# load currently searched image #}
     {% if find_id %}
@@ -113,6 +113,6 @@
     }
 
     {# load last text query to searcher #}
-    {#document.getElementById("search_text").value = last_query;#}
+    document.getElementById("search_text").value = last_query;
 </script>
 </html>
