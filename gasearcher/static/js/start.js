@@ -70,7 +70,7 @@ function create_context() {
     butt_p.setAttribute("class", "previous cont_butt");
     butt_p.textContent = '<';
     butt_p.addEventListener("click", function () {
-        show_context(parseInt(middle) - 1);
+        show_context(parseInt(middle) - 3);
     });
     document.getElementsByClassName("popup_window")[0].appendChild(butt_p);
 
@@ -78,7 +78,7 @@ function create_context() {
     butt_n.setAttribute("class", "next cont_butt");
     butt_n.textContent = '>';
     butt_n.addEventListener("click", function () {
-        show_context(parseInt(middle) + 1);
+        show_context(parseInt(middle) + 3);
     });
     document.getElementsByClassName("popup_window")[0].appendChild(butt_n);
 }

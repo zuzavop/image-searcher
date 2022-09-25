@@ -65,19 +65,21 @@ function show_context(id) {
     middle = id;
     document.getElementsByClassName("context")[0].innerHTML = '';
     let new_id;
-    for (let i = -7; i < 8; i++) {
+    for (let i of [-7, -2, -1, 4, 5, -6, -3, 0, 3, 6, -5, -4, 1, 2, 7]) {
         new_id = parseInt(id) + i
-        const image = document.createElement("img");
-        image.id = "w" + (new_id).toString();
-        image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
-        image.addEventListener("click", function (e) {
-            if (e.ctrlKey) {
-                if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
-            } else {
-                select(image.id, false);
-            }
-        });
-        document.getElementsByClassName("context")[0].appendChild(image);
+        if (new_id > 0 && new_id < 22035) {
+            const image = document.createElement("img");
+            image.id = "w" + (new_id).toString();
+            image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
+            image.addEventListener("click", function (e) {
+                if (e.ctrlKey) {
+                    if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
+                } else {
+                    select(image.id, false);
+                }
+            });
+            document.getElementsByClassName("context")[0].appendChild(image);
+        }
     }
 }
 
@@ -86,7 +88,7 @@ function select(id, new_c = true) {
     if (selected != -1) {
         document.getElementById(selected).setAttribute("class", "unselected");
     }
-    if (new_c & selected == id) {
+    if (new_c && selected == id) {
         let parent = document.querySelector(".modal_parent");
         parent.style.display = "block";
         // document.getElementsByClassName('previous')[0].style.visibility = 'visible';

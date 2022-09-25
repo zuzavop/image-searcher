@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASearcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<h1>Video retrieval</h1>
+<p>After pressing the "Search" button, a search will be started, where your task will be to find the template image
+    shown in the bottom left corner.</p>
+<p>Sending of photo, you think is the correct answer, is done by ctrl + click to that photo.</p>
+<p>After double click on any photo will be displayed context of photo in dataset, but photo in context can't be sent as
+    answer due to the currently tested method.</p>
+<p>If you don't know what to do or if you don't want to search for the current image, you can always skip the search
+    using the "Next" button.</p>
+<button onclick="location.href = '/search';">Search</button>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+</body>
+</html>

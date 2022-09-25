@@ -89,7 +89,7 @@ def search(request):
 def index(request):
     # "login" - setting session id
     request.session['session_id'] = secrets.token_urlsafe(6)
-    return redirect('/search')  # redirect to search
+    return render(request, 'start.html')
 
 
 def end(request):
