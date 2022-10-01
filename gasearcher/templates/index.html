@@ -64,6 +64,20 @@
         throw "Loading of classes went wrong.";
     {% endif %}
 
+    {# load percentage value of classes #}
+    {% if percent %}
+        let percent_class = {};
+        {% for i,v in percent.items %}
+            {
+                id = '{{i}}';
+                values = {{v}};
+                percent_class[id] = values;
+            }
+        {% endfor %}
+    {% else %}
+        throw "Loading of percent went wrong.";
+    {% endif %}
+
     {# load photos with classes #}
     {% if list_photo %}
         let num = 0;

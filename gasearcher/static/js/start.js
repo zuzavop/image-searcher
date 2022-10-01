@@ -39,6 +39,7 @@ function create_buttons(buttons, values) {
             but.className = "more_b hidden";
         }
         but.textContent = classes[values[e]];
+        but.style.background = perc2color(100 - percent_class[values[e]]);
         but.addEventListener("click", function () {
             add_text(but.textContent);
         });
@@ -90,4 +91,17 @@ function create_wanted(fin) {
     img.setAttribute("class", "find_img");
     img.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
     document.getElementsByClassName("sidebar")[0].appendChild(img);
+}
+
+function perc2color(per) {
+    let r, g, b = 0;
+    if (per < 99) {
+        r = 255;
+        g = Math.round((255/99) * per);
+    } else {
+        g = 255;
+        r = Math.round((25500/99) - (255/99) * per);
+    }
+    let h = r * 0x10000 + g * 0x100 + b * 0x1;
+    return '#' + ('000000' + h.toString(16)).slice(-6);
 }

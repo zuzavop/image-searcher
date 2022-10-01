@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render
 from django.template import loader
 
 from gas.models import device, model, clip_data, path_data, finding, class_data, classes, last_search, same_video, \
-    showing
+    showing, class_pr
 
 
 def get_data_from_clip_text_search(query, session, found):
@@ -24,9 +24,9 @@ def get_data_from_clip_text_search(query, session, found):
     scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features)], axis=None))
 
     # save score for next search
-    # new_scores = scores + last_search[session]
-    # last_search[session] = new_scores
-    new_scores = list(np.argsort(scores))
+    new_scores = scores + last_search[session]
+    last_search[session] = scores
+    new_scores = list(np.argsort(new_scores))
 
     # write down log
     old_stdout = sys.stdout
@@ -78,6 +78,7 @@ def search(request):
 
     send_data = {
         'list_photo': data_to_display,
+        'percent': class_pr,
         'classes': ','.join(classes),
         'top_classes': top_classes[::-1],
         'find_id': finding[found]

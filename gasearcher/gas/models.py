@@ -25,16 +25,17 @@ clip_data = []
 class_data = {}
 classes = []
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
-finding = []  # 144, 198, 214, 300, 838, 870, 900, 1031, 1181, 1215, 1840, 2315, 2416, 3558, 3658, 3977, 4477, 4952,
-#            6735, 7051, 7479, 7531, 7541, 7581, 7682, 7977, 8108, 8378, 8486, 8527, 8598, 8637, 8687, 8956, 9138, 9180,
-#            9287, 9404, 9818, 9883, 10151, 11850]
+
+finding = []
 for i in range(80):
     new_int = random.randint(1, 22036)
     if new_int not in finding:
         finding.append(new_int)
 random.shuffle(finding)
+
 last_search = {}  # vectors of last text search
 same_video = {}  # indexes of images in same video (high probability of same looking photos)
+class_pr = {}
 sur = 7  # surrounding of image in context
 showing = 60  # number of shown image in result
 
@@ -49,9 +50,10 @@ def get_data():
     class_data = class_data.to_dict()['top']
     class_data = {int(key) - 1: literal_eval(value) for key, value in class_data.items()}
 
-    with open(path_data + 'sea_nounlist.txt', 'r') as f:
+    with open(path_data + 'pr_nounlist.txt', 'r') as f:
         for line in f:
-            classes.append(line[:-1].replace("'", '"'))
+            classes.append(line.split(":")[0][:-1].replace("'", '"'))
+            class_pr[len(classes)-1] = float(line.split(":")[1][:-1])
 
     bottom = 0
     with open(path_data + 'sea_videos.txt', 'r') as f:

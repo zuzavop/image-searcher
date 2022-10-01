@@ -19,6 +19,7 @@ html {
 .right {
     right: 0;
     width: 80%;
+    padding-top: 2%;
 }
 
 .sidebar {
