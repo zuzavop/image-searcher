@@ -1,11 +1,11 @@
 function create_image(id, num) {
     const div = document.createElement('td');
     div.className = 'img_div';
-    document.getElementById(Math.floor(num / 12) + 'tr').appendChild(div);
+    document.getElementById(Math.floor(num / config.photos_on_line) + 'tr').appendChild(div);
     const image = document.createElement("img");
     div.appendChild(image);
     image.id = id.toString();
-    image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
+    image.setAttribute('src', config.photos_address + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
     image.addEventListener("click", function (e) {
         if (e.ctrlKey) {
             control_and_send(image.id);
@@ -39,7 +39,7 @@ function create_buttons(buttons, values) {
             but.className = "more_b hidden";
         }
         but.textContent = classes[values[e]];
-        but.style.background = perc2color(100 - percent_class[values[e]]);
+        but.style.background = perc2color(percent_class[values[e]]);
         but.addEventListener("click", function () {
             add_text(but.textContent);
         });
@@ -71,7 +71,7 @@ function create_context() {
     butt_p.setAttribute("class", "previous cont_butt");
     butt_p.textContent = '<';
     butt_p.addEventListener("click", function () {
-        show_context(parseInt(middle) - 3);
+        show_context(parseInt(middle) - config.context_shift);
     });
     document.getElementsByClassName("popup_window")[0].appendChild(butt_p);
 
@@ -79,7 +79,7 @@ function create_context() {
     butt_n.setAttribute("class", "next cont_butt");
     butt_n.textContent = '>';
     butt_n.addEventListener("click", function () {
-        show_context(parseInt(middle) + 3);
+        show_context(parseInt(middle) + config.context_shift);
     });
     document.getElementsByClassName("popup_window")[0].appendChild(butt_n);
 }
@@ -89,11 +89,12 @@ function create_wanted(fin) {
     const img = document.createElement("img");
     img.id = fin.toString() + 'r';
     img.setAttribute("class", "find_img");
-    img.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (fin + 1)).slice(-5) + '.jpg');
+    img.setAttribute('src', config.photos_address + ("0000" + (fin + 1)).slice(-5) + '.jpg');
     document.getElementsByClassName("sidebar")[0].appendChild(img);
 }
 
 function perc2color(per) {
+    per = 100 - (per*8)
     let r, g, b = 0;
     if (per < 99) {
         r = 255;

@@ -11,6 +11,7 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="{% static 'js/config.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/start.js' %}" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
@@ -38,7 +39,7 @@
             <script>
                 {# set table for photos #}
                 const tb = document.getElementsByClassName('div_table')[0];
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < config.lines; i++) {
                     const tr = document.createElement('tr');
                     tr.id = i.toString() + 'tr';
                     tb.appendChild(tr);
@@ -104,7 +105,9 @@
         create_top_classes(top_classes);
     {% endif %}
 
-    {#create_context();#}
+    if(config.listing_context) {
+        create_context();
+    }
 
     {# load currently searched image #}
     {% if find_id %}
@@ -119,7 +122,7 @@
     });
 
     {# hide searcher - last attempt allows only showing of results #}
-    if (trying == att) {
+    if (trying == config.att) {
         document.getElementById('search_text').style.visibility = 'hidden';
         document.getElementById('clear').style.visibility = 'hidden';
         document.getElementById('next_button').style.visibility = 'hidden';
@@ -127,6 +130,8 @@
     }
 
     {# load last text query to searcher #}
-    document.getElementById("search_text").value = last_query;
+    if (config.show_last_query) {
+        document.getElementById("search_text").value = last_query;
+    }
 </script>
 </html>

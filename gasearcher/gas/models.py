@@ -5,18 +5,8 @@ from ast import literal_eval
 import clip
 import pandas as pd
 import torch as torch
-from django.db import models
 
 from gasearcher.settings import STATICFILES_DIRS
-
-
-class Image(models.Model):
-    index = models.IntegerField(default=0)
-    classes = models.TextField()
-
-    def __str__(self):
-        return self.index
-
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
@@ -28,7 +18,7 @@ path_data = os.path.join(STATICFILES_DIRS[0], "data/")
 
 finding = []
 for i in range(80):
-    new_int = random.randint(1, 22036)
+    new_int = random.randint(1, 20000)
     if new_int not in finding:
         finding.append(new_int)
 random.shuffle(finding)
@@ -50,19 +40,22 @@ def get_data():
     class_data = class_data.to_dict()['top']
     class_data = {int(key) - 1: literal_eval(value) for key, value in class_data.items()}
 
-    with open(path_data + 'pr_nounlist.txt', 'r') as f:
+    with open(path_data + 'sea_nounlist.txt', 'r') as f:
         for line in f:
             classes.append(line.split(":")[0][:-1].replace("'", '"'))
-            class_pr[len(classes)-1] = float(line.split(":")[1][:-1])
+            class_pr[len(classes) - 1] = float(line.split(":")[1][:-1])
 
     bottom = 0
     with open(path_data + 'sea_videos.txt', 'r') as f:
         for line in f:
             top = int(line[:-1]) - 1
             for i in range(bottom, top):
-                same = [_ for _ in range(bottom if bottom >= i - sur else i - sur, top if top <= i + sur else i + sur)]
+                same = [_ for _ in range(bottom if bottom >= i - sur else i - sur,
+                                         top if top <= i + sur else i + sur)]
                 same_video[i] = same
             bottom = top
+    # for i in range(20000):
+    #     same_video[i] = [i]
 
 
 get_data()

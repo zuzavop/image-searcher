@@ -3,7 +3,6 @@ let middle = -1;
 let found = -1; // index of currently search image
 let trying = -1; // number of trying on current image
 let last_query = ""; // text of last query
-const att = 3; // number of trying before next search image
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -30,14 +29,14 @@ if (found == -1) {
 function searching() {
     // send text query
     let query = document.getElementById('search_text').value;
-    if (trying == att) {
+    if (trying == config.att) {
         found++;
         document.cookie = 'index=' + found;
         document.cookie = 'trying=-1';
         document.cookie = 'last_query=""';
-        location.href = '?s=0';
+        location.href = '?s';
     } else if (query.length > 0) {
-        if (trying == (att - 1)) { // display alert - last search
+        if (trying == (config.att - 1)) { // display alert - last search
             if (!confirm("Last search before displaying new search image...")) {
                 return;
             }
@@ -50,7 +49,7 @@ function searching() {
 
 function sim_search() {
     // send query for similarity search
-    if (selected > -1) {
+    if (selected != -1) {
         location.href = '?id=' + selected;
     }
 }
@@ -67,10 +66,10 @@ function show_context(id) {
     let new_id;
     for (let i of [-7, -2, -1, 4, 5, -6, -3, 0, 3, 6, -5, -4, 1, 2, 7]) {
         new_id = parseInt(id) + i
-        if (new_id > 0 && new_id < 22035) {
+        if (new_id > 0 && new_id < config.size_dataset) {
             const image = document.createElement("img");
             image.id = "w" + (new_id).toString();
-            image.setAttribute('src', '../static/data/sea_photos/' + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
+            image.setAttribute('src', config.photos_address + ("0000" + (new_id + 1)).slice(-5) + '.jpg');
             image.addEventListener("click", function (e) {
                 if (e.ctrlKey) {
                     if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
@@ -91,8 +90,10 @@ function select(id, new_c = true) {
     if (new_c && selected == id) {
         let parent = document.querySelector(".modal_parent");
         parent.style.display = "block";
-        // document.getElementsByClassName('previous')[0].style.visibility = 'visible';
-        // document.getElementsByClassName('next')[0].style.visibility = 'visible';
+        if(config.listing_context) {
+            document.getElementsByClassName('previous')[0].style.visibility = 'visible';
+            document.getElementsByClassName('next')[0].style.visibility = 'visible';
+        }
         show_context(id);
     }
     selected = id;
@@ -119,7 +120,7 @@ function add_text(text) {
     const input = document.getElementById('search_text');
     let end = input.value.length;
     if (end > 0) {
-        input.value += ', ' + text;
+        input.value += config.connection + text;
     } else {
         input.value += text;
     }
@@ -134,7 +135,7 @@ function next_search() {
     document.cookie = 'index=' + found;
     document.cookie = 'trying=-1';
     document.cookie = 'last_query=""';
-    location.href = '?s=0';
+    location.href = '?s';
 }
 
 function close_window() {
