@@ -99,12 +99,6 @@
         throw "Loading of photos went wrong.";
     {% endif %}
 
-    {# loading top classes #}
-    {% if top_classes %}
-        let top_classes = {{ top_classes }};
-        create_top_classes(top_classes);
-    {% endif %}
-
     if(config.listing_context) {
         create_context();
     }
@@ -127,6 +121,12 @@
         document.getElementById('clear').style.visibility = 'hidden';
         document.getElementById('next_button').style.visibility = 'hidden';
         document.getElementById('text_searcher').innerText = 'Next';
+    } else {
+        {# loading top classes #}
+        {% if top_classes %}
+            let top_classes = {{ top_classes }};
+            create_top_classes(top_classes);
+        {% endif %}
     }
 
     {# load last text query to searcher #}

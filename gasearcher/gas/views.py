@@ -15,16 +15,16 @@ from gas.models import device, model, clip_data, path_data, finding, class_data,
 
 def get_data_from_clip_text_search(query, session, found):
     # get features of text query
-    text = clip.tokenize(query).to(device)
+    text = clip.tokenize([query]).to(device)
     with torch.no_grad():
-        text_features = np.transpose(model.encode_text(text))
-        text_features /= np.linalg.norm(text_features)
+        text_features = model.encode_text(text)
+    text_features /= np.linalg.norm(text_features)
 
     # get distance of vectors
-    scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features)], axis=None))
+    scores = (np.concatenate([1 - (text_features @ torch.cat(clip_data).T)], axis=None))
 
     # save score for next search
-    new_scores = scores + last_search[session]
+    new_scores = scores  # + last_search[session]
     last_search[session] = scores
     new_scores = list(np.argsort(new_scores))
 

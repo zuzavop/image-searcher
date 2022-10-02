@@ -8,5 +8,6 @@ const config = {
     context_shift: 3,
     size_dataset: 22036,
     connection: ', ',
-    showing_photos: 60
+    showing_photos: 60,
+    perc_grow: 1.4, // for sea 1.4 and for v3c 9 - for scaling percentage of occurrence of classes
 };

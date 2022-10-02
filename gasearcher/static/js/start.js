@@ -94,14 +94,14 @@ function create_wanted(fin) {
 }
 
 function perc2color(per) {
-    per = 100 - (per*8)
+    per = 100 - (per * config.perc_grow)
     let r, g, b = 0;
     if (per < 99) {
         r = 255;
-        g = Math.round((255/99) * per);
+        g = Math.round((255 / 99) * per);
     } else {
         g = 255;
-        r = Math.round((25500/99) - (255/99) * per);
+        r = Math.round((25500 / 99) - (255 / 99) * per);
     }
     let h = r * 0x10000 + g * 0x100 + b * 0x1;
     return '#' + ('000000' + h.toString(16)).slice(-6);
