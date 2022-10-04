@@ -1,4 +1,5 @@
 import os
+import random
 from ast import literal_eval
 
 import clip
@@ -23,12 +24,14 @@ sea_finding = [91, 97, 105, 193, 317, 362, 426, 590, 646, 772, 791, 811, 844, 10
                10123, 10739, 11566, 11643, 12525, 12785, 12829, 12906, 13252, 13333, 13947, 14096, 14346, 14417, 15450,
                16062, 16142, 16394, 16631, 16673, 18547, 18677, 19807, 20426, 20912, 21412, 21617, 21876]
 
-finding = sea_finding
+print(len(sea_finding))
+
+finding = sea_finding[:60]
 # for i in range(120):
 #     new_int = random.randint(1, 22036)
 #     if new_int not in finding:
 #         finding.append(new_int)
-# random.shuffle(finding)
+random.shuffle(finding)
 
 last_search = {}  # vectors of last text search
 same_video = {}  # indexes of images in same video (high probability of same looking photos)
