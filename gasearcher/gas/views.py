@@ -24,7 +24,7 @@ def get_data_from_clip_text_search(query, session, found):
     scores = (np.concatenate([1 - (text_features @ torch.cat(clip_data).T)], axis=None))
 
     # save score for next search
-    new_scores = scores  # + last_search[session]
+    new_scores = scores + last_search[session]
     last_search[session] = scores
     new_scores = list(np.argsort(new_scores))
 

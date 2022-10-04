@@ -26,12 +26,12 @@ sea_finding = [91, 97, 105, 193, 317, 362, 426, 590, 646, 772, 791, 811, 844, 10
 
 print(len(sea_finding))
 
-finding = sea_finding[:60]
+finding = [3604, 4719, 17862, 4022, 2549, 3006, 2129, 2819, 2261, 549, 10759, 11666, 2742, 2951, 2235, 9828, 2295, 4314, 4646, 3053, 2486, 3951, 5541, 2809, 4481, 13521, 3415]
 # for i in range(120):
 #     new_int = random.randint(1, 22036)
 #     if new_int not in finding:
 #         finding.append(new_int)
-random.shuffle(finding)
+# random.shuffle(finding)
 
 last_search = {}  # vectors of last text search
 same_video = {}  # indexes of images in same video (high probability of same looking photos)

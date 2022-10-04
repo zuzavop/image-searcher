@@ -10,26 +10,46 @@ query;find_id;session_id;position;same_video
 "a lot of banded butterflyfishes in light blue water";362;6bCSh2bg;137;1
 "light blue photo of banded butterflyfishes and threespot damselfishes";362;6bCSh2bg;262;1
 "light blue photo of black and white striped fishes and one black fish";426;6bCSh2bg;25;1
+"bright hazy greenish photo of rocks";590;6bCSh2bg;346;0
+"bright hazy light greenish photo of rocks, seagrass bed";590;6bCSh2bg;89;0
+"big greenish carpet lying on rocks";646;6bCSh2bg;125;0
+"big greenish carpet lying on rocks, leaf coral, small whitish rocks";646;6bCSh2bg;279;0
+"bright blue photo of rocks with white stains";772;6bCSh2bg;3530;0
+"bright light blue photo of rocks with white stains, ";772;6bCSh2bg;3323;0
 "brain coral in purplish photo";791;6bCSh2bg;8;1
 "leaf coral in greenish photo";811;6bCSh2bg;91;1
 "ivory bush coral in greenish photo";811;6bCSh2bg;23;1
+"brown rocks with white stains";844;6bCSh2bg;4;1
+"divers with purplish flashlights in darker water";1087;6bCSh2bg;127;0
+"divers with purplish flashlights in darker water, deep hydrothermal vent";1087;6bCSh2bg;645;0
 "net lying on rocks in greenish photo";1337;6bCSh2bg;2;1
 "bright yellow corals";1419;6bCSh2bg;38;1
 "purplish bush coral on rocks";1623;6bCSh2bg;85;0
 "small purplish bush coral on rocks";1623;6bCSh2bg;35;1
 "whitish leaf coral";1851;6bCSh2bg;21;1
+"light blue photo of rocks";1999;6bCSh2bg;116;0
+"light blue photo of small rocks";1999;6bCSh2bg;105;0
+"light blue photo of rocks, brain corals and leaf corals";2129;6bCSh2bg;887;0
+"light blue-green photo of rocks, brain corals and leaf corals";2129;6bCSh2bg;432;0
+"purple coral, whitish pillar coral and leaf coral";2261;6bCSh2bg;5677;0
 "purple ivory bush coral, whitish pillar coral and leaf coral";2235;6bCSh2bg;51;1
 "bright blue tails on right side of photo, coral reef and whitish sand";2295;6bCSh2bg;1377;0
 "bright blue fins on right side of the photo, coral reef and small spot of whitish sand";2295;6bCSh2bg;1121;0
 "coral reef with brownish plant, bright blue water with small black fishes";2486;6bCSh2bg;3;1
+"really foggy photo showing dark rocks";549;1DD5zvg_;8571;0
+"really light foggy photo showing dark rocks, southern stingray, flatback turtle";549;1DD5zvg_;280;1
 "coral reef with diver and grey sand";2479;1DD5zvg_;676;0
 "coral reef with a diver with a breathing bomb and grey sand";2479;1DD5zvg_;352;0
 "brain coral and opening clam";2580;1DD5zvg_;1415;0
 "brain coral and opening clam, giant barrel sponge, light blue photo";2580;1DD5zvg_;682;0
 "small snake head in the middle of the photo surround with sand and grey corals";2685;1DD5zvg_;930;1
 "small snake head in the middle of the photo surround with sand and grey corals, smooth mounding coral, bluebanded goby";2685;1DD5zvg_;166;1
+"diver in the bottom of photo, black rocks on the left side of the photo";3006;1DD5zvg_;2948;0
+"diver in the bottom of photo, black rocks on the left side of the photo, all in fog";3006;1DD5zvg_;123;0
 "corals and small black fish";4646;1DD5zvg_;1371;0
 "smooth mounding coral, threespot damselfish, nassau grouper";4646;1DD5zvg_;18;1
+"rocky wall on the left side of the photo and blue water on the right";4719;1DD5zvg_;4384;1
+"dark rocky wall on the left and blue water on the right with small white and yellow fish and black fishes";4719;1DD5zvg_;808;1
 "poorly visible sharks";5541;1DD5zvg_;193;0
 "poorly visible blue sharks in lighter blue water";5541;1DD5zvg_;38;1
 "shark in darker blue water";5599;1DD5zvg_;316;1
@@ -40,10 +60,14 @@ query;find_id;session_id;position;same_video
 "brownish ivory bush coral bottom of the sea, seagrass bed, bamboo coral";9828;1DD5zvg_;2614;1
 "shipwreck";10759;1DD5zvg_;294;1
 "shipwreck, windows and small tuna";10759;1DD5zvg_;10;1
+"sandy bottom of the sea";11666;1DD5zvg_;1326;0
+"grey almost white sandy bottom of the sea with blue water at the top of the photo";11666;1DD5zvg_;165;1
 "light brown corals and rocks on the left, darker blue water in the top left";13521;1DD5zvg_;9484;0
 "light brown corals and rocks on the left, darker blue water in the top left, smooth mounding coral, pillar coral, hood coral, honeycomb coral, ivory bush coral";13521;1DD5zvg_;3591;0
 "diver near big turtle";14198;1DD5zvg_;1900;0
 "diver near turtle lying on sea floor and banded butterflyfish";14198;1DD5zvg_;163;0
+"sandy bottom of the sea with small rocks and blue water above";14761;1DD5zvg_;12795;0
+"grey sandy bottom of the sea with a few small rocks and bluish water above, foggy photo";14761;1DD5zvg_;619;0
 "blackish parrot fish and brain coral";16545;1DD5zvg_;593;1
 "grey parrotfish with white spots near small brain coral";16545;1DD5zvg_;122;1
 "two sharks lying on sandy sea bed";17862;1DD5zvg_;333;1
@@ -66,12 +90,16 @@ query;find_id;session_id;position;same_video
 "pillar coral with small yellow fish";3053;1DD5zvg_;1;1
 "pillar coral with small yellow fish and diver in background";3415;1DD5zvg_;3119;0
 "pillar coral with small yellow fish, sea anemone, bamboo coral, grooved brain coral, two divers in background";3415;1DD5zvg_;1030;1
+"diver with breathing bomb swimming next to rock reef";3604;1DD5zvg_;5957;0
+"diver with white breathing bomb, bright yellow neoprene and black fins swimming next to rock reef";3604;1DD5zvg_;1628;0
 "bright yellow fish in cave";3951;1DD5zvg_;130;0
 "bright yellow fishes in cave, green moray eel";3951;1DD5zvg_;17;1
 "bright blue moray eel opening mouth";4022;1DD5zvg_;1;1
 "three divers, bright orange fins in blue photo";4314;1DD5zvg_;1138;0
 "three divers with a lot of bubbles, orange fins in blue photo";4314;1DD5zvg_;103;0
 "small black fishes swimming up near rock reef";4481;1DD5zvg_;18;1
+"brown rocky valley";4983;1DD5zvg_;472;0
+"brown rocky reef under foggy bright blue water";4983;1DD5zvg_;434;0
 "a lot of brownish fishes";4999;1DD5zvg_;167;1
 "a lot of brownish striped mullet";4999;1DD5zvg_;15;1
 "small brown and white creature with short tentacles near grey sand";5025;1DD5zvg_;653;0
@@ -87,6 +115,10 @@ query;find_id;session_id;position;same_video
 "shark in spotlight";5432;1DD5zvg_;42;1
 "diver swimming to the surface next to rock reef";5945;1DD5zvg_;8302;0
 "diver swimming up to the bright surface between rocks";5945;1DD5zvg_;1869;0
+"lamp with yellow shine";6030;1DD5zvg_;818;0
+"lamp or camera with bright yellow shine";6030;1DD5zvg_;1046;0
+"moon shine";6070;1DD5zvg_;593;0
+"bright white light";6070;1DD5zvg_;502;0
 "orange fishes under rock";6114;1DD5zvg_;2;1
 "pillar reef with greenish and brownish corals";6134;1DD5zvg_;233;0
 "pillar reef with greenish honeycomb corals and brownish pillar corals";6134;1DD5zvg_;221;0
@@ -117,6 +149,8 @@ query;find_id;session_id;position;same_video
 "greenish brain coral and ivory bush coral on reddish rock with small fish, cockscomb cup coral, light purple corals";10123;1DD5zvg_;2946;0
 "shipwreck with windows";10739;1DD5zvg_;162;1
 "kind of inside shipwreck with windows";10739;1DD5zvg_;44;1
+"ocean bed with white sand, bounded by rocky coral reef";11566;1DD5zvg_;259;0
+"ocean bed with white sand, left bounded by rocky coral reef";11566;1DD5zvg_;369;0
 "white black spotted fish above white sandy ocean bed";11643;1DD5zvg_;144;0
 "white black spotted porcupinefish above white sandy ocean bed";11643;1DD5zvg_;6;1
 "striped white and brown fish above sand, brownish photo";12525;1DD5zvg_;23;1
@@ -154,6 +188,8 @@ query;find_id;session_id;position;same_video
 "mars surface";20426;1DD5zvg_;4;1
 "scuba diver with flashlight";20912;1DD5zvg_;6;1
 "kelp forest";21412;1DD5zvg_;8;1
+"white and red hairy coral in spotlight";21617;1DD5zvg_;165;0
+"white and red hairy coral in yellowish spotlight";21617;1DD5zvg_;451;1
 "bright yellow fins of scuba diver in spotlight";21876;1DD5zvg_;22;1
 "diver with yellow shirt";3604;EPt87JL1;4299;0
 "diver with yellow shirt, yellow tube sponge";3604;EPt87JL1;4516;0
@@ -165,17 +201,34 @@ query;find_id;session_id;position;same_video
 "shark on bottom";17862;EPt87JL1;1142;0
 "whitetip reef shark cyan sand";17862;EPt87JL1;87;1
 "moray eel open mouth";4022;EPt87JL1;4;1
+"stones on sea floor";772;EPt87JL1;971;0
+"stones on sea floor, honeycomb coral";772;EPt87JL1;9316;0
 "coral fins";811;EPt87JL1;29;1
+"coral fins, ivory bush coral";2685;EPt87JL1;2182;0
+"brown corals with a lot of fish";2549;EPt87JL1;6366;0
+"dark grey corals with a lot of fish";2549;EPt87JL1;7926;0
+"ray sand";8931;EPt87JL1;2154;0
 "crab cage";1337;EPt87JL1;3;1
+"dark clouds and mountain";3006;EPt87JL1;530;0
+"dark clouds and mountain, plateau";3006;EPt87JL1;891;0
+"stones and corals on sea floor";2129;EPt87JL1;209;0
+"stones and corals on sea floor, honeycomb coral";2129;EPt87JL1;424;0
 "fish with stripes";2819;EPt87JL1;134;1
 "fish with stripes, queen angelfish";2819;EPt87JL1;39;1
 "star";105;EPt87JL1;3428;0
 "star, great star coral, sea star";105;EPt87JL1;18;1
+"coral reef white sand";2261;EPt87JL1;2688;0
+"coral reef white sand, elkhorn coral, hood coral";2261;EPt87JL1;3308;0
+"grey stone";549;EPt87JL1;5958;0
+"grey stone, stonefish";549;EPt87JL1;4622;0
 "fish with stripes";193;EPt87JL1;177;1
 "fish with stripes, kingfishes, clown triggerfish";193;EPt87JL1;77;0
 "diver mask hair";317;EPt87JL1;10;1
 "ship wreck steel blue";10759;EPt87JL1;541;1
 "shipwreck, elkhorn coral";10759;EPt87JL1;2068;1
+"stones";1999;EPt87JL1;51;1
+"sea floor open sea";11666;EPt87JL1;4403;0
+"sea floor open sea, lookdown dory";11666;EPt87JL1;1303;0
 "ray";2742;EPt87JL1;1200;0
 "ray, spotted eagle ray, giant manta ray, eagle ray";2742;EPt87JL1;220;0
 "pink coral";1623;EPt87JL1;32;1
@@ -195,6 +248,7 @@ query;find_id;session_id;position;same_video
 "corals and fish, honeycomb coral, stanghorn coral";4646;EPt87JL1;7276;0
 "yellow fish lettuce coral";3053;EPt87JL1;43;1
 "yellow corals";1419;EPt87JL1;38;1
+"brown stone";844;EPt87JL1;29;1
 "lot of fish bush coral";2486;EPt87JL1;1914;0
 "lot of fish bush coral, cockscomb cup coral, kelp forest, branching cauliflower coral";2486;EPt87JL1;3583;0
 "yellow fish reef";3951;EPt87JL1;373;0
@@ -206,6 +260,8 @@ query;find_id;session_id;position;same_video
 "coral labyrinth, ivory bush coral";1851;EPt87JL1;12;1
 "vertical fish clif";4481;EPt87JL1;212;1
 "vertical fish clif, atlantic spadefish";4481;EPt87JL1;16;1
+"cauliflower coral";13521;EPt87JL1;13728;0
+"bubble coral";13521;EPt87JL1;12664;0
 "lettuce coral diver";3415;EPt87JL1;1845;0
 "lettuce coral diver, cockscomb cup coral, branching cauliflower coral";3415;EPt87JL1;4939;0
 "greyish fish on sandy sea bottom";14096;test;54;1
@@ -216,6 +272,8 @@ query;find_id;session_id;position;same_video
 "grey fish on a seabed";91;test;30;1
 "blue fish with white dots on a coral";16545;test;704;1
 "blue fish with white dots on a coral, queen parrotfish, parrotfish, blue spotted ribbontail ray";16545;test;18;1
+"blue sea with sandy bottom";11666;test;909;0
+"blue sea with , sand flounder";11666;test;857;0
 "big coral with diver at back";3415;test;2111;1
 "diver, pillar coral , threespot damselfish";3415;test;3963;0
 "violette fish in front of rock with a hole";18677;test;2485;0
@@ -232,6 +290,7 @@ query;find_id;session_id;position;same_video
 "shark on bluish sand";17862;test;315;1
 "shark on bluish sand, nurse shark, lemon shark, bull shark, spinner shark";17862;test;72;1
 "underwatter trees";21412;test;15;1
+"underwatter trees, kelp forest, giant kelp, kelpfish";21412;test;32;1
 "pink coral with a fish in the centre";9368;test;14530;0
 "pink coral with a fish in the centre, rose coral";9368;test;14597;0
 "squid with grey sand and coral";12906;test;1258;0
@@ -240,20 +299,28 @@ query;find_id;session_id;position;same_video
 "greyish sandish coral on bottom with fisha and blue watter behind, nassau grouper, bamboo coral, boulder star coral";4646;test;1026;1
 "pillar column with small fish";3053;test;507;0
 " with small fish, pillar coral";3053;test;2;1
+"light with blue-green coral on sides";6070;test;3841;0
 "brown-greyish mushroom on sand";14417;test;223;0
 "brown-greyish mushroom on sand, smooth mounding coral, elkhorn coral, honeycomb coral";14417;test;701;0
 "shark in blue ocean";5599;test;786;0
 "shark in blue ocean, blue shark, shortfin mako shark, longfin mako shark";5599;test;89;1
+"brownish coral with small fish in background";13521;test;2568;0
+"brownish coral with small fish in background, boulder star coral";13521;test;3384;0
 "hairy pblue-green coral";6295;test;30;1
+"sandy coral with blueish water";14761;test;14249;0
+"sandy coral with blueish water, smooth mounding coral, bamboo coral, pillar coral, ivory bush coral";14761;test;11541;0
 "shark in dark sea";5432;test;221;1
 "shark in dark sea, bowhead whale, whale, greenland shark";5432;test;39;1
 "yellow star on sand";13947;test;17;1
+"yellow star on sand, sea star, brown stargazer";13947;test;4;1
 "pilar coral with greenish water";2235;test;153;0
 "pilar coral with greenish water, cockscomb cup coral, boulder star coral, hood coral";2235;test;249;0
 "murena fish on green-blueish sand and coral";5358;test;2545;0
 "murena fish on green-blueish sand and coral, green moray eel, banded wrasse";5358;test;526;0
 "stripped fish with diver on background";193;test;1110;0
 "stripped fish with diver on background, atlantic spadefish, gray triggerfish, queen parrotfish";193;test;482;0
+"underwatter grey sand with a rock";549;test;7048;0
+"underwatter grey sand with a rock, seagrass bed";549;test;7119;0
 "diver face with blue-green sandy background";317;test;708;1
 "holed coral brown-redish";14346;test;8105;1
 "holed coral brown-redish, giant barrel sponge";14346;test;1505;1
@@ -265,12 +332,17 @@ query;find_id;session_id;position;same_video
 "yellow clustered corals, mustard hill coral, kelp forest";1419;test;45;1
 "brown-white crabish on bluish sand";5025;test;147;0
 "brown-white crabish on bluish sand, southern stingray, sand flounder, greenback flounder";5025;test;1156;0
+"diver on top of a wrinkled yellow-white coral";16062;test;175;1
 "manta on top of bluish rocky coral";2742;test;3741;0
 "manta on top of bluish rocky coral, giant manta ray";2742;test;215;0
 "underwatter bars and doors";10739;test;99;1
 "underwatter bars and doors, shipwreck, mirror dory";10739;test;87;1
+"greenish muldy waters with diver in the bottm";3006;test;902;0
+"greenish muldy waters with diver in the bottom bubbles on top§";3006;test;3560;0
 "yellow-reddish coral in the dark";21617;test;719;0
 "yellow-reddish coral in the dark, venus sea fan coral";21617;test;338;0
+"yellowish coral rocsk";16394;test;4718;0
+"yellowish coral rocsk, yellow tube sponge, honeycomb coral";16394;test;4116;0
 "pilar coral lighted from sides in a dark ocean";12829;test;313;0
 "pilar coral lighted from sides in a dark ocean, cockscomb cup coral";12829;test;293;1
 "a flock of blak fishes swimming to the top";4481;test;76;1
@@ -280,6 +352,8 @@ query;find_id;session_id;position;same_video
 "holed reddish coral in sea, smooth mounding coral";15450;test;1479;0
 "wrinkled coral with small fish in the centre, watter is almost not visible";10123;test;7466;0
 "wrinkled coral with small fish in the centre, watter is almost not visible, branching cauliflower coral";10123;test;7573;0
+"light with a camera closeup underwater";6030;test;8145;0
+"black-dotted white fish with bluish sand underwater";11643;test;325;1
 "coral bushes";9656;test;81;0
 "coral bushes, smooth mounding coral";9656;test;63;1
 "brown octopus";12785;test;24;1
@@ -291,5 +365,8 @@ query;find_id;session_id;position;same_video
 "fishes in front of a rock and blue water, atlantic spadefish, atlantic trumpetfish";4719;test;669;0
 "coral bushes with blue water";9828;test;8546;0
 "coral bushes with blue water, smooth mounding coral, stanghorn coral, bamboo coral";9828;test;4773;1
+"shipwreck";10759;test;294;1
 "red fish on top of greenish coral and sand";13333;test;41;1
 "blue-yellow fish on top of sand and corals";9600;test;12;1
+"muddy greenish water with sand";590;test;166;0
+"muddy greenish water with sand, seagrass, seagrass bed";590;test;113;0
