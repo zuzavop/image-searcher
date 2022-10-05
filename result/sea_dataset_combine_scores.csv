@@ -155,8 +155,7 @@ query;find_id;session_id;position;same_video
 "scuba diver with flashlight";20912;USsQyJVR;6;1
 "kelp forest";21412;USsQyJVR;8;1
 "bright yellow fins of scuba diver in spotlight";21876;USsQyJVR;22;1
-"greyish fish on sandy sea bottom";14096;Ya10hp9N;54;1
-"greyish stripped fish on a blue-grey sand";14096;2t0J-hiT;428;1
+"greyish fish on sandy sea bottom";14096;2t0J-hiT;54;1
 "bluebanded goby, atlantic trumpetfish, bluebanded goby, inshore lizardfish";14096;2t0J-hiT;213;1
 "blue nose appearing from a hole";4022;2t0J-hiT;14;1
 "grey fish on a seabed";91;2t0J-hiT;30;1
@@ -239,22 +238,22 @@ query;find_id;session_id;position;same_video
 "coral bushes with blue water, smooth mounding coral, stanghorn coral, bamboo coral";9828;2t0J-hiT;6612;0
 "red fish on top of greenish coral and sand";13333;2t0J-hiT;41;1
 "blue-yellow fish on top of sand and corals";9600;2t0J-hiT;12;1
-"fish on sand";91;pCdJR1Gu;495;0
-"fish on sand, spotted porcupinefish, sarcastic fringehead";91;pCdJR1Gu;164;1
-"thorn fish";97;pCdJR1Gu;2006;0
-"thorn fish, threespot damselfish, bluebanded goby";97;pCdJR1Gu;9429;0
-"star";105;pCdJR1Gu;3428;0
-"star, great star coral, sea star";105;pCdJR1Gu;68;1
-"fish with stripes";193;pCdJR1Gu;177;1
-"fish with stripes, kingfishes, clown triggerfish";193;pCdJR1Gu;111;1
-"diver mask hair";317;pCdJR1Gu;10;1
-"purple coral";791;pCdJR1Gu;11;1
-"coral fins";811;pCdJR1Gu;29;1
-"crab cage";1337;pCdJR1Gu;3;1
-"yellow corals";1419;pCdJR1Gu;38;1
-"pink coral";1623;pCdJR1Gu;32;1
-"coral labyrinth";1851;pCdJR1Gu;631;0
-"coral labyrinth, ivory bush coral";1851;pCdJR1Gu;47;1
+"fish on sand";91;2F9Ih1Kx;495;0
+"fish on sand, spotted porcupinefish, sarcastic fringehead";91;2F9Ih1Kx;164;1
+"thorn fish";97;2F9Ih1Kx;2006;0
+"thorn fish, threespot damselfish, bluebanded goby";97;2F9Ih1Kx;9429;0
+"star";105;2F9Ih1Kx;3428;0
+"star, great star coral, sea star";105;2F9Ih1Kx;68;1
+"fish with stripes";193;2F9Ih1Kx;177;1
+"fish with stripes, kingfishes, clown triggerfish";193;2F9Ih1Kx;111;1
+"diver mask hair";317;2F9Ih1Kx;10;1
+"purple coral";791;2F9Ih1Kx;11;1
+"coral fins";811;2F9Ih1Kx;29;1
+"crab cage";1337;2F9Ih1Kx;3;1
+"yellow corals";1419;2F9Ih1Kx;38;1
+"pink coral";1623;2F9Ih1Kx;32;1
+"coral labyrinth";1851;2F9Ih1Kx;631;0
+"coral labyrinth, ivory bush coral";1851;2F9Ih1Kx;47;1
 "diver with yellow shirt";3604;2F9Ih1Kx;4299;0
 "diver with yellow shirt, yellow tube sponge";3604;2F9Ih1Kx;4029;0
 "cliff and yellow fish";4719;2F9Ih1Kx;149;0

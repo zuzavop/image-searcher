@@ -1,7 +1,5 @@
 query;find_id;session_id;position;same_video
-"greyish fish on sandy sea bottom";14096;Ya10hp9N;54;1
-"greyish fish on sandy sea bottom, atlantic trumpetfish, shovelnose spiny dogfish, lucifer dogfish";14096;Ya10hp9N;112;1
-"greyish stripped fish on a blue-grey sand";14096;2t0J-hiT;428;1
+"greyish fish on sandy sea bottom";14096;2t0J-hiT;54;1
 "bluebanded goby, atlantic trumpetfish, bluebanded goby, inshore lizardfish";14096;2t0J-hiT;213;1
 "blue nose appearing from a hole";4022;2t0J-hiT;14;1
 "grey fish on a seabed";91;2t0J-hiT;30;1
@@ -25,7 +23,6 @@ query;find_id;session_id;position;same_video
 "shark on bluish sand";17862;2t0J-hiT;315;1
 "shark on bluish sand, nurse shark, lemon shark, bull shark, spinner shark";17862;2t0J-hiT;148;1
 "underwatter trees";21412;2t0J-hiT;15;1
-"underwatter trees, kelp forest, giant kelp, kelpfish";21412;2t0J-hiT;8;1
 "pink coral with a fish in the centre";9368;2t0J-hiT;14530;0
 "pink coral with a fish in the centre, rose coral";9368;2t0J-hiT;14590;0
 "squid with grey sand and coral";12906;2t0J-hiT;1258;0
@@ -47,7 +44,6 @@ query;find_id;session_id;position;same_video
 "shark in dark sea";5432;2t0J-hiT;221;1
 "shark in dark sea, bowhead whale, whale, greenland shark";5432;2t0J-hiT;60;1
 "yellow star on sand";13947;2t0J-hiT;17;1
-"yellow star on sand, sea star, brown stargazer";13947;2t0J-hiT;8;1
 "pilar coral with greenish water";2235;2t0J-hiT;153;0
 "pilar coral with greenish water, cockscomb cup coral, boulder star coral, hood coral";2235;2t0J-hiT;107;0
 "murena fish on green-blueish sand and coral";5358;2t0J-hiT;2545;0
@@ -92,7 +88,6 @@ query;find_id;session_id;position;same_video
 "coral bushes";9656;2t0J-hiT;81;0
 "coral bushes, smooth mounding coral";9656;2t0J-hiT;54;1
 "brown octopus";12785;2t0J-hiT;24;1
-"brown octopus on sand";12785;2t0J-hiT;7;1
 "three divers";4314;2t0J-hiT;78;0
 "three divers, smooth mounding coral";4314;2t0J-hiT;111;0
 "brown-white fish on sand";12525;2t0J-hiT;3;1

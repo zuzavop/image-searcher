@@ -1,7 +1,5 @@
 query;find_id;session_id;position;same_video
 "greyish fish on sandy sea bottom";14096;test;54;1
-"greyish fish on sandy sea bottom, atlantic trumpetfish, shovelnose spiny dogfish, lucifer dogfish";14096;test;386;0
-"greyish stripped fish on a blue-grey sand";14096;test;428;1
 "bluebanded goby, atlantic trumpetfish, bluebanded goby, inshore lizardfish";14096;test;342;1
 "blue nose appearing from a hole";4022;test;14;1
 "grey fish on a seabed";91;test;30;1
@@ -47,7 +45,6 @@ query;find_id;session_id;position;same_video
 "shark in dark sea";5432;test;221;1
 "shark in dark sea, bowhead whale, whale, greenland shark";5432;test;39;1
 "yellow star on sand";13947;test;17;1
-"yellow star on sand, sea star, brown stargazer";13947;test;4;1
 "pilar coral with greenish water";2235;test;153;0
 "pilar coral with greenish water, cockscomb cup coral, boulder star coral, hood coral";2235;test;249;0
 "murena fish on green-blueish sand and coral";5358;test;2545;0
@@ -92,7 +89,6 @@ query;find_id;session_id;position;same_video
 "coral bushes";9656;test;81;0
 "coral bushes, smooth mounding coral";9656;test;63;1
 "brown octopus";12785;test;24;1
-"brown octopus on sand";12785;test;5;1
 "three divers";4314;test;78;0
 "three divers, smooth mounding coral";4314;test;1235;0
 "brown-white fish on sand";12525;test;3;1
