@@ -1,0 +1,108 @@
+query;find_id;session_id;position;same_video
+"small greyish fish lying on grey sand";91;test_n;2377;0;922
+"small greyish fish lying on grey sand, spotted porcupinefish";91;test_n;2436;0;2046
+"rounded fish with small prickles";97;test_n;395;3;51
+"rounded fish with small prickles, spotted porcupinefish, porcupine fish";97;test_n;287;0;110
+"sea dragon looking like palm";105;test_n;2;7;57
+"a lot of striped black and white fishes and yellow fish";193;test_n;123;1;27
+"a lot of striped black and white fishes and yellow fish, longfinned boarfish";193;test_n;171;2;18
+"diver face";317;test_n;1;5;11992
+"a lot of banded butterflyfishes in light blue water";362;test_n;1035;0;752
+"a lot of banded butterflyfishes in light blue water, longfinned boarfish, moorish idol, trevally";362;test_n;509;0;497
+"light blue photo of black and white striped fishes and one black fish";426;test_n;57;6;1906
+"brain coral in purplish photo";791;test_n;554;0;2114
+"coral in purplish photo";791;test_n;188;0;7479
+"leaf coral in greenish photo";811;test_n;60;2;4622
+"net lying on rocks in greenish photo";1337;test_n;46;4;2
+"bright yellow corals";1419;test_n;17;4;38
+"purplish bush coral on rocks";1623;test_n;152;0;1205
+"small purplish bush coral on brownish rocks";1623;test_n;454;0;1868
+"whitish leaf coral";1851;test_n;26;1;2870
+"purple ivory bush coral, whitish pillar coral and leaf coral";2235;test_n;389;0;2046
+"purple ivory bush coral, whitish pillar coral and leaf coral, tubastraea floreana coral";2235;test_n;426;0;2012
+"coral reef with brownish plant, bright blue water with small black fishes";2486;test_n;118;0;416
+"coral reef with brownish plant, bright blue water with small black fishes, black coral";2486;test_n;51;1;385
+"brain coral and opening clam";2580;test_n;3372;0;1016
+"pillar coral and opening clam, brain coral";2580;test_n;9813;0;1746
+"small snake head in the middle of the photo surround with sand and grey corals";2685;test_n;918;0;3521
+"snake head in the middle of the photo surround with whitish sand and grey corals, sea krait";2685;test_n;4352;0;14308
+"corals and small black fish";4646;test_n;470;0;10340
+"corals and small black fish with dark blue water, black sea bass";4646;test_n;535;0;15120
+"poorly visible sharks";5541;test_n;165;6;80
+"poorly visible sharks, hammerhead shark in light blue water";5541;test_n;278;3;117
+"shark in darker blue water";5599;test_n;247;0;72
+"two tuna in darker blue water";5599;test_n;1523;1;93
+"two rays";8931;test_n;97;5;45
+"two rays, eagle ray, spotted eagle ray";8931;test_n;21;13;8
+"brownish ivory bush coral";9828;test_n;4336;0;972
+"brownish ivory bush coral bottom of the sea, bamboo coral";9828;test_n;6731;0;1448
+"shipwreck";10759;test_n;1574;1;78
+"shipwreck, windows and small tuna";10759;test_n;10;4;94
+"diver near big turtle";14198;test_n;9;9;49
+"blackish parrot fish and brain coral";16545;test_n;6864;0;108
+"blackish nassau grouper and brain coral";16545;test_n;384;5;425
+"two sharks lying on sandy sea bed";17862;test_n;2252;2;252
+"nurse shark lying on sandy sea bed";17862;test_n;419;1;84
+"coral reef with small black bluetail fishes";2549;test_n;3438;0;3432
+"coral reef with small black bluetail fishes, threespot damselfish";2549;test_n;3428;0;2830
+"whitish sand with black sea cucumber";2585;test_n;35;5;111
+"brain coral and yellow and blue striped fish and yellow fish";2658;test_n;5;8;22
+"black ray";2742;test_n;206;2;12
+"black giant devilray";2742;test_n;6;10;17
+"parrot fish";2785;test_n;16;5;223
+"turtle near coral reef";2809;test_n;117;2;62
+"hawksbill turtle near coral reef";2809;test_n;102;3;57
+"pillar coral with small yellow fish and diver in background";3415;test_n;645;0;1346
+"pillar coral with small yellow fish and diver in background, threespot damselfish, yellow cup black coral";3415;test_n;498;0;1213
+"bright yellow fish in cave";3951;test_n;9;6;1980
+"bright blue moray eel opening mouth";4022;test_n;3;3;551
+"small black fishes swimming up near rock reef";4481;test_n;15;1;1971
+"a lot of brownish fishes";4999;test_n;194;0;1795
+"a school of brownish fishes with strip";4999;test_n;1;9;8
+"small brown and white creature with short tentacles near grey sand";5025;test_n;59;1;478
+"orange weird fish";5104;test_n;20;8;13
+"bright blue photo of white spotted shark";5282;test_n;1000;0;576
+"bright blue photo of white spotted shark, whale shark, spinner shark, broadnose sevengill shark";5282;test_n;472;1;180
+"moray eel eating lobster";5358;test_n;4;9;407
+"shark and four divers";5413;test_n;330;0;449
+"shark and four divers near white sand";5413;test_n;224;0;508
+"shark in spotlight";5432;test_n;264;2;21
+"shark in spotlight, great hammerhead shark, basking shark";5432;test_n;371;3;6
+"orange fishes under rock";6114;test_n;1;7;1
+"clown fish";6231;test_n;6;7;26
+"giant kelp";6257;test_n;2430;0;642
+"giant kelp, kelp forest";6257;test_n;4193;0;678
+"yellowish coral with blueish ends";6295;test_n;14;3;182
+"rocky reef with small black thorny creature";7346;test_n;39;3;16080
+"three greyish rays lying in sand";8740;test_n;18;2;7486
+"two spotted rays";8912;test_n;34;12;26
+"fattish fish lying under rock";9368;test_n;37;2;2234
+"spotted moray eel under coral reef";9487;test_n;12;13;100
+"blue and yellow fish near coral reef";9600;test_n;14;2;13
+"turtle near brown corals";9772;test_n;168;1;146
+"hawksbill turtle near brown corals";9772;test_n;145;5;122
+"shipwreck with windows";10739;test_n;8;9;764
+"white black spotted fish above white sandy ocean bed";11643;test_n;304;0;364
+"white black spotted fish above white sandy ocean bed, spotted porcupinefish, porcupine fish";11643;test_n;71;3;74
+"striped white and brown fish above sand, brownish photo";12525;test_n;110;2;5682
+"striped white and brown fish above sand, brownish photo, yellowedge grouper, sand flounder";12525;test_n;36;3;6481
+"octopus lying in sand";12785;test_n;14;6;4266
+"bush coral in spotlight";12829;test_n;66;0;10469
+"bush coral in spotlight, yellow tube sponge";12829;test_n;61;3;9654
+"orange creature above greyish sand with pillar coral";12906;test_n;2660;0;2673
+"orange creature above greyish sand with pillar coral, arrow squid";12906;test_n;12;3;283
+"hand holding round creature";13252;test_n;92;7;2
+"hand holding cushion star, portuguese man owar";13252;test_n;3;14;8
+"orange clownfish";13333;test_n;5;3;242
+"sea star";13947;test_n;10;2;10
+"giant barrel sponge";14346;test_n;9;4;375
+"purple leafy corals from detail";14417;test_n;805;0;544
+"purple leafy corals from detail, lettuce coral";14417;test_n;1170;0;268
+"giant barrel sponge";15450;test_n;273;3;228
+"giant barrel sponge, yellow tube sponge";15450;test_n;404;5;287
+"giant black ray next to rock";16631;test_n;5567;0;2249
+"giant black ray in light blue water";16631;test_n;294;0;1531
+"a lot of small blue fishes with yellowish fins";16673;test_n;396;0;485
+"a school of blue fishes with yellowish fins";16673;test_n;11;9;14
+"kelp forest";21412;test_n;278;0;7974
+"kelp forest with trees";21412;test_n;89;0;7911

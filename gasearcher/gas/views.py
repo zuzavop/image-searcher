@@ -21,7 +21,7 @@ def get_data_from_clip_text_search(query, session, found):
     text_features /= np.linalg.norm(text_features)
 
     # get distance of vectors
-    scores = (np.concatenate([1 - (text_features @ torch.cat(clip_data).T)], axis=None))
+    scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features.T)], axis=None))
 
     # save score for next search
     new_scores = scores + last_search[session]

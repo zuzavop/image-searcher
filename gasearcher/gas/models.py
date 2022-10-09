@@ -9,7 +9,7 @@ import torch as torch
 from gasearcher.settings import STATICFILES_DIRS
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load("ViT-B/32", device=device)
+model, preprocess = clip.load("ViT-L/14@336px", device=device)
 
 clip_data = []
 class_data = {}
@@ -24,14 +24,13 @@ sea_finding = [91, 97, 105, 193, 317, 362, 426, 590, 646, 772, 791, 811, 844, 10
                10123, 10739, 11566, 11643, 12525, 12785, 12829, 12906, 13252, 13333, 13947, 14096, 14346, 14417, 15450,
                16062, 16142, 16394, 16631, 16673, 18547, 18677, 19807, 20426, 20912, 21412, 21617, 21876]
 
-print(len(sea_finding))
 
-finding = [3604, 4719, 17862, 4022, 2549, 3006, 2129, 2819, 2261, 549, 10759, 11666, 2742, 2951, 2235, 9828, 2295, 4314, 4646, 3053, 2486, 3951, 5541, 2809, 4481, 13521, 3415]
-# for i in range(120):
+finding = sea_finding
+# for i in range(60):
 #     new_int = random.randint(1, 22036)
 #     if new_int not in finding:
 #         finding.append(new_int)
-# random.shuffle(finding)
+random.shuffle(finding)
 
 last_search = {}  # vectors of last text search
 same_video = {}  # indexes of images in same video (high probability of same looking photos)
@@ -43,14 +42,14 @@ showing = 60  # number of shown image in result
 def get_data():
     global clip_data, class_data, classes
     print('loading data...')
-    for fn in sorted(os.listdir(path_data + "sea_clip")):
-        clip_data.append(torch.load(path_data + f"sea_clip/{fn}"))
+    for fn in sorted(os.listdir(path_data + "sea_clip_longer")):
+        clip_data.append(torch.load(path_data + f"sea_clip_longer/{fn}"))
 
-    class_data = pd.read_csv(path_data + "sea_result.csv", sep=';').set_index('id')
+    class_data = pd.read_csv(path_data + "sea_new_result.csv", sep=';').set_index('id')
     class_data = class_data.to_dict()['top']
     class_data = {int(key) - 1: literal_eval(value) for key, value in class_data.items()}
 
-    with open(path_data + 'sea_nounlist.txt', 'r') as f:
+    with open(path_data + 'pr_sea_new_nounlist.txt', 'r') as f:
         for line in f:
             classes.append(line.split(":")[0][:-1].replace("'", '"'))
             class_pr[len(classes) - 1] = float(line.split(":")[1][:-1])

@@ -6,7 +6,7 @@ ranks2 = []
 diff = []
 
 
-with open('sea_dataset_combine_scores.csv') as csv_file:
+with open('..//..//new_message.csv') as csv_file:
 #with open('sea_dataset_normal.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line = 0
