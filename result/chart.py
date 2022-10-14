@@ -6,7 +6,7 @@ ranks2 = []
 diff = []
 
 
-with open('..//..//new_message.csv') as csv_file:
+with open('normal_larger_model.csv') as csv_file:
 #with open('sea_dataset_normal.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     line = 0
@@ -29,7 +29,7 @@ plt.rcParams["figure.figsize"] = (3,8)
 data = [ranks1, ranks2, diff]
 
 fig1, ax1 = plt.subplots()
-ax1.set_title('Basic Plot')
+ax1.set_title('Larger model')
 ax1.boxplot(data)
 
 plt.show()
