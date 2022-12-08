@@ -129,3 +129,7 @@ button:hover {
     width: 90%;
     margin: 5% 5%;
 }
+
+#next_button {
+    bottom: 0;
+}
