@@ -30,6 +30,7 @@ html {
 .container {
     position: absolute;
     height: 100%;
+    width: 100%;
     float: left;
     margin: 0 3%;
 }
@@ -49,11 +50,17 @@ img.selected {
     border-color: yellow;
 }
 
-.sidebar img {
+.find_img_div {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 18%;
+}
+
+.sidebar img {
+    border-style: solid;
+    border-color: greenyellow;
+    border-radius: 8px;
 }
 
 .context img {
@@ -98,7 +105,7 @@ button:hover {
 
 .img_div {
     float: left;
-    width: 8%;
+    width: 8.2%;
     height: auto;
     position: relative;
     margin: 0 0 calc(20vh - 4.5vw) 0;
@@ -130,6 +137,14 @@ button:hover {
     margin: 5% 5%;
 }
 
+#help_button {
+    position:absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5% 1%;
+    margin: 0;
+}
+
 #next_button {
-    bottom: 0;
+    width: 100%;
 }

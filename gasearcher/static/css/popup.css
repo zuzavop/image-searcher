@@ -8,14 +8,14 @@
 }
 .popup_window{
   background: white;
-  width: 70%;
+  width: 90%;
   padding: 2% 2%;
   border-radius: 9px;
   border-style: solid;
   border-color: black;
   border-width: 2px;
-  top: 25%;
-  left: 23%;
+  top: 30%;
+  left: 5%;
   position: relative;
 }
 
@@ -51,4 +51,25 @@
 
 .context img {
   width: 18%;
+}
+
+.help_parent{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.help_window{
+  background: white;
+  width: 80%;
+  padding: 2% 2%;
+  border-radius: 9px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  left: 10%;
+  position: relative;
 }

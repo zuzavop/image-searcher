@@ -7,12 +7,11 @@ import torch
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
-
 from gas.models import device, model, clip_data, path_log, finding, class_data, classes, last_search, same_video, \
-    showing, class_pr
+    showing, class_pr, combination, first_show
 
 
-def get_data_from_clip_text_search(query, session, found):
+def get_data_from_clip_text_search(query, session, found, activity):
     # get normalize features of text query
     with torch.no_grad():
         text_features = model.encode_text(clip.tokenize([query]).to(device))
@@ -21,17 +20,17 @@ def get_data_from_clip_text_search(query, session, found):
     # get distance of vectors
     scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features.T)], axis=None))
 
+    new_scores = list(np.argsort((scores + last_search[session]) if combination else scores))
     # save score for next search
-    new_scores = scores + last_search[session]
-    last_search[session] = scores
-    new_scores = list(np.argsort(new_scores))
+    if combination:
+        last_search[session] = scores
 
     # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
     same = 1 if len(list(set(new_scores[:showing]) & set(same_video[finding[found]]))) > 0 else 0
     # write down log
     with open(path_log, "a") as log:
         log.write(query + ';' + str(finding[found]) + ';' + session + ';' + str(
-            new_scores.index(finding[found]) + 1) + ';' + str(same) + '\n')
+            new_scores.index(finding[found]) + 1) + ';' + str(same) + ';"' + activity[:-1] + '"' + '\n')
 
     return new_scores[:showing]
 
@@ -53,10 +52,11 @@ def search(request):
     found = int(request.COOKIES.get('index')) if request.COOKIES.get('index') is not None else 0
     if found >= len(finding):  # control of end
         return redirect('/end')
-    data = np.arange(1, showing + 1)
+    data = first_show
 
     if request.GET.get('query'):
-        data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found)
+        data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found,
+                                              request.COOKIES.get('activity'))
     else:
         # reset save search if user use any other method than text search
         last_search[request.session['session_id']] = np.zeros(len(clip_data))
@@ -84,6 +84,7 @@ def search(request):
 def index(request):
     # "login" - setting session id
     request.session['session_id'] = secrets.token_urlsafe(6)
+    last_search[request.session['session_id']] = np.zeros(len(clip_data))
     return render(request, 'start.html')
 
 

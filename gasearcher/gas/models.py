@@ -13,6 +13,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
 sea_database = True
+combination = True
 
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
 path_log = path_data + "message.csv"
@@ -30,8 +31,20 @@ class_pr = {}
 sur = 7  # surrounding of image in context
 showing = 60  # number of shown image in result
 
-finding = list(set([random.randint(1, size_dataset) for _ in range(80)]))
-random.shuffle(finding)
+sea_finding = [91, 97, 105, 193, 317, 362, 426, 646, 791, 811, 1337, 1419, 1623, 1851,
+               2235, 2486, 2580, 2685, 4646, 5541, 5599, 8931, 9828, 10759,
+               14198, 16545, 17862, 2549, 2585, 2658, 2742, 2785, 2809, 2951,
+               3053, 3415, 3951, 4022, 4481, 4999, 5025, 5104, 5282, 5358, 5413, 5432,
+               6114, 6231, 6257, 6295, 7346, 8740, 8912, 9368, 9487, 9600, 9772,
+               10739, 11643, 12525, 12785, 12829, 12906, 13252, 13333, 13947, 14346, 14417, 15450,
+               16062, 16631, 16673, 19807, 21412]
+random.shuffle(sea_finding)
+finding = sea_finding[:20] if sea_database else []
+for i in range(80):
+    new_int = random.randint(1, size_dataset)
+    if new_int not in finding:
+        finding.append(new_int)
+first_show = [random.randint(1, size_dataset) for _ in range(showing)]
 
 
 def get_data(is_sea_database):

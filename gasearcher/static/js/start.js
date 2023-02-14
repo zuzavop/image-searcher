@@ -29,7 +29,7 @@ function pop_up(buttons, button) {
     }
 }
 
-function create_buttons(buttons, values) {
+function create_buttons(buttons, values, id) {
     // create buttons with labels/classes
     let i = 1;
     for (let e in values) {
@@ -38,10 +38,11 @@ function create_buttons(buttons, values) {
         if (i > 3) {
             but.className = "more_b hidden";
         }
+        but.id = "b" + id;
         but.textContent = classes[values[e]];
         but.style.background = perc2color(percent_class[values[e]]);
         but.addEventListener("click", function () {
-            add_text(but.textContent);
+            add_text(but.textContent, but.id.slice(1));
         });
         i++;
     }
@@ -86,11 +87,22 @@ function create_context() {
 
 function create_wanted(fin) {
     // create image of currently search image
+    const div = document.createElement("div");
+    div.className = "find_img_div";
     const img = document.createElement("img");
     img.id = fin.toString() + 'r';
     img.setAttribute("class", "find_img");
     img.setAttribute('src', config.photos_address + ("0000" + (fin + 1)).slice(-5) + '.jpg');
-    document.getElementsByClassName("sidebar")[0].appendChild(img);
+    div.appendChild(img);
+    const button = document.createElement("button");
+    button.textContent = "Next";
+    button.id = "next_button";
+    button.class = "bar-item";
+    button.addEventListener("click", function () {
+        next_search();
+    });
+    div.appendChild(button)
+    document.getElementsByClassName("sidebar")[0].appendChild(div);
 }
 
 function perc2color(per) {

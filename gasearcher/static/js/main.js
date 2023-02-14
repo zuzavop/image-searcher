@@ -10,6 +10,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+document.cookie = 'activity=""';
 // setting cookies and local variables about attempts
 if (found == -1) {
     let co = document.cookie.split(';');
@@ -34,6 +35,7 @@ function searching() {
         document.cookie = 'index=' + found;
         document.cookie = 'trying=-1';
         document.cookie = 'last_query=""';
+        document.cookie = 'activity=""';
         location.href = '?s';
     } else if (query.length > 0) {
         if (trying == (config.att - 1)) { // display alert - last search
@@ -64,7 +66,7 @@ function show_context(id) {
     middle = id;
     document.getElementsByClassName("context")[0].innerHTML = '';
     let new_id;
-    for (let i of [-7, -2, -1, 4, 5, -6, -3, 0, 3, 6, -5, -4, 1, 2, 7]) {
+    for (let i of [-2, -1, 0, 1, 2]) {
         new_id = parseInt(id) + i
         if (new_id > 0 && new_id < config.size_dataset) {
             const image = document.createElement("img");
@@ -73,6 +75,7 @@ function show_context(id) {
             image.addEventListener("click", function (e) {
                 if (e.ctrlKey) {
                     if (id == parseInt(image.id.slice(1))) control_and_send(parseInt(image.id.slice(1)));
+                    else alert("Context of image can't be sent...")
                 } else {
                     select(image.id, false);
                 }
@@ -109,13 +112,14 @@ function control_and_send(id) {
         document.cookie = 'index=' + found;
         document.cookie = 'trying=-1';
         document.cookie = 'last_query=""';
+        document.cookie = 'activity=""';
         location.href = '?answer=' + id;
     } else {
         alert("Wrong answer. Try again...");
     }
 }
 
-function add_text(text) {
+function add_text(text, id) {
     // add text to text search and set focus to end
     const input = document.getElementById('search_text');
     let end = input.value.length;
@@ -127,6 +131,8 @@ function add_text(text) {
     end = input.value.length;
     input.setSelectionRange(end, end);
     input.focus();
+    const last = getCookie("activity");
+    document.cookie = 'activity=' + last.slice(0, last.length - 1) + text + ":" + id + '|"';
 }
 
 function next_search() {
@@ -135,6 +141,7 @@ function next_search() {
     document.cookie = 'index=' + found;
     document.cookie = 'trying=-1';
     document.cookie = 'last_query=""';
+    document.cookie = 'activity=""';
     location.href = '?s';
 }
 
@@ -142,4 +149,24 @@ function close_window() {
     // closing of context window
     let parent = document.querySelector(".modal_parent");
     parent.style.display = "none";
+}
+
+function close_help_window() {
+    // closing of context window
+    let parent = document.querySelector(".help_parent");
+    parent.style.display = "none";
+}
+
+function step_back(state) {
+    document.cookie = 'activity=""';
+    if (trying > 0){
+        document.cookie = 'trying=' + (trying - 1);
+    } else {
+        document.cookie = 'index=' + (found - 1);
+    }
+}
+
+function show_help() {
+    let parent = document.querySelector(".help_parent");
+    parent.style.display = "block";
 }

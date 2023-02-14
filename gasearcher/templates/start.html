@@ -15,14 +15,34 @@
 </head>
 <body>
 <h1>Video retrieval</h1>
-<p>After pressing the "Search" button, a search will be started, where your task will be to find the template image
-    shown in the bottom left corner.</p>
-<p>Sending of photo, you think is the correct answer, is done by ctrl + click to that photo.</p>
-<p>After double click on any photo will be displayed context of photo in dataset, but photo in context can't be sent as
-    answer due to the currently tested method.</p>
-<p>If you don't know what to do or if you don't want to search for the current image, you can always skip the search
-    using the "Next" button.</p>
-<button onclick="location.href = '/search';">Search</button>
+<h2>Informovaný souhlas</h2>
+<p>S čím byste měli souhlasit v případě, že chcete pokračovat:</p>
+<p>Seznámili jste se s cíli a obsahem výzkumu (viz Nápověda níže) a nevadí Vám se na něm podílet (např. není v rozporu s
+    Vaším přesvědčením). Souhlasíte s tím, že mohou být použity Vaše (anonymní) odpovědi k prezentaci například ve
+    vědeckých pracích.</p>
+<p>V práci, která na základě výzkumu vznikne, bychom chtěli zveřejnit dataset s výsledky v následujícím rozsahu:</p>
+<ul>
+    <li>anonymizovaný, náhodně vygenerovaný identifikátor účastníka (něco jako UID = rYTAp9IY)</li>
+    <li>textové dotazy účastníka spojené s postupem vyhledávání</li>
+</ul>
+<p>Výzkum můžete kdykoliv v průběhu ukončit zavřením okna, avšak Vaše vyhledávání bude zaznamenáno průběžně. V případě,
+    že budete chtít svůj souhlas se zpracováním Vašich odpovědí odvolat, napište e-mail na <i>zuzana.vop@gmail.com</i> (ideálně
+    s přibližným časem začátku Vašeho experimentu). </p>
+
+<script>
+  fetch('templates/help.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('help_context').innerHTML = data;
+    });
+</script>
+<button class="bar-item" onclick="location.href = '/search';">Search</button>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </body>
+<script>
+    document.cookie = "index=0";
+    document.cookie = 'trying=-1';
+    document.cookie = 'last_query=""';
+    document.cookie = 'activity=""';
+</script>
 </html>
