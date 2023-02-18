@@ -24,8 +24,7 @@
                                                 minlength="1"><br>
         <button class="bar-item" id="text_searcher" onclick="searching()">Text search</button>
         <br>
-        {#        <button class="bar-item" onclick="sim_search()">Similarity search</button>#}
-        {#        <br>#}
+        {# <button class="bar-item" onclick="sim_search()">Similarity search</button> #}
         <button class="bar-item" id="clear" onclick="clear_search()">Clear text</button>
         <br>
     </div>
@@ -54,10 +53,10 @@
         <div id="help_context">
             <script>
               fetch('templates/help.html')
-                .then(response => response.text())
-                .then(data => {
-                  document.getElementById('help_context').innerHTML = data;
-                });
+                  .then(response => response.text())
+                  .then(data => {
+                      document.getElementById('help_context').innerHTML = data;
+                  });
             </script>
         </div>
     </div>
@@ -147,14 +146,10 @@
         document.getElementById("search_text").value = last_query;
     }
 
-    window.onpopstate = (event) => {
-        step_back(event.state);
-    };
-    history.pushState({ index: getCookie("index"), trying: getCookie("trying"), last_query: getCookie("last_query")}, '');
-
+    {# close popup window with escape #}
     document.onkeydown = function(event) {
         event = event || window.event;
-        var isEscape;
+        let isEscape;
         if ("key" in event) {
             isEscape = (event.key === "Escape" || event.key === "Esc");
         } else {
@@ -165,5 +160,12 @@
             close_help_window();
         }
     };
+
+    {# set history #}
+    window.onpopstate = (event) => {
+        step_back(event.state);
+    };
+    history.pushState({ index: getCookie("index"), trying: getCookie("trying"), last_query: getCookie("last_query")}, '');
+
 </script>
 </html>

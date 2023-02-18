@@ -29,17 +29,20 @@
     že budete chtít svůj souhlas se zpracováním Vašich odpovědí odvolat, napište e-mail na <i>zuzana.vop@gmail.com</i> (ideálně
     s přibližným časem začátku Vašeho experimentu). </p>
 
+<div id="help_context"></div>
 <script>
-  fetch('templates/help.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('help_context').innerHTML = data;
-    });
+    {#  get help text  #}
+    fetch('templates/help.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('help_context').innerHTML = data;
+        });
 </script>
 <button class="bar-item" onclick="location.href = '/search';">Search</button>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </body>
 <script>
+    {#  set cookies  #}
     document.cookie = "index=0";
     document.cookie = 'trying=-1';
     document.cookie = 'last_query=""';

@@ -6,6 +6,7 @@ import clip
 import numpy as np
 import pandas as pd
 import torch as torch
+from sklearn_som.som import SOM
 
 from gasearcher.settings import STATICFILES_DIRS
 
@@ -31,20 +32,17 @@ class_pr = {}
 sur = 7  # surrounding of image in context
 showing = 60  # number of shown image in result
 
-sea_finding = [91, 97, 105, 193, 317, 362, 426, 646, 791, 811, 1337, 1419, 1623, 1851,
-               2235, 2486, 2580, 2685, 4646, 5541, 5599, 8931, 9828, 10759,
-               14198, 16545, 17862, 2549, 2585, 2658, 2742, 2785, 2809, 2951,
-               3053, 3415, 3951, 4022, 4481, 4999, 5025, 5104, 5282, 5358, 5413, 5432,
-               6114, 6231, 6257, 6295, 7346, 8740, 8912, 9368, 9487, 9600, 9772,
-               10739, 11643, 12525, 12785, 12829, 12906, 13252, 13333, 13947, 14346, 14417, 15450,
-               16062, 16631, 16673, 19807, 21412]
+sea_finding = [91, 97, 105, 193, 317, 362, 426, 646, 791, 811, 1337, 1419, 1623, 1851, 2235, 2486, 2580, 2685, 4646,
+               5541, 5599, 8931, 9828, 10759, 14198, 16545, 17862, 2549, 2585, 2658, 2742, 2785, 2809, 2951, 3053, 3415,
+               3951, 4022, 4481, 4999, 5025, 5104, 5282, 5358, 5413, 5432, 6114, 6231, 6257, 6295, 7346, 8740, 8912,
+               9368, 9487, 9600, 9772, 10739, 11643, 12525, 12785, 12829, 12906, 13252, 13333, 13947, 14346, 14417,
+               15450, 16062, 16631, 16673, 19807, 21412]
 random.shuffle(sea_finding)
 finding = sea_finding[:20] if sea_database else []
 for i in range(80):
     new_int = random.randint(1, size_dataset)
     if new_int not in finding:
         finding.append(new_int)
-first_show = [random.randint(1, size_dataset) for _ in range(showing)]
 
 
 def get_data(is_sea_database):
@@ -76,3 +74,13 @@ def get_data(is_sea_database):
 
 
 get_data(sea_database)
+
+# get first window - SOM
+input_data = np.array(torch.cat(clip_data))
+data_som = SOM(m=5, n=12, dim=len(clip_data[0][0]))
+X = data_som.fit_predict(input_data)
+
+first_show = [21535 for _ in range(12 * 5)]
+for i in range(len(first_show)):
+    if i in X:
+        first_show[i] = np.random.choice(np.where(X == i)[0])
