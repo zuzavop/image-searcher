@@ -50,7 +50,7 @@ img.selected {
     border-color: yellow;
 }
 
-.find_img_div {
+.find-img-div {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -103,7 +103,7 @@ button:hover {
     border-color: #05b4cd;
 }
 
-.img_div {
+.img-div {
     float: left;
     width: 8.2%;
     height: auto;
@@ -111,7 +111,7 @@ button:hover {
     margin: 0 0 calc(20vh - 4.5vw) 0;
 }
 
-.img_div div {
+.img-div div {
     position: absolute;
     float: left;
     font-size: 50%;
@@ -120,24 +120,24 @@ button:hover {
     bottom: calc(-20vh + 4.5vw);
 }
 
-.image_buttons .hidden {
+.image-buttons .hidden {
     display: none;
 }
 
-.image_buttons {
+.image-buttons {
     display: block;
 }
 
-.plus_but {
+.plus-but {
     border-radius: 12px;
 }
 
-#search_text {
+#search-text {
     width: 90%;
     margin: 5% 5%;
 }
 
-#help_button {
+#help-button {
     position:absolute;
     right: 0;
     top: 0;
@@ -145,6 +145,14 @@ button:hover {
     margin: 0;
 }
 
-#next_button {
+#next-button {
     width: 100%;
+}
+
+#warning {
+    background-color: yellow;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    padding: 2%;
 }

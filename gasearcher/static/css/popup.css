@@ -1,4 +1,4 @@
-.modal_parent{
+.modal-parent{
   position: fixed;
   top: 0;
   left: 0;
@@ -6,7 +6,7 @@
   width: 100%;
   display: none;
 }
-.popup_window{
+.popup-window{
   background: white;
   width: 90%;
   padding: 2% 2%;
@@ -19,7 +19,7 @@
   position: relative;
 }
 
-.close_button{
+.close-button{
   position: absolute;
   left: 97%;
   top: 0;
@@ -33,7 +33,7 @@
     margin: 0 0 0 5%;
 }
 
-.cont_butt {
+.cont-butt {
     position: absolute;
     height: 85%;
     bottom: 5%;
@@ -53,7 +53,7 @@
   width: 18%;
 }
 
-.help_parent{
+.help-parent{
   position: fixed;
   top: 0;
   left: 0;
@@ -62,7 +62,7 @@
   display: none;
 }
 
-.help_window{
+.help-window{
   background: white;
   width: 80%;
   padding: 2% 2%;

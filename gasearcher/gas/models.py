@@ -10,9 +10,11 @@ from sklearn_som.som import SOM
 
 from gasearcher.settings import STATICFILES_DIRS
 
+# clip
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
+# configuration
 sea_database = True
 combination = True
 
@@ -32,6 +34,7 @@ class_pr = {}
 sur = 7  # surrounding of image in context
 showing = 60  # number of shown image in result
 
+# images that should be found
 sea_finding = [91, 97, 105, 193, 317, 362, 426, 646, 791, 811, 1337, 1419, 1623, 1851, 2235, 2486, 2580, 2685, 4646,
                5541, 5599, 8931, 9828, 10759, 14198, 16545, 17862, 2549, 2585, 2658, 2742, 2785, 2809, 2951, 3053, 3415,
                3951, 4022, 4481, 4999, 5025, 5104, 5282, 5358, 5413, 5432, 6114, 6231, 6257, 6295, 7346, 8740, 8912,
@@ -49,9 +52,11 @@ def get_data(is_sea_database):
     global clip_data, class_data, classes, same_video
     print('loading data...')
 
+    # preprocessed data from clip
     for fn in sorted(os.listdir(path_clip)):
         clip_data.append(torch.load(path_clip + f"/{fn}"))
 
+    # image classes
     class_data = pd.read_csv(path_classes, sep=';').set_index('id').to_dict()['top']
     class_data = {int(key) - 1: literal_eval(value) for key, value in class_data.items()}
 
@@ -61,6 +66,7 @@ def get_data(is_sea_database):
             classes.append(split[0][:-1])
             class_pr[len(classes) - 1] = float(split[1][:-1])
 
+    # context
     if is_sea_database:
         bottom = 0
         with open(path_data + 'sea_videos.txt', 'r') as f:
