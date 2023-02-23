@@ -1,14 +1,16 @@
 const startMainWindow = {
-    createImageTable: function() {
+    createImageTable: function () {
         const tb = document.getElementsByClassName('div-table')[0];
-        for (let i = 0; i < config.lines; i++) {
-            const tr = document.createElement('tr');
-            tr.id = i.toString() + 'tr';
-            tb.appendChild(tr);
+        if (tb) {
+            for (let i = 0; i < config.lines; i++) {
+                const tr = document.createElement('tr');
+                tr.id = i.toString() + 'tr';
+                tb.appendChild(tr);
+            }
         }
     },
 
-    createImageBlock: function(id, values, num) {
+    createImageBlock: function (id, values, num) {
         let div = startMainWindow.createImage(id, num);
         const buttons = document.createElement('div');
         buttons.className = "image-buttons";
@@ -35,7 +37,7 @@ const startMainWindow = {
         return div;
     },
 
-    createButtons: function(buttons, values, id) {
+    createButtons: function (buttons, values, id) {
         // create buttons with labels/classes
         let i = 1;
         for (let e in values) {
@@ -61,7 +63,7 @@ const startMainWindow = {
         buttons.appendChild(but);
     },
 
-    popUp: function(buttons, button) {
+    popUp: function (buttons, button) {
         // create button for showing more labels
         const butt = buttons.getElementsByClassName("more-b");
         for (let b of butt) {
@@ -74,7 +76,7 @@ const startMainWindow = {
         }
     },
 
-    createTopClasses: function(topClasses) {
+    createTopClasses: function (topClasses) {
         for (let c in topClasses) {
             const but = document.createElement("button");
             but.textContent = classes[parseInt(topClasses[c])];
@@ -86,12 +88,12 @@ const startMainWindow = {
         document.getElementById("search-text").after(document.createElement('br'));
     },
 
-    createContext: function() {
+    createContext: function () {
         const buttPrev = document.createElement("button");
         buttPrev.setAttribute("class", "previous cont-butt");
         buttPrev.textContent = '<';
         buttPrev.addEventListener("click", function () {
-            mainWindow.showContext(parseInt(mainWindow.middle) - config.contextShift);
+            mainWindow.showContext(parseInt(mainWindow.middleId) - config.contextShift);
         });
         document.getElementsByClassName("popup-window")[0].appendChild(buttPrev);
 
@@ -99,12 +101,12 @@ const startMainWindow = {
         buttNext.setAttribute("class", "next cont-butt");
         buttNext.textContent = '>';
         buttNext.addEventListener("click", function () {
-            mainWindow.showContext(parseInt(mainWindow.middle) + config.contextShift);
+            mainWindow.showContext(parseInt(mainWindow.middleId) + config.contextShift);
         });
         document.getElementsByClassName("popup-window")[0].appendChild(buttNext);
     },
 
-    createWanted: function(fin) {
+    createWanted: function (fin) {
         // create image of currently search image
         const div = document.createElement("div");
         div.className = "find-img-div";
@@ -131,9 +133,9 @@ const startMainWindow = {
         document.getElementById('text-searcher').innerText = 'Next';
     },
 
-    percToColor: function(per) {
+    percToColor: function (per) {
         per = 100 - (per * config.percGrow)
-        let r, g, b = 0;
+        let r, g;
         if (per < 99) {
             r = 255;
             g = Math.round((255 / 99) * per);
@@ -141,7 +143,7 @@ const startMainWindow = {
             g = 255;
             r = Math.round((25500 / 99) - (255 / 99) * per);
         }
-        let h = r * 0x10000 + g * 0x100 + b;
+        let h = r * 0x10000 + g * 0x100;
         return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
+    },
 };

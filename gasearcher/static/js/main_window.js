@@ -1,18 +1,15 @@
 const mainWindow = {
-    selected: -1,
-    middle: -1,
+    selectedId: -1, // index of currently selected
+    middleId: -1, // index of middle image in context
     found: -1, // index of currently search image
     trying: -1, // number of trying on current image
     lastQuery: "", // text of last query
 
-    getCookie: function(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    },
-
     init: function () {
-        if(config.listingContext) {
+        // get help text
+        utils.loadHelp();
+
+        if (config.listingContext) {
             startMainWindow.createContext();
         }
 
@@ -28,7 +25,7 @@ const mainWindow = {
         }
 
         // close popup window with escape
-        document.onkeydown = function(event) {
+        document.onkeydown = function (event) {
             event = event || window.event;
             let isEscape;
             if ("key" in event) {
@@ -46,16 +43,20 @@ const mainWindow = {
         window.onpopstate = (event) => {
             mainWindow.stepBack(event.state);
         };
-        history.pushState({ index: mainWindow.getCookie("index"), trying: mainWindow.getCookie("trying"), last_query: mainWindow.getCookie("last_query")}, '');
+        history.pushState({
+            index: utils.getCookie("index"),
+            trying: utils.getCookie("trying"),
+            last_query: utils.getCookie("last_query")
+        }, '');
 
         document.cookie = 'activity=""';
         // setting cookies and local variables about attempts
         if (mainWindow.found === -1) {
             let co = document.cookie.split(';');
             if (co.length > 1) {
-                mainWindow.found = parseInt(mainWindow.getCookie("index"));
-                mainWindow.trying = parseInt(mainWindow.getCookie("trying")) + 1;
-                mainWindow.lastQuery = mainWindow.getCookie("last_query").slice(1, -1);
+                mainWindow.found = parseInt(utils.getCookie("index"));
+                mainWindow.trying = parseInt(utils.getCookie("trying")) + 1;
+                mainWindow.lastQuery = utils.getCookie("last_query").slice(1, -1);
             } else {
                 document.cookie = 'index=0; trying=0; last_query=""';
                 mainWindow.found = 0;
@@ -64,7 +65,7 @@ const mainWindow = {
         }
     },
 
-    searching: function() {
+    searching: function () {
         // send text query
         let query = document.getElementById('search-text').value;
         if (mainWindow.trying === config.att) {
@@ -82,9 +83,9 @@ const mainWindow = {
         }
     },
 
-    simSearch: function() {
+    simSearch: function () {
         // send query for similarity search
-        if (mainWindow.selected !== -1) {
+        if (mainWindow.selectedId !== -1) {
             if (mainWindow.trying === config.att) {
                 mainWindow.found++;
                 document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
@@ -96,21 +97,21 @@ const mainWindow = {
                     }
                 }
                 document.cookie = 'trying=' + mainWindow.trying + '; last_query=""';
-                location.href = '?id=' + mainWindow.selected;
+                location.href = '?id=' + mainWindow.selectedId;
             }
         } else {
             alert(text.similarity_warning);
         }
     },
 
-    clearSearch: function() {
+    clearSearch: function () {
         // clear text of search
         document.getElementById('search-text').value = '';
     },
 
-    showContext: function(id) {
+    showContext: function (id) {
         // show images in context of database
-        mainWindow.middle = id;
+        mainWindow.middleId = id;
         document.getElementsByClassName("context")[0].innerHTML = '';
         let newId;
         for (let i of [-2, -1, 0, 1, 2]) {
@@ -132,25 +133,30 @@ const mainWindow = {
         }
     },
 
-    select: function(id, newContext = true) {
+    select: function (id, newContext = true) {
         // select image and show it context
-        if (mainWindow.selected != -1) {
-            document.getElementById(mainWindow.selected).setAttribute("class", "unselected");
+        if (mainWindow.selectedId != -1) {
+            document.getElementById(mainWindow.selectedId).setAttribute("class", "unselected");
         }
-        if (newContext && mainWindow.selected == id) {
+
+        if (newContext && mainWindow.selectedId == id) {
             let parent = document.querySelector(".modal-parent");
-            parent.style.display = "block";
-            if(config.listingContext) {
+            if (parent) {
+                parent.style.display = "block";
+            }
+
+            if (config.listingContext) {
                 document.getElementsByClassName('previous')[0].style.visibility = 'visible';
                 document.getElementsByClassName('next')[0].style.visibility = 'visible';
             }
             mainWindow.showContext(id);
         }
-        mainWindow.selected = id;
+
+        mainWindow.selectedId = id;
         document.getElementById(id).setAttribute("class", "selected");
     },
 
-    controlAndSend: function(id) {
+    controlAndSend: function (id) {
         // control result and if correct send query for new image
         let findId = document.getElementsByClassName("find-img")[0].id.slice(0, -1);
         if (id == findId) {
@@ -163,55 +169,54 @@ const mainWindow = {
         }
     },
 
-    addText: function(text, id) {
+    addText: function (text, id) {
         // add text to text search and set focus to end
         const input = document.getElementById('search-text');
-        let end = input.value.length;
-        if (end > 0) {
-            input.value += config.connection + text;
-        } else {
-            input.value += text;
+        if (input) {
+            let end = input.value.length;
+            if (end > 0) {
+                input.value += config.connection + text;
+            } else {
+                input.value += text;
+            }
+            end = input.value.length;
+            input.setSelectionRange(end, end);
+            input.focus();
+            const last = utils.getCookie("activity");
+            document.cookie = 'activity=' + last.slice(0, -1) + text + ":" + id + '|"';
         }
-        end = input.value.length;
-        input.setSelectionRange(end, end);
-        input.focus();
-        const last = mainWindow.getCookie("activity");
-        document.cookie = 'activity=' + last.slice(0, last.length - 1) + text + ":" + id + '|"';
     },
 
-    nextSearch: function() {
+    nextSearch: function () {
         // showing next image for search
         mainWindow.found++;
         document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
         location.href = '?s';
     },
 
-    closeWindow: function() {
+    closeWindow: function () {
         // closing of context window
-        let parent = document.querySelector(".modal-parent");
-        parent.style.display = "none";
+        utils.openOrCloseWindow(".help-modal-parent", false);
     },
 
-    closeHelpWindow: function() {
+    closeHelpWindow: function () {
         // closing of context window
-        let parent = document.querySelector(".help-parent");
-        parent.style.display = "none";
+        utils.openOrCloseWindow(".help-parent", false);
     },
 
-    stepBack: function(state) {
-        // set cookies to last state
+    stepBack: function (state) {
+        // set cookies to last state - TODO
         document.cookie = 'activity=""';
-        if (mainWindow.trying > 0){
+        if (mainWindow.trying > 0) {
             document.cookie = 'trying=' + (mainWindow.trying - 1);
         } else {
             document.cookie = 'index=' + (mainWindow.found - 1);
         }
     },
 
-    showHelp: function() {
+    showHelp: function () {
         // display text of help
-        let parent = document.querySelector(".help-parent");
-        parent.style.display = "block";
+        utils.openOrCloseWindow(".help-parent", true);
     },
 };
 
