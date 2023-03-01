@@ -21,7 +21,7 @@ const mainWindow = {
         if (mainWindow.found === -1) {
             if (utils.getCookie("index") && utils.getCookie("trying")) {
                 mainWindow.found = parseInt(utils.getCookie("index"));
-                mainWindow.trying = parseInt(utils.getCookie("trying")) + 1;
+                mainWindow.trying = parseInt(utils.getCookie("trying"));
                 if (utils.getCookie("last_query")) {
                     mainWindow.lastQuery = utils.getCookie("last_query").slice(1, -1);
                 } else {
@@ -29,7 +29,7 @@ const mainWindow = {
                     mainWindow.lastQuery = "";
                 }
             } else {
-                document.cookie = 'index=0; trying=0; last_query=""';
+                utils.setCookies(0, 0, "");
                 mainWindow.found = 0;
                 mainWindow.trying = 0;
             }
@@ -40,8 +40,7 @@ const mainWindow = {
         // send text query
         let query = document.getElementById('search-text').value;
         if (mainWindow.trying === config.att) {
-            mainWindow.found++;
-            document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
+            utils.setCookies(mainWindow.found + 1, 0, "", "");
             location.href = '?s';
         } else if (query.length > 0) {
             if (mainWindow.trying === (config.att - 1)) { // display alert - last search
@@ -49,7 +48,7 @@ const mainWindow = {
                     return;
                 }
             }
-            document.cookie = 'trying=' + mainWindow.trying + '; last_query="' + query + '"';
+            utils.setCookies(mainWindow.found, mainWindow.trying + 1, query);
             location.href = '?query="' + query + '"';
         }
     },
@@ -58,8 +57,7 @@ const mainWindow = {
         // send query for similarity search
         if (mainWindow.selectedId !== -1) {
             if (mainWindow.trying === config.att) {
-                mainWindow.found++;
-                document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
+                utils.setCookies(mainWindow.found + 1, 0, "", "");
                 location.href = '?s';
             } else {
                 if (mainWindow.trying === (config.att - 1)) { // display alert - last search
@@ -67,7 +65,7 @@ const mainWindow = {
                         return;
                     }
                 }
-                document.cookie = 'trying=' + mainWindow.trying + '; last_query=""';
+                utils.setCookies(mainWindow.found, mainWindow.trying + 1, "");
                 location.href = '?id=' + mainWindow.selectedId;
             }
         } else {
@@ -130,8 +128,7 @@ const mainWindow = {
         let findId = parseInt(document.getElementsByClassName("find-img")[0].id.slice(0, -1));
         if (parseInt(id) === findId) {
             alert(text.right_answer)
-            mainWindow.found++;
-            document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
+            utils.setCookies(mainWindow.found + 1, 0, "", "");
             location.href = '?answer=' + id;
         } else {
             alert(text.wrong_answer);
@@ -151,7 +148,7 @@ const mainWindow = {
             end = input.value.length;
             input.setSelectionRange(end, end);
             input.focus();
-            if(id) {
+            if (id) {
                 const last = utils.getCookie("activity");
                 document.cookie = 'activity=' + last.slice(0, -1) + text + ":" + id + '|"';
             }
@@ -160,8 +157,7 @@ const mainWindow = {
 
     nextSearch: function () {
         // showing next image for search
-        mainWindow.found++;
-        document.cookie = 'index=' + mainWindow.found + '; trying=-1; last_query=""; activity=""';
+        utils.setCookies(mainWindow.found + 1, 0, "", "");
         location.href = '?s';
     },
 

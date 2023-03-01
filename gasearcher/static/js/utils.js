@@ -11,6 +11,19 @@ const utils = {
             });
     },
 
+    setCookies: function (index, trying, last_query, activity) {
+        if (navigator.cookieEnabled) {
+            document.cookie = 'index=' + index;
+            document.cookie = 'trying=' + trying;
+            if (last_query || last_query === "") document.cookie = 'last_query="' + last_query + '"';
+            if (activity || activity === "") document.cookie = 'activity="' + activity + '"';
+        } else {
+            if(confirm(text.cookies_warning)) {
+                location.reload();
+            }
+        }
+    },
+
     getCookie: function (name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);

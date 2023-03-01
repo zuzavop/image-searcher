@@ -94,7 +94,7 @@
     {% endif %}
 
     {# hide searcher - last attempt allows only showing of results #}
-    if (mainWindow.trying === config.att) {
+    if (utils.getCookie("trying") == config.att) {
         createMainWindow.hideBarButtons();
     } else {
         {# loading top classes #}

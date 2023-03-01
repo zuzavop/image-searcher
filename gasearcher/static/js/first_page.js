@@ -4,9 +4,8 @@ const welcome_page = {
         utils.loadHelp('help-context');
 
         if (navigator.cookieEnabled) {
-            // set cookies - TODO
-            document.cookie = 'index=0';
-            document.cookie = 'trying=-1; last_query=""; activity=""';
+            // set cookies
+            utils.setCookies(0,0,"","");
         } else {
             welcome_page.showCookiesWarning();
         }
