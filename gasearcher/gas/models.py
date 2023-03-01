@@ -84,9 +84,12 @@ get_data(sea_database)
 # get first window - SOM
 input_data = np.array(torch.cat(clip_data))
 data_som = SOM(m=5, n=12, dim=len(clip_data[0][0]))
+
 X = data_som.fit_predict(input_data)
 
-first_show = [21535 for _ in range(12 * 5)]
+first_show = [0 for _ in range(12 * 5)]
 for i in range(len(first_show)):
     if i in X:
         first_show[i] = np.random.choice(np.where(X == i)[0])
+    else:
+        first_show[i] = random.randint(1, size_dataset)

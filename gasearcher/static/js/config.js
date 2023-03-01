@@ -1,11 +1,14 @@
 const config = {
     att: 2, // number of trying before next search image
     lines: 5,
+    displayed_classes: 3,
     showLastQuery: true,
-    listingContext: false,
+    similaritySearchEnabled: false,
     photosAddress: '../static/data/sea_photos/',
     photosOnLine: 12,
     contextShift: 3,
+    shiftInContextEnabled: false,
+    contextIds: [-2, -1, 0, 1, 2],
     sizeDataset: 22036, // 20000 for v3c and 22036 for sea dataset
     connection: ', ',
     showingPhotos: 60,
@@ -19,6 +22,7 @@ const text_cz = {
     context_warning: "Kontext snímku nemůže být odeslán.",
     right_answer: "Správná odpověď. Nový hledaný snímek bude zobrazen.",
     wrong_answer: "Špatná odpověď. Zkuste to znovu.",
+    cookies_warning: "Povolte cookies, prosím."
 }
 
 const text_en = {
@@ -28,6 +32,7 @@ const text_en = {
     context_warning: "Context of image can't be sent.",
     right_answer: "Right answer. New image will be generate.",
     wrong_answer: "Wrong answer. Try again.",
+    cookies_warning: "Enable cookies, please."
 }
 
 const text = text_cz;

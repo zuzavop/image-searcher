@@ -1,11 +1,12 @@
 const welcome_page = {
     init: function () {
         // get help text
-        utils.loadHelp();
+        utils.loadHelp('help-context');
 
         if (navigator.cookieEnabled) {
-            // set cookies
-            document.cookie = 'index=0; trying=-1; last_query=""; activity=""';
+            // set cookies - TODO
+            document.cookie = 'index=0';
+            document.cookie = 'trying=-1; last_query=""; activity=""';
         } else {
             welcome_page.showCookiesWarning();
         }

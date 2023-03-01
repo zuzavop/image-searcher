@@ -46,6 +46,9 @@ def get_data_from_clip_image_search(image_query):
 
 
 def search(request):
+    if not request.session.get('session_id'):
+        return render(request, 'index.html')
+
     template = loader.get_template('index.html')
 
     # load index of currently searching image from cookies

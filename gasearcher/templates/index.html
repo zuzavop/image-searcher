@@ -16,38 +16,40 @@
     <link rel="stylesheet" href="{% static 'css/popup.css' %}"/>
 </head>
 <body>
-    <div class="split left">
-        <div class="sidebar">
-            <label for="search-text"></label><input class="bar-item" id="search-text" placeholder="text query"
-                                                    minlength="1"><br>
-            <button class="bar-item" id="text-searcher" onclick="mainWindow.searching()">Text search</button>
-            <br>
-            {# <button class="bar-item" onclick="mainWindow.simSearch()">Similarity search</button> #}
-            <button class="bar-item" id="clear" onclick="mainWindow.clearSearch()">Clear text</button>
-            <br>
-        </div>
+<div class="split left">
+    <div class="sidebar">
+        <label for="search-text"></label><input class="bar-item" id="search-text" placeholder="text query"
+                                                minlength="1"><br>
+        <button class="bar-item" id="text-searcher" onclick="mainWindow.searching()">Text search</button>
+        <br>
+        <button class="bar-item" id="similarity-searcher" onclick="mainWindow.simSearch()">Similarity search</button>
+        <button class="bar-item" id="clear" onclick="mainWindow.clearSearch()">Clear text</button>
+        <br>
     </div>
-    <div class="split right">
-        <div class="container">
-            <table>
-                <tbody class="div-table"></tbody>
-            </table>
-        </div>
-        <button id="help-button" class="bar-item" onclick="mainWindow.showHelp()">Help</button>
+</div>
+<div class="split right">
+    {# space for images and theirs labels #}
+    <div class="container">
+        <table>
+            <tbody class="div-table"></tbody>
+        </table>
     </div>
-    <div class="help-parent">
-        <div class="help-window">
-            <span class="close-button" draggable="true" onclick="mainWindow.closeHelpWindow()">&times;</span>
-            <div id="help-context"></div>
-        </div>
+    <button id="help-button" class="bar-item" onclick="mainWindow.showHelp()">Help</button>
+</div>
+<div class="help-parent">
+    {#  help text viewer #}
+    <div class="help-window">
+        <span class="close-button" draggable="true" onclick="mainWindow.closeHelpWindow()">&times;</span>
+        <div id="help-context"></div>
     </div>
-    <div class="modal-parent">
-        {# context of selected image #}
-        <div class="popup-window">
-            <span class="close-button" draggable="true" onclick="mainWindow.closeWindow()">&times;</span>
-            <div class="context"></div>
-        </div>
+</div>
+<div class="modal-parent">
+    {# context of selected image #}
+    <div class="popup-window">
+        <span class="close-button" draggable="true" onclick="mainWindow.closeWindow()">&times;</span>
+        <div class="context"></div>
     </div>
+</div>
 </body>
 <script>
     {% if classes %}
@@ -69,14 +71,15 @@
     {% endif %}
 
     {# set table for photos #}
-    startMainWindow.createImageTable();
+    createMainWindow.createImageTable();
 
     {# load photos with classes #}
     {% if list_photo %}
         let num = 0;
         {% for i,v in list_photo.items %}
             {
-                num = startMainWindow.createImageBlock('{{i}}', {{v}}, num);
+                createMainWindow.createImageBlock('{{i}}', {{v}}, num);
+                ++num;
             }
         {% endfor %}
     {% else %}
@@ -85,18 +88,18 @@
 
     {# load currently searched image #}
     {% if find_id %}
-        startMainWindow.createWanted({{ find_id }});
+        createMainWindow.createWanted({{ find_id }});
     {% else %}
         throw "Loading of searched photo went wrong.";
     {% endif %}
 
     {# hide searcher - last attempt allows only showing of results #}
     if (mainWindow.trying === config.att) {
-        startMainWindow.hideBarButtons();
+        createMainWindow.hideBarButtons();
     } else {
         {# loading top classes #}
         {% if top_classes %}
-            startMainWindow.createTopClasses({{ top_classes }});
+            createMainWindow.createTopClasses({{ top_classes }});
         {% endif %}
     }
 </script>

@@ -1,4 +1,50 @@
-const startMainWindow = {
+const createMainWindow = {
+    init: function () {
+        if (!navigator.cookieEnabled) {
+            if(confirm(text.cookies_warning)) {
+                location.reload();
+            }
+        }
+
+        // load help text
+        utils.loadHelp('help-context');
+
+        // create button in context
+        if (config.shiftInContextEnabled) {
+            createMainWindow.createContext();
+        }
+
+        // hide similarity searcher button if similarity search isn't enable
+        if (!config.similaritySearchEnabled) {
+            document.getElementById("similarity-searcher").style.display = "none";
+        }
+
+        // load last text query to searcher
+        if (config.showLastQuery) {
+            document.getElementById("search-text").value = mainWindow.lastQuery;
+        }
+
+        // set sending query on enter press
+        document.getElementById("search-text").addEventListener("keyup", ({key}) => {
+            if (key === "Enter") {
+                mainWindow.searching();
+            }
+        });
+
+        // allow closing popup windows with escape
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" || e.key === "Esc") {
+                mainWindow.closeWindow();
+                mainWindow.closeHelpWindow();
+            }
+            if (config.similaritySearchEnabled) {
+                if (e.ctrlKey && e.key === 's') {
+                    mainWindow.simSearch();
+                }
+            }
+        });
+    },
+
     createImageTable: function () {
         const tb = document.getElementsByClassName('div-table')[0];
         if (tb) {
@@ -11,22 +57,19 @@ const startMainWindow = {
     },
 
     createImageBlock: function (id, values, num) {
-        let div = startMainWindow.createImage(id, num);
-        const buttons = document.createElement('div');
-        buttons.className = "image-buttons";
-        div.appendChild(buttons);
-        startMainWindow.createButtons(buttons, values, id);
-        return ++num;
+        let div = createMainWindow.createImage(id, num);
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = "image-buttons";
+        div.appendChild(buttonsDiv);
+        createMainWindow.createButtons(buttonsDiv, values, id);
     },
 
     createImage: function (id, num) {
         const div = document.createElement('td');
         div.className = 'img-div';
         document.getElementById(Math.floor(num / config.photosOnLine) + 'tr').appendChild(div);
-        const image = document.createElement("img");
+        const image = utils.createImage(id, id.toString(), null);
         div.appendChild(image);
-        image.id = id.toString();
-        image.setAttribute('src', config.photosAddress + ("0000" + (parseInt(id) + 1)).slice(-5) + '.jpg');
         image.addEventListener("click", function (e) {
             if (e.ctrlKey) {
                 mainWindow.controlAndSend(image.id);
@@ -37,35 +80,28 @@ const startMainWindow = {
         return div;
     },
 
-    createButtons: function (buttons, values, id) {
+    createButtons: function (buttonsDiv, values, id) {
         // create buttons with labels/classes
         let i = 1;
         for (let e in values) {
-            const but = document.createElement("button");
-            buttons.appendChild(but);
-            if (i > 3) {
-                but.className = "more-b hidden";
-            }
-            but.id = "b" + id;
-            but.textContent = classes[values[e]];
-            but.style.background = startMainWindow.percToColor(percentClass[values[e]]);
+            const but = utils.createButton(classes[values[e]], (i > config.displayed_classes) ? "more-b hidden" : null, "b" + id);
+            buttonsDiv.appendChild(but);
+            but.style.background = utils.percToColor(percentClass[values[e]]);
             but.addEventListener("click", function () {
                 mainWindow.addText(but.textContent, but.id.slice(1));
             });
             i++;
         }
-        const but = document.createElement("button");
-        but.textContent = '+';
-        but.className = "plus-but";
+        const but = utils.createButton('+', "plus-but");
         but.addEventListener("click", function () {
-            startMainWindow.popUp(buttons, but);
+            createMainWindow.showMoreClasses(buttonsDiv, but);
         });
-        buttons.appendChild(but);
+        buttonsDiv.appendChild(but);
     },
 
-    popUp: function (buttons, button) {
+    showMoreClasses: function (buttonsDiv, button) {
         // create button for showing more labels
-        const butt = buttons.getElementsByClassName("more-b");
+        const butt = buttonsDiv.getElementsByClassName("more-b");
         for (let b of butt) {
             b.classList.toggle("hidden");
         }
@@ -77,29 +113,26 @@ const startMainWindow = {
     },
 
     createTopClasses: function (topClasses) {
+        // create buttons of most common classes in currently shown result
         for (let c in topClasses) {
-            const but = document.createElement("button");
-            but.textContent = classes[parseInt(topClasses[c])];
-            but.addEventListener("click", function () {
-                mainWindow.addText(but.textContent);
+            const button = utils.createButton(classes[parseInt(topClasses[c])]);
+            button.addEventListener("click", function () {
+                mainWindow.addText(button.textContent);
             });
-            document.getElementById("search-text").after(but);
+            document.getElementById("search-text").after(button);
         }
         document.getElementById("search-text").after(document.createElement('br'));
     },
 
     createContext: function () {
-        const buttPrev = document.createElement("button");
-        buttPrev.setAttribute("class", "previous cont-butt");
-        buttPrev.textContent = '<';
+        // create buttons for shifting context of image
+        const buttPrev = utils.createButton('<', "previous cont-butt");
         buttPrev.addEventListener("click", function () {
             mainWindow.showContext(parseInt(mainWindow.middleId) - config.contextShift);
         });
         document.getElementsByClassName("popup-window")[0].appendChild(buttPrev);
 
-        const buttNext = document.createElement("button");
-        buttNext.setAttribute("class", "next cont-butt");
-        buttNext.textContent = '>';
+        const buttNext = utils.createButton('>', "next cont-butt");
         buttNext.addEventListener("click", function () {
             mainWindow.showContext(parseInt(mainWindow.middleId) + config.contextShift);
         });
@@ -110,15 +143,11 @@ const startMainWindow = {
         // create image of currently search image
         const div = document.createElement("div");
         div.className = "find-img-div";
-        const img = document.createElement("img");
-        img.id = fin.toString() + 'r';
-        img.setAttribute("class", "find-img");
-        img.setAttribute('src', config.photosAddress + ("0000" + (fin + 1)).slice(-5) + '.jpg');
+        const img = utils.createImage(fin, fin.toString() + 'r', "find-img");
         div.appendChild(img);
-        const button = document.createElement("button");
-        button.textContent = "Next";
-        button.id = "next-button";
-        button.class = "bar-item";
+
+        // create button for skipping currently searching image
+        const button = utils.createButton("Next", "bar-item", "next-button");
         button.addEventListener("click", function () {
             mainWindow.nextSearch();
         });
@@ -127,23 +156,12 @@ const startMainWindow = {
     },
 
     hideBarButtons: function () {
+        // hide buttons used for search
         document.getElementById('search-text').style.visibility = 'hidden';
         document.getElementById('clear').style.visibility = 'hidden';
         document.getElementById('next-button').style.visibility = 'hidden';
         document.getElementById('text-searcher').innerText = 'Next';
     },
-
-    percToColor: function (per) {
-        per = 100 - (per * config.percGrow)
-        let r, g;
-        if (per < 99) {
-            r = 255;
-            g = Math.round((255 / 99) * per);
-        } else {
-            g = 255;
-            r = Math.round((25500 / 99) - (255 / 99) * per);
-        }
-        let h = r * 0x10000 + g * 0x100;
-        return '#' + ('000000' + h.toString(16)).slice(-6);
-    },
 };
+
+document.addEventListener('DOMContentLoaded', createMainWindow.init);
