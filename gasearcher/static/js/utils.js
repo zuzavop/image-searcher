@@ -11,6 +11,7 @@ const utils = {
             });
     },
 
+    // set used cookies if cookies are enable
     setCookies: function (index, trying, last_query, activity) {
         if (navigator.cookieEnabled) {
             document.cookie = 'index=' + index;
@@ -33,6 +34,7 @@ const utils = {
 
     openOrCloseWindow: function (className, open) {
         let parent = document.querySelector(className);
+        console.log(parent);
         if (parent) {
             parent.style.display = open ? "block" : "none";
         }

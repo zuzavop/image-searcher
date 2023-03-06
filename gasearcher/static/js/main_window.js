@@ -163,7 +163,7 @@ const mainWindow = {
 
     closeWindow: function () {
         // closing of context window
-        utils.openOrCloseWindow(".help-modal-parent", false);
+        utils.openOrCloseWindow(".modal-parent", false);
     },
 
     closeHelpWindow: function () {
