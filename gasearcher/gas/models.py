@@ -81,9 +81,9 @@ def get_data(is_sea_database):
 
 get_data(sea_database)
 
-# get first window - SOM
-input_data = np.array(torch.cat(clip_data))
-data_som = SOM(m=5, n=12, dim=len(clip_data[0][0]))
+# get first window - SOM og labels
+input_data = np.array(list(class_data.values()))
+data_som = SOM(m=5, n=12, dim=len(input_data[0]))
 
 X = data_som.fit_predict(input_data)
 
