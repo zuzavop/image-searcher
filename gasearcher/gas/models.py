@@ -16,6 +16,7 @@ sea_database = True
 combination = True
 
 path_data = os.path.join(STATICFILES_DIRS[0], "data/")
+path_log_search = path_data + "log.csv"
 path_log = path_data + "message.csv"
 path_clip = path_data + ("sea_clip" if sea_database else "clip")
 path_nounlist = path_data + ("sea_nounlist.txt" if sea_database else "new_nounlist.txt")
@@ -34,3 +35,6 @@ finding = set_finding(sea_database, size_dataset)
 first_show = load_first_screen(class_data, size_dataset)
 
 
+def is_in_same_video(new_showing, found):
+    # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
+    return 1 if len(list(set(new_showing) & set(same_video[finding[found]]))) > 0 else 0

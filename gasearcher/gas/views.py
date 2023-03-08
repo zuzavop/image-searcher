@@ -8,8 +8,28 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from gasearcher.gas.models import device, model, clip_data, path_log, finding, class_data, classes, last_search, same_video, \
-    showing, class_pr, combination, first_show
+from gasearcher.gas.models import device, model, clip_data, path_log_search, finding, class_data, classes, last_search, \
+    showing, class_pr, combination, first_show, is_in_same_video, path_log
+
+
+def log_text_query(query, new_scores, found, session, activity):
+    same = is_in_same_video(new_scores[:showing], found)
+    # write down log
+    with open(path_log_search, "a") as log:
+        log.write(query + ';' + str(finding[found]) + ';' + session + ';' + str(
+            new_scores.index(finding[found]) + 1) + ';' + str(same) + ';"' + activity + '"' + '\n')
+
+
+def log_image_query(query_id, new_scores, found, session):
+    same = is_in_same_video(new_scores[:showing], found)
+    # write down log
+    with open(path_log, "a") as log:
+        log.write(str(query_id) + ';' + str(finding[found]) + ';' + session + ';' + str(
+            new_scores.index(finding[found]) + 1) + ';' + str(same) + '"' + '\n')
+
+
+def result_score(features):
+    return np.concatenate([1 - (torch.cat(clip_data) @ features)], axis=None)
 
 
 def get_data_from_clip_text_search(query, session, found, activity):
@@ -19,29 +39,26 @@ def get_data_from_clip_text_search(query, session, found, activity):
     text_features /= np.linalg.norm(text_features)
 
     # get distance of vectors
-    scores = (np.concatenate([1 - (torch.cat(clip_data) @ text_features.T)], axis=None))
+    scores = result_score(text_features.T)
 
     new_scores = list(np.argsort((scores + last_search[session]) if combination else scores))
     # save score for next search
     if combination:
         last_search[session] = scores
 
-    # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-    same = 1 if len(list(set(new_scores[:showing]) & set(same_video[finding[found]]))) > 0 else 0
-    # write down log
-    with open(path_log, "a") as log:
-        log.write(query + ';' + str(finding[found]) + ';' + session + ';' + str(
-            new_scores.index(finding[found]) + 1) + ';' + str(same) + ';"' + activity[:-1] + '"' + '\n')
+    log_text_query(query, new_scores, found, session, activity)
 
     return new_scores[:showing]
 
 
-def get_data_from_clip_image_search(image_query):
+def get_data_from_clip_image_search(image_query, found, session):
     # get features of image query
     image_query_index = int(image_query)
     image_query = np.transpose(clip_data[image_query_index])
 
-    scores = list(np.argsort(np.concatenate([1 - (torch.cat(clip_data) @ image_query)], axis=None)))
+    scores = list(np.argsort(result_score(image_query)))
+
+    log_image_query(image_query, scores, found, session)
 
     return scores[:showing]
 
@@ -60,12 +77,12 @@ def search(request):
 
     if request.GET.get('query'):
         data = get_data_from_clip_text_search(request.GET['query'], request.session['session_id'], found,
-                                              request.COOKIES.get('activity'))
+                                              request.COOKIES.get('activity')[:-1])
     else:
         # reset save search if user use any other method than text search
         last_search[request.session['session_id']] = np.zeros(len(clip_data))
         if request.GET.get('id'):
-            data = get_data_from_clip_image_search(request.GET['id'])
+            data = get_data_from_clip_image_search(request.GET['id'], found, request.session['session_id'])
 
     # get classes of current shown result
     data_to_display = {str(i): ([] if i not in class_data else class_data[i]) for i in data}
