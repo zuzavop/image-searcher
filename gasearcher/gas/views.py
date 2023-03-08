@@ -7,7 +7,8 @@ import torch
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
-from gas.models import device, model, clip_data, path_log, finding, class_data, classes, last_search, same_video, \
+
+from gasearcher.gas.models import device, model, clip_data, path_log, finding, class_data, classes, last_search, same_video, \
     showing, class_pr, combination, first_show
 
 

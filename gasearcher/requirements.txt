@@ -1,0 +1,7 @@
+clip==1.0
+Django==4.1
+django_debug_toolbar==3.5.0
+numpy==1.22.3
+pandas==1.4.2
+sklearn_som==1.1.0
+torch==1.10.2
