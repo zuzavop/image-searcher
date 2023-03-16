@@ -4,7 +4,7 @@ const createMainWindow = {
      */
     init: function () {
         if (!navigator.cookieEnabled) {
-            if(confirm(text.cookies_warning)) {
+            if (confirm(text.cookies_warning)) {
                 location.reload();
             }
         }
@@ -65,7 +65,7 @@ const createMainWindow = {
     /**
      * create div containing an image and its classes
      * @param {string} id - id of the image
-     * @param values - classes of the image
+     * @param {string[]} values - classes of the image
      * @param {number} num - position of the image
      */
     createImageBlock: function (id, values, num) {
@@ -99,9 +99,9 @@ const createMainWindow = {
 
     /**
      * create buttons of classes
-     * @param buttonsDiv
-     * @param values
-     * @param {string} id
+     * @param {HTMLDivElement} buttonsDiv - div to which buttons will be create
+     * @param {string[]} values - labels of buttons
+     * @param {string} id - id of image in given div
      */
     createButtons: function (buttonsDiv, values, id) {
         // create buttons with labels/classes
@@ -124,8 +124,8 @@ const createMainWindow = {
 
     /**
      * show or hide more classes in given div
-     * @param buttonsDiv
-     * @param button
+     * @param {HTMLDivElement} buttonsDiv - div containing buttons of classes
+     * @param {HTMLButtonElement} button - button which show or hide classes
      */
     showMoreClasses: function (buttonsDiv, button) {
         // create button for showing more labels
@@ -142,7 +142,7 @@ const createMainWindow = {
 
     /**
      * create buttons for top classes
-     * @param topClasses
+     * @param {string[]} topClasses - names of top classes
      */
     createTopClasses: function (topClasses) {
         // create buttons of most common classes in currently shown result
@@ -176,7 +176,7 @@ const createMainWindow = {
 
     /**
      * create div with currently searched image
-     * @param fin
+     * @param {number} fin - id of currently search image
      */
     createWanted: function (fin) {
         // create image of currently search image

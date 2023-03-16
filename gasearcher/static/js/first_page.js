@@ -1,14 +1,14 @@
 const welcome_page = {
     /**
-    * Initializes the welcome page
-    */
+     * Initializes the welcome page
+     */
     init: function () {
         // get help text
         utils.loadHelp('help-context');
 
         if (navigator.cookieEnabled) {
             // set cookies
-            utils.setCookies(0,0,"","");
+            utils.setCookies(0, 0, "", "");
         } else {
             welcome_page.showCookiesWarning();
         }

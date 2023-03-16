@@ -1,47 +1,89 @@
-/**
- *
- * @property {number} att
- * @property {number} lines
- * @property {number} displayed_classes
- * @property {boolean} showLastQuery
- * @property {boolean} similaritySearchEnabled
- * @property {string} photosAddress
- * @property {number} photosOnLine
- * @property {number} contextShift
- * @property {boolean} shiftInContextEnabled
- * @property {number[]} contextIds
- * @property {number} sizeDataset
- * @property {string} connection
- * @property {number} showingPhotos
- * @property {number} percGrow
- */
 const config = {
-    att: 2, // number of trying before next search image
+    /**
+     * @type {number}
+     * @description number of trying before next search image
+     */
+    att: 2,
+
+    /**
+     * @type {number}
+     * @description number of lines in result table
+     */
     lines: 5,
+
+    /**
+     * @type {number}
+     * @description number of classes shown under each image
+     */
     displayed_classes: 3,
+
+    /**
+     * @type {boolean}
+     * @description enable showing last send query
+     */
     showLastQuery: true,
+
+    /**
+     * @type {boolean}
+     * @description enable similarity search
+     */
     similaritySearchEnabled: false,
+
+    /**
+     * @type {string}
+     * @description address to database of images
+     */
     photosAddress: '../static/data/sea_photos/',
+
+    /**
+     * @type {number}
+     * @description number of images on each line
+     */
     photosOnLine: 12,
+
+    /**
+     * @type {number}
+     * @description number of images for shift
+     */
     contextShift: 3,
+
+    /**
+     * @type {boolean}
+     * @description enable shifting in context
+     */
     shiftInContextEnabled: false,
+
+    /**
+     * @type {number[]}
+     * @description numbers for shifting
+     */
     contextIds: [-2, -1, 0, 1, 2],
+
+    /**
+     * @type {number}
+     * @description size of currently used dataset
+     */
     sizeDataset: 22036, // 20000 for v3c and 22036 for sea dataset
+
+    /**
+     * @type {string}
+     * @description connection for text query
+     */
     connection: ', ',
+
+    /**
+     * @type {number}
+     * @description number of images in results
+     */
     showingPhotos: 60,
-    percGrow: 1.4, // for sea dataset 1.4 and for v3c 9 - for scaling percentage of occurrence of classes
+
+    /**
+     * @type {number}
+     * @description for scaling percentage of occurrence of classes
+     */
+    percGrow: 1.4, // for sea dataset 1.4 and for v3c 9
 };
 
-/**
- *
- * @property {string} cookies_warning
- * @property {string} similarity_warning
- * @property {string} context_warning
- * @property {string} right_answer
- * @property {string} warning
- * @property {string} last_warning
- * @property {string} wrong_answer
- */
 const text_cz = {
     warning: "Povolte cookies, prosím! Následně načtěte znovu aktuální stránku.",
     last_warning: "Poslední dotaz před zobrazením dalšího hledané snímku.",
@@ -52,16 +94,6 @@ const text_cz = {
     cookies_warning: "Povolte cookies, prosím."
 }
 
-/**
- *
- * @property {string} cookies_warning
- * @property {string} similarity_warning
- * @property {string} context_warning
- * @property {string} right_answer
- * @property {string} warning
- * @property {string} last_warning
- * @property {string} wrong_answer
- */
 const text_en = {
     warning: "Enable cookies, please! Then refresh this page.",
     last_warning: "Last search before displaying new search image.",

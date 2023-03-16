@@ -15,10 +15,10 @@ const utils = {
 
     /**
      * set used cookies if cookies are enable
-     * @param {number} index
-     * @param {number} trying
-     * @param {string} last_query
-     * @param {string} [activity]
+     * @param {number} index - index of currently search image
+     * @param {number} trying - number of attempts
+     * @param {string} last_query - last send query
+     * @param {string} [activity] - activity from user
      */
     setCookies: function (index, trying, last_query, activity) {
         if (navigator.cookieEnabled) {
@@ -35,8 +35,8 @@ const utils = {
 
     /**
      * try to get cookies with given name
-     * @param {string} name
-     * @returns {null|string}
+     * @param {string} name - name of searching cookie
+     * @returns {null|string} - value saved in cookies
      */
     getCookie: function (name) {
         const value = `; ${document.cookie}`;
@@ -47,8 +47,8 @@ const utils = {
 
     /**
      * open or close window of given class
-     * @param {string} className
-     * @param {boolean} open
+     * @param {string} className - class name of closing or opening window
+     * @param {boolean} open - if opening
      */
     openOrCloseWindow: function (className, open) {
         let parent = document.querySelector(className);
@@ -59,10 +59,10 @@ const utils = {
 
     /**
      * create image with given parameters
-     * @param {number} id
-     * @param {string} idName
-     * @param {string} [className]
-     * @returns {HTMLImageElement}
+     * @param {number} id - id of the image (index in dataset)
+     * @param {string} idName - id name of the image
+     * @param {string} [className] - class name of the image
+     * @returns {HTMLImageElement} - the image element
      */
     createImage: function (id, idName, className) {
         const img = document.createElement("img");
@@ -74,10 +74,10 @@ const utils = {
 
     /**
      * create button with given parameters
-     * @param {string} textContent
-     * @param {string} [className]
-     * @param {string} [idName]
-     * @returns {HTMLButtonElement}
+     * @param {string} textContent - label of the button
+     * @param {string} [className] - class name of the button
+     * @param {string} [idName] - id of the button
+     * @returns {HTMLButtonElement} - the button element
      */
     createButton: function (textContent, className, idName) {
         const button = document.createElement("button");
@@ -88,9 +88,9 @@ const utils = {
     },
 
     /**
-     * generate color according to given percentage
-     * @param {number} per
-     * @returns {string}
+     * generate color of class button according to given percentage
+     * @param {number} per - the percentage representation of class in the dataset
+     * @returns {string} - color of class
      */
     percToColor: function (per) {
         per = 100 - (per * config.percGrow)
