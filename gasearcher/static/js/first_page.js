@@ -1,4 +1,7 @@
 const welcome_page = {
+    /**
+    * Initializes the welcome page
+    */
     init: function () {
         // get help text
         utils.loadHelp('help-context');
@@ -11,6 +14,9 @@ const welcome_page = {
         }
     },
 
+    /**
+     * Shows warning message if cookies are not enabled
+     */
     showCookiesWarning: function () {
         const startButton = document.getElementById("start-button");
         if (startButton) {

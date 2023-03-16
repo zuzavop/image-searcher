@@ -1,10 +1,33 @@
 const mainWindow = {
-    selectedId: -1, // index of currently selected
-    middleId: -1, // index of middle image in context
-    found: -1, // index of currently search image
-    trying: -1, // number of trying on current image
-    lastQuery: "", // text of last query
+    /**
+     * @type {number}
+     * @description index of currently selected
+     */
+    selectedId: -1,
+    /**
+     * @type {number}
+     * @description index of middle image in context
+     */
+    middleId: -1,
+    /**
+     * @type {number}
+     * @description index of currently search image
+     */
+    found: -1,
+    /**
+     * @type {number}
+     * @description number of trying on current image
+     */
+    trying: -1,
+    /**
+     * @type {string}
+     * @description text of last query
+     */
+    lastQuery: "",
 
+    /**
+     * initialize variables and set history
+     */
     init: function () {
         // set history
         window.onpopstate = (event) => {
@@ -36,6 +59,9 @@ const mainWindow = {
         }
     },
 
+    /**
+     * sends text query
+     */
     searching: function () {
         // send text query
         let query = document.getElementById('search-text').value;
@@ -53,6 +79,9 @@ const mainWindow = {
         }
     },
 
+    /**
+     * sends query for similarity search
+     */
     simSearch: function () {
         // send query for similarity search
         if (mainWindow.selectedId !== -1) {
@@ -73,23 +102,30 @@ const mainWindow = {
         }
     },
 
+    /**
+     * clear text query
+     */
     clearSearch: function () {
         // clear text of search
         document.getElementById('search-text').value = '';
     },
 
+    /**
+     * shows images in context of database
+     * @param {number} id - id of selected image
+     */
     showContext: function (id) {
         // show images in context of database
         mainWindow.middleId = id;
         document.getElementsByClassName("context")[0].innerHTML = '';
         let newId;
         for (let i of config.contextIds) {
-            newId = parseInt(id) + i
+            newId = id + i
             if (newId > 0 && newId < config.sizeDataset) {
-                const image = utils.createImage(newId, "w" + (newId).toString(), null);
+                const image = utils.createImage(newId, "w" + (newId).toString());
                 image.addEventListener("click", function (e) {
                     if (e.ctrlKey) {
-                        if (parseInt(id) === parseInt(image.id.slice(1))) mainWindow.controlAndSend(parseInt(image.id.slice(1)));
+                        if (id === parseInt(image.id.slice(1))) mainWindow.controlAndSend(image.id.slice(1));
                         else alert(text.context_warning)
                     } else {
                         mainWindow.select(image.id, false);
@@ -100,10 +136,15 @@ const mainWindow = {
         }
     },
 
+    /**
+     * selects image and shows its context if double click
+     * @param {string} id - id of currently selected image
+     * @param {boolean} [newContext=true] - if a shifting in context is allowed
+     */
     select: function (id, newContext = true) {
         // select image and show it context
         if (mainWindow.selectedId !== -1) {
-            document.getElementById(mainWindow.selectedId).setAttribute("class", "unselected");
+            document.getElementById(mainWindow.selectedId.toString()).setAttribute("class", "unselected");
         }
 
         if (newContext && mainWindow.selectedId === parseInt(id)) {
@@ -116,13 +157,17 @@ const mainWindow = {
                 document.getElementsByClassName('previous')[0].style.visibility = 'visible';
                 document.getElementsByClassName('next')[0].style.visibility = 'visible';
             }
-            mainWindow.showContext(id);
+            mainWindow.showContext(parseInt(id));
         }
 
         mainWindow.selectedId = parseInt(id);
         document.getElementById(id).setAttribute("class", "selected");
     },
 
+    /**
+     * controls result and sends query for new image if correct
+     * @param {string} id - id of image being checked
+     */
     controlAndSend: function (id) {
         // control result and if correct send query for new image
         let findId = parseInt(document.getElementsByClassName("find-img")[0].id.slice(0, -1));
@@ -135,6 +180,11 @@ const mainWindow = {
         }
     },
 
+    /**
+     * adds text to text query and sets focus to end
+     * @param {string} text - text to be added to search text
+     * @param {string} [id] - id of last selected image
+     */
     addText: function (text, id) {
         // add text to text search and set focus to end
         const input = document.getElementById('search-text');
@@ -155,22 +205,35 @@ const mainWindow = {
         }
     },
 
+    /**
+     * send request for next image to search
+     */
     nextSearch: function () {
         // showing next image for search
         utils.setCookies(mainWindow.found + 1, 0, "", "");
         location.href = '?s';
     },
 
+    /**
+     * close window with context
+     */
     closeWindow: function () {
         // closing of context window
         utils.openOrCloseWindow(".modal-parent", false);
     },
 
+    /**
+     * close help window
+     */
     closeHelpWindow: function () {
         // closing of context window
         utils.openOrCloseWindow(".help-parent", false);
     },
 
+    /**
+     * Set cookies to previous state
+     * @param {any} state
+     */
     stepBack: function (state) {
         console.log(state); //TODO
         // set cookies to last state
@@ -182,6 +245,9 @@ const mainWindow = {
         }
     },
 
+    /**
+     * show popup window with help
+     */
     showHelp: function () {
         // display text of help
         utils.openOrCloseWindow(".help-parent", true);
