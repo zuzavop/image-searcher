@@ -13,6 +13,12 @@ const config = {
 
     /**
      * @type {number}
+     * @description number of images in results
+     */
+    showingPhotos: 60,
+
+    /**
+     * @type {number}
      * @description number of classes shown under each image
      */
     displayed_classes: 3,
@@ -73,12 +79,6 @@ const config = {
 
     /**
      * @type {number}
-     * @description number of images in results
-     */
-    showingPhotos: 60,
-
-    /**
-     * @type {number}
      * @description for scaling percentage of occurrence of classes
      */
     percGrow: 1.4, // for sea dataset 1.4 and for v3c 9
@@ -104,4 +104,9 @@ const text_en = {
     cookies_warning: "Enable cookies, please."
 }
 
-const text = text_cz;
+let text;
+if (navigator.language === "cs-CZ") {
+    text = text_cz;
+} else {
+    text = text_en;
+}

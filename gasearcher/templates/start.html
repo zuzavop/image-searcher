@@ -1,6 +1,9 @@
 {% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang={{ LANGUAGE_CODE }}>
 <head>
     <meta charset="UTF-8">
     <title>GASearcher</title>
@@ -15,22 +18,28 @@
 </head>
 <body>
 <h1>Video retrieval</h1>
-<h2>Informovaný souhlas</h2>
-<p>S čím byste měli souhlasit v případě, že chcete pokračovat:</p>
-<p>Seznámili jste se s cíli a obsahem výzkumu (viz Nápověda níže) a nevadí Vám se na něm podílet (např. není v rozporu s
-    Vaším přesvědčením). Souhlasíte s tím, že mohou být použity Vaše (anonymní) odpovědi k prezentaci například ve
-    vědeckých pracích.</p>
-<p>V práci, která na základě výzkumu vznikne, bychom chtěli zveřejnit dataset s výsledky v následujícím rozsahu:</p>
+<h2>{% trans "Informed consent" %}</h2>
+<p>{% blocktrans %}Before continuing with the research, you should be familiarized yourself and agree with the following
+    statements{% endblocktrans %}:</p>
+<p>{% blocktrans %}I familiarize myself with the aims and content of the research (see Help below) and I don't mind
+    participating in it (e.g. it does not contradict my beliefs). I agree that authors of the project may utilize my
+    (anonymous) answers while presenting research outcomes, for example, in scientific papers{% endblocktrans %}.</p>
+<p>{% blocktrans %}In the work that will be created based on the research, we would like to publish a dataset with
+    results in the following range{% endblocktrans %}:</p>
 <ul>
-    <li>anonymizovaný, náhodně vygenerovaný identifikátor účastníka (něco jako UID = rYTAp9IY)</li>
-    <li>textové dotazy účastníka spojené s postupem vyhledávání</li>
+    <li>{% trans "anonymized, randomly generated participant identifier (something like" %} UID = rYTAp9IY)</li>
+    <li>{% trans "participant's text queries associated with the search procedure" %}</li>
 </ul>
-<p>Výzkum můžete kdykoliv v průběhu ukončit zavřením okna, avšak Vaše vyhledávání bude zaznamenáno průběžně. V případě,
-    že budete chtít svůj souhlas se zpracováním Vašich odpovědí odvolat, napište e-mail na <i>zuzana.vop@gmail.com</i>
-    (ideálně
-    s přibližným časem začátku Vašeho experimentu). </p>
+<p>{% blocktrans %}You can end the search at any time by closing the window, but your search will be recorded
+    continuously. If you want to withdraw your consent to the processing of your answers, write an e-mail
+    to {% endblocktrans %}
+    <i>zuzana.vop@gmail.com</i> {% trans " (ideally with the approximate start time of your experiment)." %}.</p>
 
-<div id="help-context"></div>
-<button class="bar-item" id="start-button" onclick="location.href = '/search';">Search</button>
+<div id="help-context">
+    {% block content %}
+    {% include "help.html" %}
+    {% endblock content %}
+</div>
+<button class="bar-item" id="start-button" onclick="location.href = '/search';">{% trans "Search" %}</button>
 </body>
 </html>

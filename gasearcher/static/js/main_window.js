@@ -29,16 +29,6 @@ const mainWindow = {
      * initialize variables and set history
      */
     init: function () {
-        // set history
-        window.onpopstate = (event) => {
-            mainWindow.stepBack(event.state);
-        };
-        history.pushState({
-            index: utils.getCookie("index"),
-            trying: utils.getCookie("trying"),
-            last_query: utils.getCookie("last_query")
-        }, '');
-
         // setting cookies and local variables about attempts
         document.cookie = 'activity=""';
         if (mainWindow.found === -1) {
@@ -108,6 +98,7 @@ const mainWindow = {
     clearSearch: function () {
         // clear text of search
         document.getElementById('search-text').value = '';
+        document.cookie = 'activity=""';
     },
 
     /**
@@ -228,21 +219,6 @@ const mainWindow = {
     closeHelpWindow: function () {
         // closing of context window
         utils.openOrCloseWindow(".help-parent", false);
-    },
-
-    /**
-     * Set cookies to previous state
-     * @param {any} state
-     */
-    stepBack: function (state) {
-        console.log(state); //TODO
-        // set cookies to last state
-        document.cookie = 'activity=""';
-        if (mainWindow.trying > 0) {
-            document.cookie = 'trying=' + (mainWindow.trying - 1);
-        } else {
-            document.cookie = 'index=' + (mainWindow.found - 1);
-        }
     },
 
     /**

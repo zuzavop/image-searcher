@@ -1,6 +1,9 @@
 {% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang={{ LANGUAGE_CODE }}>
 <head>
     <meta charset="UTF-8">
     <title>GASearcher</title>
@@ -14,7 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 <body>
-<h1>Konec...</h1>
-<h2>Děkujeme za vyplnění...</h2>
+<h1>{% trans "End" %}...</h1>
+<h2>{% trans "Thank you for participation" %}...</h2>
 </body>
 </html>

@@ -1,6 +1,9 @@
 {% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang={{ LANGUAGE_CODE }}>
 <head>
     <meta charset="UTF-8">
     <title>GASearcher</title>
@@ -40,7 +43,11 @@
     {#  help text viewer #}
     <div class="help-window">
         <span class="close-button" draggable="true" onclick="mainWindow.closeHelpWindow()">&times;</span>
-        <div id="help-context"></div>
+        <div id="help-context">
+            {% block content %}
+            {% include "help.html" %}
+            {% endblock content %}
+        </div>
     </div>
 </div>
 <div class="modal-parent">

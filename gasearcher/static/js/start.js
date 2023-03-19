@@ -9,9 +9,6 @@ const createMainWindow = {
             }
         }
 
-        // load help text
-        utils.loadHelp('help-context');
-
         // create button in context
         if (config.shiftInContextEnabled) {
             createMainWindow.createContext();
@@ -99,7 +96,7 @@ const createMainWindow = {
 
     /**
      * create buttons of classes
-     * @param {HTMLDivElement} buttonsDiv - div to which buttons will be create
+     * @param {HTMLDivElement} buttonsDiv - div to which buttons will be created
      * @param {string[]} values - labels of buttons
      * @param {string} id - id of image in given div
      */
