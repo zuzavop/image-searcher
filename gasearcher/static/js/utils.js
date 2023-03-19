@@ -1,19 +1,5 @@
 const utils = {
     /**
-     * load help text
-     */
-    loadHelp: function (containerName) {
-        fetch('templates/help.html')
-            .then(response => response.text())
-            .then(data => {
-                const container = document.getElementById(containerName);
-                if (container) {
-                    container.innerHTML = data;
-                }
-            });
-    },
-
-    /**
      * set used cookies if cookies are enable
      * @param {number} index - index of currently search image
      * @param {number} trying - number of attempts
