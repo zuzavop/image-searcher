@@ -54,6 +54,7 @@ img.selected {
     position: fixed;
     bottom: 0;
     left: 0;
+    padding-left: 3px;
     width: 18%;
 }
 

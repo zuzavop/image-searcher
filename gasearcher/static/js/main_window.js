@@ -138,6 +138,11 @@ const mainWindow = {
             document.getElementById(mainWindow.selectedId.toString()).setAttribute("class", "unselected");
         }
 
+        // in context
+        if (id.startsWith("w")) {
+            return;
+        }
+
         if (newContext && mainWindow.selectedId === parseInt(id)) {
             let parent = document.querySelector(".modal-parent");
             if (parent) {
