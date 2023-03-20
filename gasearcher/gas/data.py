@@ -55,8 +55,8 @@ class LoaderDatabase:
             is_sea_database (bool): A boolean representing whether the database is a sea database or not.
 
         """
-        self.path_clip = path_data + ("sea_clip" if is_sea_database else "clip")
-        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "new_nounlist.txt")
+        self.path_clip = path_data + ("sea_clip" if is_sea_database else "v3c_clip")
+        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "v3c_nounlist.txt")
         self.path_classes = path_data + ("sea_result.csv" if is_sea_database else "v3c_result.csv")
         self.path_selection = path_data + ("sea_selection.txt" if is_sea_database else "")
         self.is_sea_database = is_sea_database

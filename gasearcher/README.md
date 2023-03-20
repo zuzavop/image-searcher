@@ -6,8 +6,13 @@ Vyhledávání v datasetech je zpracováno jako dotaz na [server](gas/view.py).
 
 Veškerá data týkající se uživatelského rozhraní jsou rozdělena na soubory [html](templates), [css](static/css) a [javascriptu](static/js).
 
-Projekt obsahuje dva datasety obsahující podstatná jména, která jsou použita jako class ve vyhledávači:
+Projekt obsahuje předzpracovaná data pro dva datasety obsahující podstatná jména, která jsou použita jako class ve vyhledávači:
 
-1. [dataset](static/data/nounlist.txt) - obsahující 6800 podstatných jmen
+1. [dataset](static/data/v3c_nounlist.txt) - obsahující 6800 podstatných jmen
 
 2. [dataset](static/data/sea_nounlist.txt) - obsahující názvy podmořských živočíchů
+
+
+## Spuštění
+
+Pro spuštění celého projektu i se spuštěním virtuálního prostředí a nainstalacím potřebných python knihoven použijte [start_server.bat](start_server.bat) v případě Windows a [start_server](start_server) v případě Linuxu.

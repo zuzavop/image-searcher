@@ -17,8 +17,8 @@ class Logger:
             finding (dict): A dictionary containing the indexes of all images.
             same_video (dict): A dictionary containing the indexes of images in the same video.
         """
-        self.path_log_search = path_data + "log.csv"
-        self.path_log = path_data + "message.csv"
+        self.path_log_search = path_data + "sea_log.csv"
+        self.path_log = path_data + "v3c_log.csv"
         self.showing = showing
         self.finding = finding
         self.same_video = same_video  # indexes of images in same video (high probability of same looking photos)
