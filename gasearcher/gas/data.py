@@ -151,10 +151,10 @@ class LoaderDatabase:
                 sea_finding = [int(num) for num in file.readline().split(',')]
             random.shuffle(sea_finding)
 
-        finding = sea_finding[:20] if self.is_sea_database else []
+        targets = sea_finding[:20] if self.is_sea_database else []
         for i in range(80):
             new_int = random.randint(1, size_dataset)
-            if new_int not in finding:
-                finding.append(new_int)
+            if new_int not in targets:
+                targets.append(new_int)
 
-        return finding
+        return targets

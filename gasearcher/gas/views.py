@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from gas.models import device, model, clip_data, finding, class_data, classes, last_search, showing, class_pr, \
+from gas.models import device, model, clip_data, targets, class_data, classes, last_search, showing, class_pr, \
     combination, first_show, logger
 
 
@@ -51,7 +51,7 @@ def text_search(query, session, found, activity):
     if combination:
         last_search[session] = scores
 
-    logger.log_text_query(query, new_scores, found, session, activity)
+    logger.log_text_query(query, new_scores, targets[found], session, activity)
 
     return new_scores[:showing]
 
@@ -74,12 +74,12 @@ def image_search(image_query, found, session):
 
     scores = list(np.argsort(result_score(image_query)))
 
-    logger.log_image_query(image_query, scores, found, session)
+    logger.log_image_query(image_query, scores, targets[found], session)
 
     return scores[:showing]
 
 
-def send_data(request, data, find):
+def prepare_data(request, data, find):
     """
     Generate data used in template (results of search) and send the data to the index.html template.
 
@@ -126,7 +126,7 @@ def search(request):
 
     # load index of currently searching image from cookies
     found = int(request.COOKIES.get('index')) if request.COOKIES.get('index') is not None else 0
-    if found >= len(finding):  # control of end
+    if found >= len(targets):  # control of end
         return redirect('/end')
     data = first_show
 
@@ -139,7 +139,7 @@ def search(request):
         if request.GET.get('id'):
             data = image_search(request.GET['id'], found, request.session['session_id'])
 
-    return send_data(request, data, finding[found])
+    return prepare_data(request, data, targets[found])
 
 
 def start(request):
