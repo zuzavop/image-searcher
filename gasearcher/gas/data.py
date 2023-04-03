@@ -127,7 +127,7 @@ class LoaderDatabase:
                 for line in f:
                     top = int(line[:-1]) - 1
                     same_video.update(
-                        {i: np.arange(max(bottom, i - sur), min(top, i + sur)) for i in range(bottom, top)})
+                        {i: [max(bottom, i - sur), min(top, i + sur)] for i in range(bottom, top)})
                     bottom = top
         else:
             for i in range(size_dataset):

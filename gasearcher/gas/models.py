@@ -32,7 +32,7 @@ targets = loader.set_finding(size_dataset)
 first_show = load_first_screen(class_data, size_dataset)
 
 # logger that logs the search activities
-logger = Logger(path_data, showing, targets, loader.get_context(size_dataset, sur))
+logger = Logger(path_data, showing, loader.get_context(size_dataset, sur))
 
 
 

@@ -1,3 +1,4 @@
+import numpy as np
 class Logger:
     """
     Log text and image queries.
@@ -65,10 +66,12 @@ class Logger:
             int: If the searched image is present in the context of any image in the shown result, returns 1.
             Otherwise, returns 0.
         """
+        same = np.arange(self.same_video[target][0], self.same_video[target][1] + 1)
         # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-        return 1 if len(list(set(new_showing) & set(self.same_video[target]))) > 0 else 0
+        return 1 if len(list(set(new_showing) & set(same))) > 0 else 0
 
-    def get_rank(self, scores, index):
+    @staticmethod
+    def get_rank(scores, index):
         """
         Get rank (from 1) of image.
 
