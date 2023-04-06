@@ -7,14 +7,14 @@ class Logger:
         path_log_search (str): The path of the log file for text queries.
         path_log (str): The path of the log file for image queries.
         showing (int): The number of images to show in the query result.
-        same_video (dict): A dictionary containing the indexes of images in the same video.
+        same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
     """
     def __init__(self, path_data, showing, same_video):
         """
         Args:
             path_data (str): The path to data.
             showing (int): The number of images to show in the query result.
-            same_video (dict): A dictionary containing the indexes of images in the same video.
+            same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
         """
         self.path_log_search = path_data + "sea_log.csv"
         self.path_log = path_data + "v3c_log.csv"
@@ -27,7 +27,7 @@ class Logger:
 
         Args:
             query (str): The query text.
-            new_scores (list): A list of scores for the searched images.
+            new_scores (list): A list of indices of images sorted by similarity to the current text query.
             target (int): The index of the currently searching image.
             session (str): The unique session ID of the user.
             activity (str): The activity from the user.
@@ -44,7 +44,7 @@ class Logger:
 
         Args:
             query_id (int): The query image ID.
-            new_scores (list): A list of scores for the searched images.
+            new_scores (list): A list of indices of images sorted by similarity to the current image query.
             target (int): The index of the currently searching image.
             session (str): The unique session ID of the user.
         """
@@ -56,19 +56,19 @@ class Logger:
 
     def is_in_same_video(self, new_showing, target):
         """
-        Determines if the searched image is present in the context of any image in the shown result.
+        Determines if the searched image and its surrounding is present in the shown result.
 
         Args:
-            new_showing (list): A list of indexes of images to be shown in the query result.
+            new_showing (list): A list of indices of images to be shown in the query result.
             target (int): The index of the currently searching image.
 
         Returns:
             int: If the searched image is present in the context of any image in the shown result, returns 1.
             Otherwise, returns 0.
         """
-        same = np.arange(self.same_video[target][0], self.same_video[target][1] + 1)
+        surrounding = np.arange(self.same_video[target][0], self.same_video[target][1] + 1)
         # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-        return 1 if len(list(set(new_showing) & set(same))) > 0 else 0
+        return 1 if len(list(set(new_showing) & set(surrounding))) > 0 else 0
 
     @staticmethod
     def get_rank(scores, index):
@@ -76,7 +76,7 @@ class Logger:
         Get rank (from 1) of image.
 
         Args:
-            scores (list): A list of scores for the searched images.
+            scores (list): A list of indices of images sorted by similarity to the current query
             index (int): The index of the image
 
         Returns:
