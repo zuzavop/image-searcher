@@ -1,11 +1,23 @@
-# GASearcher
-Projekt se zabývá vyhledáváním a textovou klasifikací snímků, pomocí které uživatel může reformulovat textový dotaz do multimediální databáze. Tato strategie je vhodná hlavně díky tomu, že uživatele nemusí vždy napadnout nejpřesnější slova ze slovníku popisující vyhledávané video, tzv. „semantic gap problem”. A právě díky textové klasifikace mezivýsledku může uživatel efektivně reformulovat textový dotaz.
-Popisovaný projekt je realizován jako webová aplikace, ve které je možné vyhledávat v multimediální databázi s využitím výše popsaného postupu. Textové dotazy do databáze a práce s neuronovou sítí [CLIP](https://beta.openai.com/) jsou implementovány v Pythonu a webové rozhraní zobrazující výsledky hledání je vyvinuto v JavaScriptu.
+# Video retrieval
 
-Podrobnější specifikace je v [pdf](Project_specification.pdf) a aktuální verzi lze zobrazit také jako [projekt](https://www.overleaf.com/read/fgthfnksmwkn) v overleaf.
+GASearcher (where GAS stands for "Generic Annotation System") is a Django-based software that allows users to search in
+an image database using a text query. System show the results alongside their predefined classes, which
+are intended to assist users in selecting suitable word combinations for formulating queries that more likely describe
+the desired image. In addition to text search, the program also allows similarity search based on a selected image
+from the currently displayed images.
 
-Samotný projekt webové aplikace GASearcher je v [této složce](gasearcher) i s popisem funkčnosti.
+The software allows logging the search progress of individual users and changing the experiment settings within the
+framework of changing the collections of images used.
 
-Pomocný kód na zpracování snímků a jejich klasifikaci je přiložený v [složce src](src). Složka obsahuje [kód](src/parse_video.py) na zpracování videí na jednotlivé snímky, [klasifikaci](src/top_classes.py) snímků do classes a [kód](src/images_to_clip.py) na získání feature snímků ze sítě CLIP.
+Text queries to the database and classification is implemented using
+[the CLIP neural network](https://beta.openai.com/).
 
-Aktuální verze práce spojené s tímto softwarem je dostupná na tomto [odkazu](https://www.overleaf.com/read/ffjzxjyhtznc).
+The GASearcher web application project is located in [this folder](gasearcher) with a description of its functionality.
+
+Helper code for processing images and their classification is included in [the src folder](src). The folder contains
+[code](src/parse_video.py) for processing videos into individual frames, [classification](src/top_classes.py) of frames
+into classes, and [code](src/images_to_clip.py) for obtaining feature frames from the CLIP network.
+
+The current version of the work associated with this software is available
+at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Detailed software documentation is available in
+[the docs](docs) folder.
