@@ -20,4 +20,4 @@ into classes, and [code](src/images_to_clip.py) for obtaining feature frames fro
 
 The current version of the work associated with this software is available
 at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Detailed software documentation is available in
-[the docs](docs) folder.
+[the docs](docs) folder within information about reusing software with different dataset.

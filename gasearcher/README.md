@@ -1,18 +1,47 @@
-# Specifikace - GASearcher
+# GASearcher
 
-Načtení dat zpracovaných pomocí neuronové sítě CLIP probíhá po spuštění serveru ze souboru [models](gas/models.py).
+GASearcher is a search engine that utilizes a neural network CLIP to process and retrieve images. The data is
+loaded from [the models file](gas/models.py) upon server startup.
 
-Vyhledávání v datasetech je zpracováno jako dotaz na [server](gas/view.py).
+Searching through datasets is performed by querying [the server](gas/view.py).
 
-Veškerá data týkající se uživatelského rozhraní jsou rozdělena na soubory [html](templates), [css](static/css) a [javascriptu](static/js).
+All user interface data is separated into [html](templates), [css](static/css)
+a [javascript](static/js) files.
 
-Projekt obsahuje předzpracovaná data pro dva datasety obsahující podstatná jména, která jsou použita jako class ve vyhledávači:
+The project includes two dictionaries of classes:
 
-1. [dataset](static/data/v3c_nounlist.txt) - obsahující 6800 podstatných jmen
+1. [dictionary](static/data/v3c_nounlist.txt) - containing 6,800 nouns (preprocessed for v3c).
 
-2. [dataset](static/data/sea_nounlist.txt) - obsahující názvy podmořských živočíchů
+2. [dictionary](static/data/sea_nounlist.txt) - containing names of sea creatures (preprocessed for Marine Video Kit).
 
+## Requirements
 
-## Spuštění
+* Python 3
+* pip package manager
 
-Pro spuštění celého projektu i se spuštěním virtuálního prostředí a nainstalacím potřebných python knihoven použijte [start_server.bat](start_server.bat) v případě Windows a [start_server](start_server) v případě Linuxu.
+## Installation
+1. Clone the repository.
+
+    ```commandline
+    git clone git@gitlab.mff.cuni.cz:vopalkoz/term-project.git
+    ```
+
+2. To run whole project, including the virtual environment and required Python libraries,
+use [start_server.bat](start_server.bat) for Windows or [start_server](start_server) for Linux.
+   For repeated start of project is possible used only this command:
+   ```commandline
+   python manage.py runserver
+   ```
+
+3. Open your web browser and go to http://localhost:8000/ to access the GASearcher.
+
+## Using
+Once you have the GASearcher running, you can use it to search in sample image dataset using text queries.
+
+To search using text:
+
+1. Enter a query in the text search box and click "Search" or "Enter".
+2. The results will be displayed alongside their classes.
+3. To view context of a specific image, click on its thumbnail.
+
+More information about using searcher is shown on welcome page.
