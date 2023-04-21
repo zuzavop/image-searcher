@@ -1,38 +1,18 @@
-import os
-
-import clip
-import torch as torch
-
-from gas.data import LoaderDatabase, load_first_screen
+from gas.data import LoaderDatabase
 from gas.logger import Logger
-from gasearcher.settings import STATICFILES_DIRS
+from gas.searcher import Searcher
+from gas.settings import SEA_DATABASE, COMBINATION, PATH_DATA, SUR, SHOWING
 
 
-# clip
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load("ViT-B/32", device=device)
+size_dataset = 22036 if SEA_DATABASE else 20000
 
-# configuration
-sea_database = True
-combination = True # if result should be combined with previous result
-
-path_data = os.path.join(STATICFILES_DIRS[0], "data/") # get path to data
-loader = LoaderDatabase(path_data, sea_database)
-size_dataset = 22036 if sea_database else 20000
-sur = 7  # surrounding of image in context
-showing = 60  # number of shown image in result
-
-clip_data = loader.get_clip_data()
+loader = LoaderDatabase(PATH_DATA, SEA_DATABASE)
 class_data = loader.get_photos_classes()
 classes, class_pr = loader.get_classes()
-last_search = {}  # vectors of last text search
 targets = loader.set_finding(size_dataset)
 
 # the initial set of images indexes to be shown in the search result
-first_show = load_first_screen(class_data, size_dataset)
+first_show = loader.load_first_screen(class_data, size_dataset)
 
-# logger that logs the search activities
-logger = Logger(path_data, showing, loader.get_context(size_dataset, sur))
-
-
-
+searcher = Searcher(loader.get_clip_data(), COMBINATION,
+                    Logger(PATH_DATA, loader.get_context(size_dataset, SUR), targets), SHOWING)

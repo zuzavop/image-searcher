@@ -8,34 +8,6 @@ import torch as torch
 from sklearn_som.som import SOM
 
 
-def load_first_screen(class_data, size_dataset):
-    """
-    Generate the initial set of images indexes using SOM of class labels.
-
-    Args:
-        class_data (dict): A dictionary containing the class labels for each image. (used by SOM)
-        size_dataset (int): The size of the dataset.
-
-    Returns:
-        list: A list of indexes of images representing the first window.
-
-    """
-    # get first window - SOM of labels
-    first_show = [0 for _ in range(12 * 5)]
-    input_data = np.array(list(class_data.values()))
-    som = SOM(m=5, n=12, dim=len(input_data[0]))
-
-    prediction = som.fit_predict(input_data)
-
-    for i in range(len(first_show)):
-        if i in prediction:
-            first_show[i] = np.random.choice(np.where(prediction == i)[0])
-        else:
-            first_show[i] = random.randint(1, size_dataset)
-
-    return first_show
-
-
 class LoaderDatabase:
     """
     LoaderDatabase loads the data from a given database.
@@ -48,12 +20,12 @@ class LoaderDatabase:
         path_classes (str): The path to the file with classes.
         path_selection (str): The path to the file with indexes of images which should be used for searching.
     """
+
     def __init__(self, path_data, is_sea_database):
         """
         Args:
             path_data (str): The path to the database.
             is_sea_database (bool): A boolean representing whether the database is a sea database or not.
-
         """
         self.path_clip = path_data + ("sea_clip" if is_sea_database else "v3c_clip")
         self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "v3c_nounlist.txt")
@@ -106,6 +78,7 @@ class LoaderDatabase:
                 split = line.split(":")
                 classes.append(split[0][:-1])
                 class_pr[len(classes) - 1] = float(split[1][:-1])
+
         return classes, class_pr
 
     def get_context(self, size_dataset, sur):
@@ -158,3 +131,31 @@ class LoaderDatabase:
                 targets.append(new_int)
 
         return targets
+
+    @staticmethod
+    def load_first_screen(class_data, size_dataset):
+        """
+        Generate the initial set of images indexes using SOM of class labels.
+
+        Args:
+            class_data (dict): A dictionary containing the class labels for each image. (used by SOM)
+            size_dataset (int): The size of the dataset.
+
+        Returns:
+            list: A list of indexes of images representing the first window.
+
+        """
+        # get first window - SOM of labels
+        first_show = [0 for _ in range(12 * 5)]
+        input_data = np.array(list(class_data.values()))
+        som = SOM(m=5, n=12, dim=len(input_data[0]))
+
+        prediction = som.fit_predict(input_data)
+
+        for i in range(len(first_show)):
+            if i in prediction:
+                first_show[i] = np.random.choice(np.where(prediction == i)[0])
+            else:
+                first_show[i] = random.randint(1, size_dataset)
+
+        return first_show

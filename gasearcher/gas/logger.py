@@ -1,4 +1,8 @@
 import numpy as np
+
+from gas.settings import SHOWING
+
+
 class Logger:
     """
     Log text and image queries.
@@ -6,20 +10,21 @@ class Logger:
     Attributes:
         path_log_search (str): The path of the log file for text queries.
         path_log (str): The path of the log file for image queries.
-        showing (int): The number of images to show in the query result.
         same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
+        targets (list) : The indexes of images which are searched for.
     """
-    def __init__(self, path_data, showing, same_video):
+
+    def __init__(self, path_data, same_video, targets):
         """
         Args:
             path_data (str): The path to data.
-            showing (int): The number of images to show in the query result.
             same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
+            targets (list): The indexes of images which are searched for.
         """
         self.path_log_search = path_data + "sea_log.csv"
         self.path_log = path_data + "v3c_log.csv"
-        self.showing = showing
         self.same_video = same_video  # indexes of images in same video (high probability of same looking photos)
+        self.targets = targets
 
     def log_text_query(self, query, new_scores, target, session, activity):
         """
@@ -28,14 +33,15 @@ class Logger:
         Args:
             query (str): The query text.
             new_scores (list): A list of indices of images sorted by similarity to the current text query.
-            target (int): The index of the currently searching image.
+            target (int): The order of the currently searching image in targets.
             session (str): The unique session ID of the user.
             activity (str): The activity from the user.
         """
-        same = self.is_in_same_video(new_scores[:self.showing], target)
+        same = self.is_in_same_video(new_scores[:SHOWING], self.targets[target])
         # write down log
         with open(self.path_log_search, "a") as log:
-            log.write(query + ';' + str(target) + ';' + session + ';' + str(self.get_rank(new_scores, target))
+            log.write(query + ';' + str(self.targets[target]) + ';' + session + ';' + str(
+                self.get_rank(new_scores, self.targets[target]))
                       + ';' + str(same) + ';"' + activity + '"' + '\n')
 
     def log_image_query(self, query_id, new_scores, target, session):
@@ -45,13 +51,14 @@ class Logger:
         Args:
             query_id (int): The query image ID.
             new_scores (list): A list of indices of images sorted by similarity to the current image query.
-            target (int): The index of the currently searching image.
+            target (int): The order of the currently searching image in targets.
             session (str): The unique session ID of the user.
         """
-        same = self.is_in_same_video(new_scores[:self.showing], target)
+        same = self.is_in_same_video(new_scores[:SHOWING], self.targets[target])
         # write down log
         with open(self.path_log, "a") as log:
-            log.write(str(query_id) + ';' + str(target) + ';' + session + ';' + str(self.get_rank(new_scores, target))
+            log.write(str(query_id) + ';' + str(self.targets[target]) + ';' + session + ';' + str(
+                self.get_rank(new_scores, self.targets[target]))
                       + ';' + str(same) + '"' + '\n')
 
     def is_in_same_video(self, new_showing, target):

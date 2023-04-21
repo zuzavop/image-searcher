@@ -1,82 +1,11 @@
 import secrets
 from collections import Counter
 
-import clip
 import numpy as np
-import torch
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
-
-from gas.models import device, model, clip_data, targets, class_data, classes, last_search, showing, class_pr, \
-    combination, first_show, logger
-
-
-def result_score(features):
-    """
-    Calculate the similarity score of the query feature vector with the CLIP data.
-
-    Args:
-        features (numpy.ndarray): A 2D array representing the feature vector of the query.
-
-    Returns:
-        numpy.ndarray: A 1D array representing the similarity scores of the query.
-    """
-    return np.concatenate([1 - (torch.cat(clip_data) @ features)], axis=None)
-
-
-def text_search(query, session, found, activity):
-    """
-    Text search using CLIP data.
-
-    Args:
-        query (str): The text query.
-        session (str): The unique session ID of the user. (used for logging)
-        found (int): The index of the currently searching image. (used for logging)
-        activity (str): The activity from the user. (used for logging)
-
-    Returns:
-        list: A list of indices representing the top search results.
-    """
-    # get normalize features of text query
-    with torch.no_grad():
-        text_features = model.encode_text(clip.tokenize([query]).to(device))
-    text_features /= np.linalg.norm(text_features)
-
-    # get distance of vectors
-    scores = result_score(text_features.T)
-
-    new_scores = list(np.argsort((scores + last_search[session]) if combination else scores))
-    # save score for next search
-    if combination:
-        last_search[session] = scores
-
-    logger.log_text_query(query, new_scores, targets[found], session, activity)
-
-    return new_scores[:showing]
-
-
-def image_search(image_query, found, session):
-    """
-    Image search using CLIP data.
-
-    Args:
-        image_query (int): The index of the image query.
-        found (int): The index of the currently searching image. (used for logging)
-        session (str): The unique session ID of the user. (used for logging)
-
-    Returns:
-        list: A list of indices representing the top search results.
-    """
-    # get features of image query
-    image_query_index = int(image_query)
-    image_query = np.transpose(clip_data[image_query_index])
-
-    scores = list(np.argsort(result_score(image_query)))
-
-    logger.log_image_query(image_query, scores, targets[found], session)
-
-    return scores[:showing]
+from gas.models import targets, class_data, classes, class_pr, first_show, searcher
 
 
 def prepare_data(request, data, find):
@@ -131,13 +60,13 @@ def search(request):
     data = first_show
 
     if request.GET.get('query'):
-        data = text_search(request.GET['query'], request.session['session_id'], found,
-                           request.COOKIES.get('activity')[:-1])
+        data = searcher.text_search(request.GET['query'], request.session['session_id'], found,
+                                    request.COOKIES.get('activity')[:-1])
     else:
         # reset save search if user use any other method than text search
-        last_search[request.session['session_id']] = np.zeros(len(clip_data))
+        searcher.reset_last(request.session['session_id'])
         if request.GET.get('id'):
-            data = image_search(request.GET['id'], found, request.session['session_id'])
+            data = searcher.image_search(request.GET['id'], found, request.session['session_id'])
 
     return prepare_data(request, data, targets[found])
 
@@ -154,7 +83,7 @@ def start(request):
     """
     # "login" - setting session id
     request.session['session_id'] = secrets.token_urlsafe(6)
-    last_search[request.session['session_id']] = np.zeros(len(clip_data))
+    searcher.reset_last(request.session['session_id'])
     return render(request, 'start.html')
 
 
