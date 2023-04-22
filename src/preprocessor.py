@@ -1,5 +1,8 @@
 import os
 
+import clip
+import torch
+
 from images_to_clip import get_vector_from_photo
 from parse_video import parse_video
 from top_classes import classify_images
@@ -41,19 +44,72 @@ class Preprocessor:
         for photo in os.listdir(self.photos_path):
             get_vector_from_photo(self.photos_path + photo, photo[:-4], self.vectors_path)
 
-    def classify_images(self, nounlist_path, result_file):
+    def nounlist_to_vectors(self, nounlist_path, output_name):
+        """
+        Converts a list of nouns into their vector representations using the CLIP.
+
+        Args:
+            nounlist_path (str): The path to the file containing a dictionary with classes.
+            output_name (str): The name of the file to write the resulting vector representations to.
+        """
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        model, preprocess = clip.load("ViT-B/32", device=device)
+
+        idx2label = []
+        with open(nounlist_path) as f:
+            for line in f:
+                idx2label.append(line[:-1])
+
+        text_inputs = torch.cat([clip.tokenize(f"a photo of {c}") for c in idx2label]).to(device)
+
+        with torch.no_grad():
+            text_features = model.encode_text(text_inputs)
+        text_features /= text_features.norm(dim=-1, keepdim=True)
+
+        torch.save(text_features, self.result_path + "//" + output_name)
+
+    def classify_images(self, nounlist_path, result_file, new_nounlist_name):
         """
         Classifies images using a CLIP model and saves the results to a file.
 
         Args:
             nounlist_path (str): The path to the noun list file used for classification.
             result_file (str): The path to the file where the classification results will be saved.
+            new_nounlist_name (str): The name of file to which will be writen nounlist with frequency of each class.
         """
         classify_images(self.vectors_path, nounlist_path, result_file)
-        self.get_class_pr(result_file)
+        self.get_class_pr(nounlist_path, result_file, new_nounlist_name)
 
-    def get_class_pr(self, result_path):
-        print(self.result_path)
+    def get_class_pr(self, nounlist_path, classification_path, result_filename):
+        """
+        Computes the probability distribution of image classifications in a dataset.
+
+        Args:
+            nounlist_path (str): The path to the file containing a dictionary with classes.
+            classification_path (str): The path to the file containing the classification of each image in the dataset.
+            result_filename (str): The name of the file to write the classification probabilities with classes names to.
+        """
+        words = []
+        with open(nounlist_path) as f:
+            for line in f:
+                words.append(line[:-1])
+
+        most_common = {}
+        for i in range(len(words)):
+            most_common[i] = 0
+
+        photos_count = 0
+        with open(classification_path) as f:
+            for line in f:
+                line = line[7:-2].split(',')
+                for i in line:
+                    i = int(i)
+                    most_common[i] += 1
+                photos_count += 1
+
+        with open(self.result_path + result_filename, 'a') as f:
+            for k in most_common:
+                f.write(words[int(k)] + ' : ' + "%.3f" % ((most_common[k] / photos_count) * 100) + '\n')
 
     @staticmethod
     def rename_images(images_path, name_format='{:05d}'):
@@ -81,4 +137,4 @@ class Preprocessor:
         self.parse_videos(videos_path, True, self.result_path + "videos.txt")
         self.rename_images(self.result_path)
         self.images_to_vectors()
-        self.classify_images(nounlist_path, self.result_path + "result.csv")
+        self.classify_images(nounlist_path, self.result_path + "result.csv", self.result_path + "nounlist.txt")
