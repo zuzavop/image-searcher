@@ -8,12 +8,6 @@ Searching through datasets is performed by querying [the server](gas/view.py).
 All user interface data is separated into [html](templates), [css](static/css)
 a [javascript](static/js) files.
 
-The project includes two dictionaries of classes:
-
-1. [dictionary](static/data/v3c_nounlist.txt) - containing 6,800 nouns (preprocessed for v3c).
-
-2. [dictionary](static/data/sea_nounlist.txt) - containing names of sea creatures (preprocessed for Marine Video Kit).
-
 ## Requirements
 
 * Python 3
@@ -45,3 +39,13 @@ To search using text:
 3. To view context of a specific image, click on its thumbnail.
 
 More information about using searcher is shown on welcome page.
+
+## Sample dataset
+For first try project contains small sample dataset (with preprocessed data).
+
+## Dictionaries
+The project includes two dictionaries of classes:
+
+1. [dictionary](static/data/v3c_nounlist.txt) - containing 6,800 nouns (preprocessed for v3c).
+
+2. [dictionary](static/data/sea_nounlist.txt) - containing names of sea creatures (preprocessed for Marine Video Kit).
