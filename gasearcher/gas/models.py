@@ -15,4 +15,4 @@ targets = loader.set_finding(size_dataset)
 first_show = loader.load_first_screen(class_data, size_dataset)
 
 searcher = Searcher(loader.get_clip_data(), COMBINATION,
-                    Logger(PATH_DATA, loader.get_context(size_dataset, SUR), targets), SHOWING)
+                    Logger(PATH_DATA, loader.get_context(size_dataset, SUR), targets, SEA_DATABASE), SHOWING)

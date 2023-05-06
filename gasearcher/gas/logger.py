@@ -8,21 +8,19 @@ class Logger:
     Log text and image queries.
 
     Attributes:
-        path_log_search (str): The path of the log file for text queries.
-        path_log (str): The path of the log file for image queries.
+        path_log (str): The path of the log file for queries.
         same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
         targets (list) : The indexes of images which are searched for.
     """
 
-    def __init__(self, path_data, same_video, targets):
+    def __init__(self, path_data, same_video, targets, is_sea_database):
         """
         Args:
             path_data (str): The path to data.
             same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
             targets (list): The indexes of images which are searched for.
         """
-        self.path_log_search = path_data + "sea_log.csv"
-        self.path_log = path_data + "v3c_log.csv"
+        self.path_log = path_data + ("sea_log.csv" if is_sea_database else "log.csv")
         self.same_video = same_video  # indexes of images in same video (high probability of same looking photos)
         self.targets = targets
 
@@ -39,7 +37,7 @@ class Logger:
         """
         same = self.is_in_same_video(new_scores[:SHOWING], self.targets[target])
         # write down log
-        with open(self.path_log_search, "a") as log:
+        with open(self.path_log, "a") as log:
             log.write(query + ';' + str(self.targets[target]) + ';' + session + ';' + str(
                 self.get_rank(new_scores, self.targets[target]))
                       + ';' + str(same) + ';"' + activity + '"' + '\n')

@@ -19,6 +19,7 @@ class LoaderDatabase:
         path_nounlist (str): The path to the nounlist.
         path_classes (str): The path to the file with classes.
         path_selection (str): The path to the file with indexes of images which should be used for searching.
+        path_ends (str): The path to the file with indexes of images which represents ends of each video.
     """
 
     def __init__(self, path_data, is_sea_database):
@@ -27,10 +28,11 @@ class LoaderDatabase:
             path_data (str): The path to the database.
             is_sea_database (bool): A boolean representing whether the database is a sea database or not.
         """
-        self.path_clip = path_data + ("sea_clip" if is_sea_database else "v3c_clip")
-        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "v3c_nounlist.txt")
-        self.path_classes = path_data + ("sea_result.csv" if is_sea_database else "v3c_result.csv")
+        self.path_clip = path_data + ("sea_clip" if is_sea_database else "clip")
+        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "nounlist.txt")
+        self.path_classes = path_data + ("sea_result.csv" if is_sea_database else "result.csv")
         self.path_selection = path_data + ("sea_selection.txt" if is_sea_database else "")
+        self.path_ends = path_data + ("sea_videos.txt" if is_sea_database else "videos_end.txt")
         self.is_sea_database = is_sea_database
         self.path_data = path_data
 
@@ -94,9 +96,9 @@ class LoaderDatabase:
                 and the value is a list of integer representation of image within a given radius.
         """
         same_video = {}
-        if self.is_sea_database:
+        if self.path_ends:
             bottom = 0
-            with open(self.path_data + 'sea_videos.txt', 'r') as f:
+            with open(self.path_ends, 'r') as f:
                 for line in f:
                     top = int(line[:-1]) - 1
                     same_video.update(
@@ -104,7 +106,7 @@ class LoaderDatabase:
                     bottom = top
         else:
             for i in range(size_dataset):
-                same_video[i] = [i]
+                same_video[i] = [i, i]
 
         return same_video
 

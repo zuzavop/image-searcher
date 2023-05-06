@@ -55,10 +55,8 @@ class Preprocessor:
         device = "cuda" if torch.cuda.is_available() else "cpu"
         model, preprocess = clip.load("ViT-B/32", device=device)
 
-        idx2label = []
         with open(nounlist_path) as f:
-            for line in f:
-                idx2label.append(line[:-1])
+            idx2label = [line.strip() for line in f]
 
         text_inputs = torch.cat([clip.tokenize(f"a photo of {c}") for c in idx2label]).to(device)
 
@@ -89,27 +87,22 @@ class Preprocessor:
             classification_path (str): The path to the file containing the classification of each image in the dataset.
             result_filename (str): The name of the file to write the classification probabilities with classes names to.
         """
-        words = []
         with open(nounlist_path) as f:
-            for line in f:
-                words.append(line[:-1])
+            words = [line.strip() for line in f]
 
-        most_common = {}
-        for i in range(len(words)):
-            most_common[i] = 0
-
+        most_common = {i: 0 for i in range(len(words))}
         photos_count = 0
+
         with open(classification_path) as f:
             for line in f:
                 line = line[7:-2].split(',')
                 for i in line:
-                    i = int(i)
-                    most_common[i] += 1
+                    most_common[int(i)] += 1
                 photos_count += 1
 
         with open(self.result_path + result_filename, 'a') as f:
-            for k in most_common:
-                f.write(words[int(k)] + ' : ' + "%.3f" % ((most_common[k] / photos_count) * 100) + '\n')
+            for k, v in most_common.items():
+                f.write(f"{words[int(k)]} : {v / photos_count * 100:.3f}\n")
 
     @staticmethod
     def rename_images(images_path, name_format='{:05d}'):
@@ -134,7 +127,7 @@ class Preprocessor:
             videos_path (str): The path to the directory containing the videos to be parsed.
             nounlist_path (str): The path to the noun list file used for classification.
         """
-        self.parse_videos(videos_path, True, self.result_path + "videos.txt")
+        self.parse_videos(videos_path, True, self.result_path + "videos_end.txt")
         self.rename_images(self.result_path)
         self.images_to_vectors()
         self.classify_images(nounlist_path, self.result_path + "result.csv", self.result_path + "nounlist.txt")

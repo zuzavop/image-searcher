@@ -84,13 +84,14 @@ class Evaluator:
             csv_reader = csv.reader(csv_file, delimiter=';')
             line = 0
             prev_id = -1
+            prev_session = ""
             count_same = 0
 
             for row in csv_reader:
                 if line > 0:
                     ids = int(row[1])
                     session = row[2]
-                    if prev_id != ids:
+                    if prev_id != ids or prev_session != session:
                         query_count += 1
                         count_same = 1
                         self.last_search[session] = np.zeros(len(self.clip_data))
@@ -103,6 +104,7 @@ class Evaluator:
                         self.get_data_from_text_search(row[0], session, ids, prev_id == ids, with_som, is_sea)
 
                     prev_id = ids
+                    prev_session = session
                 line += 1
 
         print("Total search: ", query_count)
@@ -207,7 +209,6 @@ class Evaluator:
         """
         ranks1 = []
         ranks2 = []
-        diff = []
         with open(log_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=';')
             line = 0
@@ -215,15 +216,14 @@ class Evaluator:
             previous_row = {}
 
             for row in csv_reader:
-                if line > 0 and row[1] == previous_row[1]:
+                if line > 0 and row[1] == previous_row[1] and row[2] == previous_row[2]:
                     ranks1.append(int(previous_row[3]))
                     ranks2.append(int(row[3]) if int(row[3]) > 0 else 22036)
-                    diff.append(int(previous_row[3]) - int(row[3]))
 
                 previous_row = row
                 line += 1
 
-        return [ranks2, ranks1, diff]
+        return [ranks2, ranks1]
 
     def get_data_for_graph(self, input_path, first_col_name):
         """
@@ -244,7 +244,7 @@ class Evaluator:
             if x == 0:
                 data = [self.get_data_from_log(fn)[1]]
             data = np.append(data, [self.get_data_from_log(fn)[0]], axis=0)
-            columns.append(fn[5:-4])
+            columns.append(fn[:-4])
             x += 1
 
         return zip(data, columns)
@@ -270,7 +270,6 @@ class Evaluator:
         sns.violinplot(data=data, bw=.02, ax=ax)
 
         if use_log_scale:
-            plt.yscale('log')
             ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("$10^{{{x:.0f}}}$"))
             ymin, ymax = ax.get_ylim()
             tick_range = np.arange(np.floor(ymin), ymax)
@@ -372,8 +371,11 @@ class Logger:
             csv_writer = csv.writer(log, delimiter=';')
             # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
             same = self.is_in_same_video(indexes[new_scores[:self.showing]], found)
+            first = self.get_rank(new_scores, np.where(indexes == found)[0][0])
+            for i in list(set(indexes).intersection(set(self.same_video[found]))):
+                first = min(first, self.get_rank(new_scores, np.where(indexes == i)[0][0]))
             csv_writer.writerow([query, found, session, (
-                self.get_rank(new_scores, np.where(indexes == found)[0][0]) if found in indexes else -1), same])
+                self.get_rank(new_scores, np.where(indexes == found)[0][0]) if found in indexes else -1), same, first])
 
     def is_in_same_video(self, new_showing, target):
         """
