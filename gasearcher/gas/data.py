@@ -127,7 +127,7 @@ class LoaderDatabase:
             random.shuffle(sea_finding)
 
         targets = sea_finding[:20] if self.is_sea_database else []
-        for i in range(80):
+        for i in range(5):
             new_int = random.randint(1, size_dataset)
             if new_int not in targets:
                 targets.append(new_int)
@@ -135,17 +135,17 @@ class LoaderDatabase:
         return targets
 
     @staticmethod
-    def load_first_screen(class_data, size_dataset):
+    def load_first_screen(class_data, size_dataset, targets):
         """
         Generate the initial set of images indexes using SOM of class labels.
 
         Args:
             class_data (dict): A dictionary containing the class labels for each image. (used by SOM)
             size_dataset (int): The size of the dataset.
+            targets (list): A list of indexes of images that should be found.
 
         Returns:
             list: A list of indexes of images representing the first window.
-
         """
         # get first window - SOM of labels
         first_show = [0 for _ in range(12 * 5)]
@@ -158,6 +158,13 @@ class LoaderDatabase:
             if i in prediction:
                 first_show[i] = np.random.choice(np.where(prediction == i)[0])
             else:
-                first_show[i] = random.randint(1, size_dataset)
+                first_show[i] = -1
+
+        for i in range(len(first_show)):
+            if first_show[i] == -1 or first_show[i] in targets:
+                next_id = random.randint(1, size_dataset - 1)
+                while next_id in first_show or next_id in targets:
+                    next_id = random.randint(1, size_dataset - 1)
+                first_show[i] = next_id
 
         return first_show

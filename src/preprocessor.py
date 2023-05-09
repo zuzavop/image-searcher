@@ -27,13 +27,12 @@ class Preprocessor:
         Recursively parses a directory of videos and extracts frames from them.
 
         Args:
-            input_path (str): The path to the directory containing the videos to be parsed.
             enable_logging (bool): A flag indicating whether logging is enabled or not.
             log_path (str): The path to the log file where information about end of each video will be written.
         """
         for filename in os.listdir(self.videos_path):
             if os.path.isdir(filename):
-                self.parse_videos(self.videos_path + "//" + filename, enable_logging, log_path)
+                self.parse_videos(enable_logging, log_path)
             else:
                 parse_video(self.videos_path + "//" + filename, self.photos_path, enable_logging, log_path)
 
@@ -101,7 +100,7 @@ class Preprocessor:
                     most_common[int(i)] += 1
                 photos_count += 1
 
-        with open(self.result_path + result_filename, 'a') as f:
+        with open(result_filename, 'a') as f:
             for k, v in most_common.items():
                 f.write(f"{words[int(k)]} : {v / photos_count * 100:.3f}\n")
 
@@ -125,7 +124,6 @@ class Preprocessor:
         classifying the vectors, and saving the results to a file.
 
         Args:
-            videos_path (str): The path to the directory containing the videos to be parsed.
             nounlist_path (str): The path to the noun list file used for classification.
         """
         self.parse_videos(True, self.result_path + "videos_end.txt")
@@ -134,4 +132,4 @@ class Preprocessor:
         self.classify_images(nounlist_path, self.result_path + "result.csv", self.result_path + "nounlist.txt")
 
 preprocessor = Preprocessor("..//gasearcher//static//data//videos", "..//gasearcher//static//data//")
-preprocessor.preprocess_dataset("..//nounlist.txt")
+preprocessor.preprocess_dataset("..//nounlists//nounlist.txt")

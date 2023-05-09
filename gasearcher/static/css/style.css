@@ -109,7 +109,7 @@ button:hover {
     width: 8.2%;
     height: auto;
     position: relative;
-    margin: 0 0 calc(20vh - 4.5vw) 0;
+    margin: 0 0 calc(15vh - 4.5vw) 0;
 }
 
 .img-div div {
@@ -118,7 +118,7 @@ button:hover {
     font-size: 50%;
     left: 5%;
     z-index: 1;
-    bottom: calc(-20vh + 4.5vw);
+    bottom: calc(-15vh + 4.5vw);
 }
 
 .image-buttons .hidden {

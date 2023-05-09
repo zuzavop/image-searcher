@@ -21,6 +21,10 @@ def classify_images(vectors_path, nounlist_path, result_file, top_k = 10):
     # load nounlist (text dataset) features
     text_features = torch.load(nounlist_path)
 
+    # write header
+    with open(result_file, 'a') as f:
+        f.write("id;top\n")
+
     for fn in os.listdir(vectors_path):
         filename = vectors_path + "/" + fn
         # load image features get from clip
@@ -31,6 +35,6 @@ def classify_images(vectors_path, nounlist_path, result_file, top_k = 10):
         values, indices = similarity[0].topk(top_k)
 
         with open(result_file, 'a') as f:
-            f.write(fn[:-4] + ';' + str(list(indices)) + '\n')
+            f.write(fn[:-3] + ';' + str(list(indices.numpy())) + '\n')
 
 

@@ -39,7 +39,7 @@ const config = {
      * @type {string}
      * @description address to database of images
      */
-    photosAddress: '../static/data/sea_photos/',
+    photosAddress: '../static/data/photos/',
 
     /**
      * @type {number}
@@ -69,7 +69,7 @@ const config = {
      * @type {number}
      * @description size of currently used dataset
      */
-    sizeDataset: 22036, // 20000 for v3c and 22036 for sea dataset
+    sizeDataset: 176, // 20000 for v3c and 22036 for sea dataset
 
     /**
      * @type {string}
@@ -81,7 +81,7 @@ const config = {
      * @type {number}
      * @description for scaling percentage of occurrence of classes
      */
-    percGrow: 1.4, // for sea dataset 1.4 and for v3c 9
+    percGrow: 2, // for sea dataset 1.4 and for v3c 9
 };
 
 const text_cz = {
