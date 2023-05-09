@@ -14,9 +14,9 @@ The GASearcher project has the following structure:
 * requirements.txt: A list of required Python packages.
 
 ## Preprocessed data
-GASearcher includes part of preprocessed data for two dataset (nounlist dictionaries and classification):
+GASearcher includes two nounlists:
 
-* v3c_nounlist.txt: A dataset containing 6,800 common nouns.
+* nounlist.txt: A dataset containing 6,800 common nouns.
 * sea_nounlist.txt: A dataset containing the names of various sea creatures.
 
 ## Used dictionaries
