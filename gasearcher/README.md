@@ -35,17 +35,12 @@ Once you have the GASearcher running, you can use it to search in sample image d
 To search using text:
 
 1. Enter a query in the text search box and click "Search" or "Enter".
-2. The results will be displayed alongside their classes.
-3. To view context of a specific image, click on its thumbnail.
+2. The results will be displayed along with their classes.
+3. To view context of a specific image in the video, click on its thumbnail.
 
 More information about using searcher is shown on welcome page.
 
 ## Sample dataset
 For first try project contains small sample dataset (with preprocessed data).
 
-## Dictionaries
-The project includes two dictionaries of classes:
 
-1. [dictionary](static/data/v3c_nounlist.txt) - containing 6,800 nouns (preprocessed for v3c).
-
-2. [dictionary](static/data/sea_nounlist.txt) - containing names of sea creatures (preprocessed for Marine Video Kit).

@@ -30,3 +30,10 @@ can be used [class `Evaluator`](src/evaluator.py).
 The current version of the work associated with this software is available
 at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Detailed software documentation is available in
 [the docs](docs) folder within information about reusing software with different dataset.
+
+## Dictionaries
+Currently project includes two dictionaries of classes:
+
+1. [dictionary](nounlists/nounlist.txt) - containing exactly 6,771 most common english nouns.
+
+2. [dictionary](nounlists/sea_nounlist.txt) - containing 512 names of sea creatures and other things found in the sea.

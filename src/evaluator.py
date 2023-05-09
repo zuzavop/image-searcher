@@ -24,13 +24,12 @@ class Evaluator:
         multi_search (dict): A dictionary mapping sessions to their last searched queries for multi model.
         min_search (dict): A dictionary mapping sessions to their last search query for min model.
     """
-    def __init__(self, path_data, result_path, clip_path, showing=60, has_sur=True, surrounding=7,
-                 sur_path="sea_videos.txt"):
+    def __init__(self, result_path, clip_path, showing=60, has_sur=True, surrounding=7,
+                 sur_path="videos_end.txt"):
         """
         Initializes the Evaluator object.
 
         Args:
-            path_data (str): Path to the data directory.
             result_path (str): Path to the directory where the results will be stored.
             clip_path (str): Path to the directory where the clip data will be loaded from.
             showing (int): The number of images to be shown in the result.
@@ -40,7 +39,6 @@ class Evaluator:
         """
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model, self.preprocess = clip.load("ViT-B/32", device=self.device)
-        self.path_data = path_data
         self.result_path = result_path
         self.showing = showing
         self.sur = surrounding
@@ -405,3 +403,7 @@ class Logger:
             int: The rank of given image
         """
         return scores.index(index) + 1
+
+
+evaluator = Evaluator("", "..//gasearcher//static//data//clip", 60, True, 2, "..//gasearcher//static//data//videos_end.txt")
+evaluator.evaluate_data("..//gasearcher//static//data//log.csv")
