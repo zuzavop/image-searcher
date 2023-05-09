@@ -33,7 +33,7 @@ const config = {
      * @type {boolean}
      * @description enable similarity search
      */
-    similaritySearchEnabled: false,
+    similaritySearchEnabled: true,
 
     /**
      * @type {string}
@@ -57,7 +57,7 @@ const config = {
      * @type {boolean}
      * @description enable shifting in context
      */
-    shiftInContextEnabled: false,
+    shiftInContextEnabled: true,
 
     /**
      * @type {number[]}

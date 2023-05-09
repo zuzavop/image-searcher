@@ -2,9 +2,6 @@
 .idea
 __pycache__
 venv
-*.pt
-*.jpg
 db.sqlite3
 *.mo
-log.csv
 message.csv

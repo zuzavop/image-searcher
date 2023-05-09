@@ -24,6 +24,7 @@ class Evaluator:
         multi_search (dict): A dictionary mapping sessions to their last searched queries for multi model.
         min_search (dict): A dictionary mapping sessions to their last search query for min model.
     """
+
     def __init__(self, result_path, clip_path, showing=60, has_sur=True, surrounding=7,
                  sur_path="videos_end.txt"):
         """
@@ -66,7 +67,7 @@ class Evaluator:
 
         self.logger = Logger(showing, self.same_video, self.result_path)
 
-    def evaluate_data(self, log_path, reform_count=2, with_som=False, is_sea=True):
+    def evaluate_data(self, log_path, reform_count=2, with_som=False, is_sea=False):
         """
         Evaluates the data from given log for each model define in project.
 
@@ -156,23 +157,23 @@ class Evaluator:
             indexes = np.argsort(self.last_search[session])[:int(len(self.clip_data) * limit)]
             scores = scores[indexes]
 
-        self.logger.log_down(self.get_log_name("basic_som", with_som, limit, is_sea), list(np.argsort(scores)), indexes,
+        self.logger.log_down(self.get_log_name("basic", with_som, is_sea, limit), list(np.argsort(scores)), indexes,
                              query, session, found)
-        self.logger.log_down(self.get_log_name("min_som", with_som, limit, is_sea),
+        self.logger.log_down(self.get_log_name("min", with_som, is_sea, limit),
                              list(np.argsort(np.min(np.array([scores, self.min_search[session]]), axis=0))), indexes,
                              query, session, found)
-        self.logger.log_down(self.get_log_name("max_som", with_som, limit, is_sea),
+        self.logger.log_down(self.get_log_name("max", with_som, is_sea, limit),
                              list(np.argsort(np.max(np.array([scores, self.last_search[session]]), axis=0))), indexes,
                              query, session, found)
-        self.logger.log_down(self.get_log_name("sum_som", with_som, limit, is_sea),
+        self.logger.log_down(self.get_log_name("sum", with_som, is_sea, limit),
                              list(np.argsort(scores + self.last_search[session])), indexes, query, session, found)
-        self.logger.log_down(self.get_log_name("multi_som", with_som, limit, is_sea),
+        self.logger.log_down(self.get_log_name("multi", with_som, is_sea, limit),
                              list(np.argsort(scores * self.multi_search[session])), indexes, query, session, found)
-        self.logger.log_down(self.get_log_name("avg_som", with_som, limit, is_sea),
+        self.logger.log_down(self.get_log_name("avg", with_som, is_sea, limit),
                              list(np.argsort((2 * scores) + self.last_search[session])), indexes, query, session, found)
 
     @staticmethod
-    def get_log_name(name, is_som, limit=1.0, is_sea=True):
+    def get_log_name(name, is_som, is_sea, limit=1.0):
         """
         Gets the name for the log.
 
@@ -365,15 +366,15 @@ class Logger:
             session (str): The id of the user session.
             found (int): The index of the image that was currently looking for.
         """
-        with open(self.result_path + log_filename, "a", newline='') as log:
-            csv_writer = csv.writer(log, delimiter=';')
+        with open(self.result_path + log_filename, "a") as log:
             # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
             same = self.is_in_same_video(indexes[new_scores[:self.showing]], found)
             first = self.get_rank(new_scores, np.where(indexes == found)[0][0])
             for i in list(set(indexes).intersection(set(self.same_video[found]))):
                 first = min(first, self.get_rank(new_scores, np.where(indexes == i)[0][0]))
-            csv_writer.writerow([query, found, session, (
-                self.get_rank(new_scores, np.where(indexes == found)[0][0]) if found in indexes else -1), same, first])
+
+            log.write(f'"{query}";{found};{session};' + str(self.get_rank(new_scores, np.where(indexes == found)[0][
+                0]) if found in indexes else -1) + ';{same};{first}')
 
     def is_in_same_video(self, new_showing, target):
         """
@@ -405,5 +406,6 @@ class Logger:
         return scores.index(index) + 1
 
 
-evaluator = Evaluator("", "..//gasearcher//static//data//clip", 60, True, 2, "..//gasearcher//static//data//videos_end.txt")
+evaluator = Evaluator(".//", "..//gasearcher//static//data//clip", 60, True, 2,
+                      "..//gasearcher//static//data//videos_end.txt")
 evaluator.evaluate_data("..//gasearcher//static//data//log.csv")

@@ -7,7 +7,8 @@ import torch
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load('ViT-B/32', device)
 
-def classify_images(vectors_path, nounlist_path, result_file, top_k = 10):
+
+def classify_images(vectors_path, nounlist_path, result_file, top_k=10):
     """
     Classifies images by comparing their features obtained from CLIP model to the features of each class
     (also obtained from the same CLIP model).
@@ -36,5 +37,3 @@ def classify_images(vectors_path, nounlist_path, result_file, top_k = 10):
 
         with open(result_file, 'a') as f:
             f.write(fn[:-3] + ';' + str(list(indices.numpy())) + '\n')
-
-

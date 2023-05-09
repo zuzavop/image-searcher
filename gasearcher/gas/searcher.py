@@ -95,9 +95,9 @@ class Searcher:
         """
         # get features of image query
         image_query_index = int(image_query)
-        image_query = np.transpose(self.clip_data[image_query_index])
+        image_query_features = np.transpose(self.clip_data[image_query_index])
 
-        scores = list(np.argsort(self.result_score(image_query)))
+        scores = list(np.argsort(self.result_score(image_query_features)))
 
         self.logger.log_image_query(image_query, scores, found, session)
 

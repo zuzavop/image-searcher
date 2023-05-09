@@ -161,7 +161,8 @@ class LoaderDatabase:
                 first_show[i] = -1
 
         for i in range(len(first_show)):
-            if first_show[i] == -1 or first_show[i] in targets:
+            if (first_show[i] == -1 or first_show[i] in targets) and len(
+                    (set(first_show) & set(targets)) - {-1}) < size_dataset:
                 next_id = random.randint(1, size_dataset - 1)
                 while next_id in first_show or next_id in targets:
                     next_id = random.randint(1, size_dataset - 1)

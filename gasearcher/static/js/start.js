@@ -160,13 +160,17 @@ const createMainWindow = {
         // create buttons for shifting context of image
         const buttPrev = utils.createButton('<', "previous cont-butt");
         buttPrev.addEventListener("click", function () {
-            mainWindow.showContext(mainWindow.middleId - config.contextShift);
+            if (mainWindow.middleId - config.contextShift >= 0) {
+                mainWindow.showContext(mainWindow.middleId - config.contextShift);
+            }
         });
         document.getElementsByClassName("popup-window")[0].appendChild(buttPrev);
 
         const buttNext = utils.createButton('>', "next cont-butt");
         buttNext.addEventListener("click", function () {
-            mainWindow.showContext(mainWindow.middleId + config.contextShift);
+            if (mainWindow.middleId + config.contextShift <= config.sizeDataset) {
+                mainWindow.showContext(mainWindow.middleId + config.contextShift);
+            }
         });
         document.getElementsByClassName("popup-window")[0].appendChild(buttNext);
     },
@@ -199,6 +203,7 @@ const createMainWindow = {
         document.getElementById('search-text').style.visibility = 'hidden';
         document.getElementById('clear').style.visibility = 'hidden';
         document.getElementById('next-button').style.visibility = 'hidden';
+        document.getElementById('similarity-searcher').style.visibility = 'hidden';
         document.getElementById('text-searcher').innerText = 'Next';
     },
 };
