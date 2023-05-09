@@ -19,10 +19,10 @@ class Preprocessor:
         """
         self.videos_path = videos_path
         self.result_path = result_path
-        self.photos_path = result_path + "\\photos\\"
-        self.vectors_path = result_path + "\\clip\\"
+        self.photos_path = result_path + "photos//"
+        self.vectors_path = result_path + "clip//"
 
-    def parse_videos(self, input_path, enable_logging, log_path="videos.txt"):
+    def parse_videos(self, enable_logging, log_path="videos.txt"):
         """
         Recursively parses a directory of videos and extracts frames from them.
 
@@ -31,11 +31,11 @@ class Preprocessor:
             enable_logging (bool): A flag indicating whether logging is enabled or not.
             log_path (str): The path to the log file where information about end of each video will be written.
         """
-        for filename in os.listdir(input_path):
+        for filename in os.listdir(self.videos_path):
             if os.path.isdir(filename):
-                self.parse_videos(input_path + "\\" + filename, enable_logging, log_path)
+                self.parse_videos(self.videos_path + "//" + filename, enable_logging, log_path)
             else:
-                parse_video(input_path + "\\" + filename, self.photos_path, enable_logging, log_path)
+                parse_video(self.videos_path + "//" + filename, self.photos_path, enable_logging, log_path)
 
     def images_to_vectors(self):
         """
@@ -64,7 +64,7 @@ class Preprocessor:
             text_features = model.encode_text(text_inputs)
         text_features /= text_features.norm(dim=-1, keepdim=True)
 
-        torch.save(text_features, self.result_path + "//" + output_name)
+        torch.save(text_features, self.result_path + output_name)
 
     def classify_images(self, nounlist_path, result_file, new_nounlist_name):
         """
@@ -75,7 +75,8 @@ class Preprocessor:
             result_file (str): The path to the file where the classification results will be saved.
             new_nounlist_name (str): The name of file to which will be writen nounlist with frequency of each class.
         """
-        classify_images(self.vectors_path, nounlist_path, result_file)
+        self.nounlist_to_vectors(nounlist_path, self.result_path + "nounlist.pt")
+        classify_images(self.vectors_path, self.result_path + "nounlist.pt", result_file)
         self.get_class_pr(nounlist_path, result_file, new_nounlist_name)
 
     def get_class_pr(self, nounlist_path, classification_path, result_filename):
@@ -115,10 +116,10 @@ class Preprocessor:
         """
         i = 1
         for file in os.listdir(images_path):
-            os.rename(images_path + "//" + file, images_path + "//" + name_format.format(i) + ".jpg")
+            os.rename(images_path + file, images_path + name_format.format(i) + ".jpg")
             i += 1
 
-    def preprocess_dataset(self, videos_path, nounlist_path):
+    def preprocess_dataset(self, nounlist_path):
         """
         Preprocesses a dataset by parsing the videos, extracting frames, converting them to vectors,
         classifying the vectors, and saving the results to a file.
@@ -127,7 +128,10 @@ class Preprocessor:
             videos_path (str): The path to the directory containing the videos to be parsed.
             nounlist_path (str): The path to the noun list file used for classification.
         """
-        self.parse_videos(videos_path, True, self.result_path + "videos_end.txt")
-        self.rename_images(self.result_path)
+        self.parse_videos(True, self.result_path + "videos_end.txt")
+        self.rename_images(self.photos_path)
         self.images_to_vectors()
         self.classify_images(nounlist_path, self.result_path + "result.csv", self.result_path + "nounlist.txt")
+
+preprocessor = Preprocessor("..//gasearcher//static//data//videos", "..//gasearcher//static//data//")
+preprocessor.preprocess_dataset("..//nounlist.txt")

@@ -12,14 +12,14 @@ def get_latest_index(output_path):
     Returns:
         int: The index of the latest image file.
     """
-    list_of_files = glob.glob(output_path + "//*")
+    list_of_files = glob.glob(output_path + "*")
     if not list_of_files:
         return 1
     latest_file = max(list_of_files, key=os.path.getctime).split('\\')[-1]
     return int(latest_file[:-4]) + 1
 
 
-def get_comm(video_path, output_path, start_index):
+def get_comm(video_path, output_path, start_index, is_wide=True):
     """
     Returns the FFmpeg command to extract frames from a video.
 
@@ -31,8 +31,11 @@ def get_comm(video_path, output_path, start_index):
     Returns:
         str: The FFmpeg command to extract frames from the input video.
     """
-    comm = 'ffmpeg -i {0} -vf "fps=0.5,scale=-1:224" -start_number {1} {2}'.format(video_path, start_index, output_path + "//%9d.jpg")
-    print(video_path)
+    if is_wide:
+        comm = 'ffmpeg -i {0} -vf "fps=0.5,scale=224:-1,crop=in_w:224:0:in_h/2-112" -start_number {1} {2}'.format(video_path, start_index, output_path + "%9d.jpg")
+        print(video_path)
+    else:
+        comm = 'ffmpeg -i {0} -vf "fps=0.5,scale=-1:224,crop=224:in_h:in_w/2-112:0" -start_number {1} {2}'.format(video_path, start_index, output_path + "%9d.jpg")
     return comm
 
 
@@ -50,5 +53,6 @@ def parse_video(video_path, output_path, logging_enable, log_path=""):
         start_index = get_latest_index(output_path)
         if logging_enable:
             with open(log_path, "a") as log:
-                log.write(str(start_index))
-        os.system(get_comm(video_path, output_path, start_index))
+                log.write(str(start_index) + "\n")
+        if os.system(get_comm(video_path, output_path, start_index)) == 1:
+            os.system(get_comm(video_path, output_path, start_index, False))
