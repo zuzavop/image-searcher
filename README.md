@@ -11,29 +11,31 @@ Main features:
 * logging the search progress of individual users 
 * changing the experiment settings within the framework of changing the collections of images used
 * possibility of preprocessing own video dataset and using it by searcher
-* evaluatation of logs and creation plots from result
+* evaluation of logs and creation of plots from result
 
 Text queries to the database and classification is implemented using
 [the CLIP neural network](https://beta.openai.com/).
 
 ## Project structure
 
-The GASearcher web application project is located in [this folder](gasearcher) with a description of its functionality 
+The GASearcher web application project is located in [gasearcher folder](gasearcher) with a description of its functionality 
 and with instruction for build of searcher.
 
 Helper code for processing images and their classification is included in [the src folder](src). The folder contains
 [code](src/parse_video.py) for processing videos into individual frames, [classification](src/top_classes.py) of frames
-into classes, and [code](src/images_to_clip.py) for obtaining feature frames from the CLIP network. For preprocessing
+into classes, and [code](src/images_to_clip.py) for obtaining feature of frames from the CLIP. For preprocessing
 whole dataset at once can be used [class `Preprocessor`](src/preprocessor.py) and for evaluation and creation of plots
 can be used [class `Evaluator`](src/evaluator.py).
 
 The current version of the work associated with this software is available
-at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Detailed software documentation is available in
+at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Software documentation is available in
 [the docs](docs) folder within information about reusing software with different dataset.
 
 ## Dictionaries
-Currently project includes two dictionaries of classes:
+Currently, project includes two dictionaries of classes:
 
 1. [dictionary](nounlists/nounlist.txt) - containing exactly 6,771 most common english nouns.
 
 2. [dictionary](nounlists/sea_nounlist.txt) - containing 512 names of sea creatures and other things found in the sea.
+
+These two dictionaries can be use for preprocessing of new dataset.
