@@ -6,6 +6,8 @@ The [src](code_docs/src) folder then contains documentation for the preprocessor
 scripts for preprocessing of datasets.
 
 The GASercher documentation is available in the [file Documentation](Documentation.md).
+JavaScript documentation is only available in [code](../gasearcher/static/js), as it does not contain any complex logic 
+and only displays results and handles simple user actions.
 
 ## Preprocessing new dataset
 
@@ -19,9 +21,13 @@ Beware that when processing a new dataset, the metadata is stored in files so th
 without changing the settings. Therefore, they are stored in identically named files unless otherwise defined.
 Therefore, clean the resulting folder from all such files before starting preprocessing.
 
+If any file or folder names are changed, it is necessary to overwrite their names
+in [the Logger](../gasearcher/gas/logger.py) and [Loader](../gasearcher/gas/data.py) class codes for the software to
+function properly.
+
 ## Log processing
 
 [The Evaluator class](../src/evaluator.py) can be used to evaluate other models. In the current setup, it
 processes [the log](../gasearcher/static/data/log.csv) used directly by GASearcher and stores the results in a folder
-created directly by the helper scripts. A basic graph is then created that compares the basic six models.
+created directly by the helper scripts. A violin plot is then created that compares the basic six models.
 All paths can be redefined at the end of the file containing [the Evaluator class](../src/evaluator.py).

@@ -14,6 +14,7 @@ a [javascript](static/js) files.
 * pip package manager
 
 ## Installation
+
 1. Clone the repository.
 
     ```commandline
@@ -21,7 +22,7 @@ a [javascript](static/js) files.
     ```
 
 2. To run whole project, including the virtual environment and required Python libraries,
-use [start_server.bat](start_server.bat) for Windows or [start_server](start_server) for Linux.
+   use [start_server.bat](start_server.bat) for Windows or [start_server](start_server) for Linux.
    For repeated start of project is possible used only this command:
    ```commandline
    python manage.py runserver
@@ -29,7 +30,11 @@ use [start_server.bat](start_server.bat) for Windows or [start_server](start_ser
 
 3. Open your web browser and go to http://localhost:8000/ to access the GASearcher.
 
+In case the error occurs when starting the server itself, try running the `python manage.py migrate` command first and
+then try to start the server again using `python manage.py runserver`.
+
 ## Using
+
 Once you have the GASearcher running, you can use it to search in sample image dataset using text queries.
 
 To search using text:
@@ -40,7 +45,13 @@ To search using text:
 
 More information about using searcher is shown on welcome page.
 
+Both similarity search and shifting in context are enabled after downloading of software. These settings can be changed
+in [the config file](static/js/config.js). Similarly, the number of frames displayed and the option to use a model that
+combines the previous and current query can be set in [settings](gas/settings.py) along with adjusting the config file.
+
 ## Sample dataset
-For first try project contains small sample dataset (with preprocessed data).
+
+For first try of software project contains small sample dataset (with preprocessed data). In addition, this dataset
+contains very similar images, so it is more for test runs to show functionality than anything else.
 
 

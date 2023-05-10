@@ -40,7 +40,7 @@ class Logger:
         with open(self.path_log, "a") as log:
             log.write(query + ';' + str(self.targets[target]) + ';' + session + ';' + str(
                 self.get_rank(new_scores, self.targets[target]))
-                      + ';' + str(same) + ';"' + activity + '"' + '\n')
+                      + ';' + str(same) + ';"' + activity + '"\n')
 
     def log_image_query(self, query_id, new_scores, target, session):
         """
@@ -56,8 +56,7 @@ class Logger:
         # write down log
         with open(self.path_log, "a") as log:
             log.write(str(query_id) + ';' + str(self.targets[target]) + ';' + session + ';' + str(
-                self.get_rank(new_scores, self.targets[target]))
-                      + ';' + str(same) + '"' + '\n')
+                self.get_rank(new_scores, self.targets[target])) + ';' + str(same) + ';""\n')
 
     def is_in_same_video(self, new_showing, target):
         """

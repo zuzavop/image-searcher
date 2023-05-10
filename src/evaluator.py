@@ -57,13 +57,12 @@ class Evaluator:
             bottom = 0
             with open(sur_path, 'r') as f:
                 for line in f:
-                    top = int(line[:-1]) - 1
+                    top = int(line.strip()) - 1
                     self.same_video.update(
                         {i: np.arange(max(bottom, i - self.sur), min(top, i + self.sur)) for i in range(bottom, top)})
                     bottom = top
         else:
-            for i in range(len(self.clip_data)):
-                self.same_video[i] = [i]
+            self.same_video = {i: [i] for i in range(len(self.clip_data))}
 
         self.logger = Logger(showing, self.same_video, self.result_path)
 
@@ -78,33 +77,31 @@ class Evaluator:
             is_sea (bool): Whether the sea dataset is used.
         """
         query_count = 0
+        prev_id = -1
+        prev_session = ""
+        count_same = 0
 
         with open(log_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=';')
-            line = 0
-            prev_id = -1
-            prev_session = ""
-            count_same = 0
+            next(csv_reader) # skip header
 
             for row in csv_reader:
-                if line > 0:
-                    ids = int(row[1])
-                    session = row[2]
-                    if prev_id != ids or prev_session != session:
-                        query_count += 1
-                        count_same = 1
-                        self.last_search[session] = np.zeros(len(self.clip_data))
-                        self.min_search[session] = np.full(len(self.clip_data), 2)
-                        self.multi_search[session] = np.ones(len(self.clip_data))
-                    else:
-                        count_same += 1
+                ids = int(row[1])
+                session = row[2]
+                if prev_id != ids or prev_session != session:
+                    query_count += 1
+                    count_same = 1
+                    self.last_search[session] = np.zeros(len(self.clip_data))
+                    self.min_search[session] = np.full(len(self.clip_data), 2)
+                    self.multi_search[session] = np.ones(len(self.clip_data))
+                else:
+                    count_same += 1
 
-                    if count_same <= reform_count:
-                        self.get_data_from_text_search(row[0], session, ids, prev_id == ids, with_som, is_sea)
+                if count_same <= reform_count:
+                    self.get_data_from_text_search(row[0], session, ids, prev_id == ids, with_som, is_sea)
 
-                    prev_id = ids
-                    prev_session = session
-                line += 1
+                prev_id = ids
+                prev_session = session
 
         print("Total search: ", query_count)
 
@@ -195,12 +192,13 @@ class Evaluator:
         return name + ".csv"
 
     @staticmethod
-    def get_data_from_log(log_path):
+    def get_data_from_log(log_path, filter_undefined=False):
         """
         Method to extract data from a log file.
 
         Args:
             log_path (str): Path to the log file.
+            filter_undefined (bool): Define if undefined values should be filtered out.
 
         Returns:
             A list containing the ranks for second query, ranks for first query, and difference values
@@ -216,21 +214,23 @@ class Evaluator:
 
             for row in csv_reader:
                 if line > 0 and row[1] == previous_row[1] and row[2] == previous_row[2]:
-                    ranks1.append(int(previous_row[3]))
-                    ranks2.append(int(row[3]) if int(row[3]) > 0 else 22036)
+                    if (filter_undefined and int(row[3]) > 0) or not filter_undefined:
+                        ranks1.append(int(previous_row[3]))
+                        ranks2.append(int(row[3]) if int(row[3]) > 0 else 22036)
 
                 previous_row = row
                 line += 1
 
         return [ranks2, ranks1]
 
-    def get_data_for_graph(self, input_path, first_col_name):
+    def get_data_for_graph(self, input_path, first_col_name, with_limited=False):
         """
         Extracts data from multiple log files to be used for generating a plot.
 
         Args:
             input_path (str): Path to the directory containing the log files.
             first_col_name (str): Name of the first column in the generated plot.
+            with_limited (bool): Define if models that are limited should be used for graph
 
         Returns:
             A tuple containing the data and column names to be used in generating the plot.
@@ -240,13 +240,15 @@ class Evaluator:
 
         x = 0
         for fn in sorted(os.listdir(input_path)):
+            if "limit" in fn and not with_limited:
+                continue
             if x == 0:
-                data = [self.get_data_from_log(fn)[1]]
-            data = np.append(data, [self.get_data_from_log(fn)[0]], axis=0)
+                data = [self.get_data_from_log(input_path + fn)[1]]
+            data = np.append(data, [self.get_data_from_log(input_path + fn)[0]], axis=0)
             columns.append(fn[:-4])
             x += 1
 
-        return zip(data, columns)
+        return [data, columns]
 
     def get_violin_plot(self, input_path, output_file, first_col_name='1_not_found', use_log_scale=True):
         """
@@ -368,13 +370,12 @@ class Logger:
         """
         with open(self.result_path + log_filename, "a") as log:
             # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-            same = self.is_in_same_video(indexes[new_scores[:self.showing]], found)
             first = self.get_rank(new_scores, np.where(indexes == found)[0][0])
             for i in list(set(indexes).intersection(set(self.same_video[found]))):
                 first = min(first, self.get_rank(new_scores, np.where(indexes == i)[0][0]))
 
             log.write(f'"{query}";{found};{session};' + str(self.get_rank(new_scores, np.where(indexes == found)[0][
-                0]) if found in indexes else -1) + ';{same};{first}')
+                0]) if found in indexes else -1) + f';{first}')
 
     def is_in_same_video(self, new_showing, target):
         """
@@ -409,3 +410,4 @@ class Logger:
 evaluator = Evaluator(".//", "..//gasearcher//static//data//clip", 60, True, 2,
                       "..//gasearcher//static//data//videos_end.txt")
 evaluator.evaluate_data("..//gasearcher//static//data//log.csv")
+evaluator.get_violin_plot(".//model_results//", "plot.png")

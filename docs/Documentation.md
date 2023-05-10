@@ -22,13 +22,13 @@ The GASearcher project has the following structure:
 GASearcher uses the following additional python libraries:
 
 * Django Debug Toolbar: A panel that displays various debug information when running Django applications. 
-* ftfy: Fixes text that has been mangled by inconsistent encoding. 
-* NumPy: A library for working with arrays and matrices. 
+* ftfy
+* NumPy
 * Pandas: A library for data analysis and manipulation. 
-* regex: A regular expression library. 
+* regex
 * sklearn_som: A self-organizing map library. 
-* tqdm: A library for displaying progress bars. 
-* Torch: A machine learning library. 
-* torchaudio: A library for audio processing in Torch. 
-* torchvision: A library for computer vision tasks in Torch.
+* tqdm
+* Torch
+* torchaudio
+* torchvision
 
