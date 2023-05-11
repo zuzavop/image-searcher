@@ -9,7 +9,6 @@ All user interface data is separated into [html](templates), [css](static/css)
 a [javascript](static/js) files.
 
 
-
 ## Requirements
 
 * Python 3

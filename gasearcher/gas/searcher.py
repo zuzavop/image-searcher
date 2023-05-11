@@ -73,6 +73,7 @@ class Searcher:
         scores = self.result_score(text_features.T)
 
         new_scores = list(np.argsort((scores + self.last_search[session]) if self.combination else scores))
+
         # save score for next search
         if self.combination:
             self.last_search[session] = scores

@@ -25,7 +25,7 @@ class LoaderDatabase:
         path_ends (str): The path to the file with indexes of images which represents ends of each video.
     """
 
-    def __init__(self, path_data, is_sea_database):
+    def __init__(self, path_data, is_sea_database=False):
         """
         Args:
             path_data (str): The path to the database.

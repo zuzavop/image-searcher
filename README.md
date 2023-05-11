@@ -1,5 +1,4 @@
 # Image retrieval
-
 GASearcher (where GAS stands for "Generic Annotation System") is a Django-based software that allows users to search in
 an image database using a text query. System show the results alongside their predefined classes, which
 are intended to assist users in selecting suitable word combinations for formulating queries that more likely describe
@@ -17,7 +16,6 @@ Text queries to the database and classification is implemented using
 [the CLIP neural network](https://beta.openai.com/).
 
 ## Project structure
-
 The GASearcher web application project is located in [gasearcher folder](gasearcher) with a description of its functionality 
 and with instruction for build of searcher.
 
