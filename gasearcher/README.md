@@ -8,6 +8,8 @@ Searching through datasets is performed by querying [the server](gas/view.py).
 All user interface data is separated into [html](templates), [css](static/css)
 a [javascript](static/js) files.
 
+
+
 ## Requirements
 
 * Python 3
@@ -28,7 +30,8 @@ a [javascript](static/js) files.
    python manage.py runserver
    ```
 
-3. Open your web browser and go to http://localhost:8000/ to access the GASearcher.
+3. Open your web browser and go to http://localhost:8000/ to access the GASearcher. It is recommended to use Microsoft
+   Edge or Google Chrome, but it is essential to enable cookies for proper functioning.
 
 In case the error occurs when starting the server itself, try running the `python manage.py migrate` command first and
 then try to start the server again using `python manage.py runserver`.
@@ -37,11 +40,13 @@ then try to start the server again using `python manage.py runserver`.
 
 Once you have the GASearcher running, you can use it to search in sample image dataset using text queries.
 
-To search using text:
+To search using text (the interface can be seen in the picture below):
 
 1. Enter a query in the text search box and click "Search" or "Enter".
 2. The results will be displayed along with their classes.
 3. To view context of a specific image in the video, click on its thumbnail.
+
+![interface screenshot](../img/screenshot.png)
 
 More information about using searcher is shown on welcome page.
 

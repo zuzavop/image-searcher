@@ -7,6 +7,9 @@ import pandas as pd
 import torch as torch
 from sklearn_som.som import SOM
 
+from gas.settings import PATH_CLIP, PATH_NOUNLIST, PATH_CLASSES, PATH_SELECTION, PATH_ENDS, IMAGES_ON_LINE, \
+    LINES, NUMBER_OF_SEARCHED
+
 
 class LoaderDatabase:
     """
@@ -17,7 +20,7 @@ class LoaderDatabase:
         is_sea_database (bool): A boolean representing whether the database is a sea database or not.
         path_clip (str): The path to folder with preprocessed CLIP data.
         path_nounlist (str): The path to the nounlist.
-        path_classes (str): The path to the file with classes.
+        path_classes (str): The path to the file with classification of images.
         path_selection (str): The path to the file with indexes of images which should be used for searching.
         path_ends (str): The path to the file with indexes of images which represents ends of each video.
     """
@@ -28,11 +31,11 @@ class LoaderDatabase:
             path_data (str): The path to the database.
             is_sea_database (bool): A boolean representing whether the database is a sea database or not.
         """
-        self.path_clip = path_data + ("sea_clip" if is_sea_database else "clip")
-        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else "nounlist.txt")
-        self.path_classes = path_data + ("sea_result.csv" if is_sea_database else "result.csv")
-        self.path_selection = path_data + ("sea_selection.txt" if is_sea_database else "")
-        self.path_ends = path_data + ("sea_videos.txt" if is_sea_database else "videos_end.txt")
+        self.path_clip = path_data + ("sea_clip" if is_sea_database else PATH_CLIP)
+        self.path_nounlist = path_data + ("sea_nounlist.txt" if is_sea_database else PATH_NOUNLIST)
+        self.path_classes = path_data + ("sea_result.csv" if is_sea_database else PATH_CLASSES)
+        self.path_selection = path_data + ("sea_selection.txt" if is_sea_database else PATH_SELECTION)
+        self.path_ends = path_data + ("sea_videos.txt" if is_sea_database else PATH_ENDS)
         self.is_sea_database = is_sea_database
         self.path_data = path_data
 
@@ -127,7 +130,7 @@ class LoaderDatabase:
             random.shuffle(sea_finding)
 
         targets = sea_finding[:20] if self.is_sea_database else []
-        for i in range(5):
+        for i in range(NUMBER_OF_SEARCHED):
             new_int = random.randint(1, size_dataset)
             if new_int not in targets:
                 targets.append(new_int)
@@ -148,9 +151,9 @@ class LoaderDatabase:
             list: A list of indexes of images representing the first window.
         """
         # get first window - SOM of labels
-        first_show = [0 for _ in range(12 * 5)]
+        first_show = [0 for _ in range(IMAGES_ON_LINE * LINES)]
         input_data = np.array(list(class_data.values()))
-        som = SOM(m=5, n=12, dim=len(input_data[0]))
+        som = SOM(m=LINES, n=IMAGES_ON_LINE, dim=len(input_data[0]))
 
         prediction = som.fit_predict(input_data)
 
@@ -161,10 +164,9 @@ class LoaderDatabase:
                 first_show[i] = -1
 
         for i in range(len(first_show)):
-            if (first_show[i] == -1 or first_show[i] in targets) and len(
-                    (set(first_show) & set(targets)) - {-1}) < size_dataset:
+            if first_show[i] == -1 and len((set(first_show) & set(targets)) - {-1}) < size_dataset:
                 next_id = random.randint(1, size_dataset - 1)
-                while next_id in first_show or next_id in targets:
+                while next_id in first_show:
                     next_id = random.randint(1, size_dataset - 1)
                 first_show[i] = next_id
 

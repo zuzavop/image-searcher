@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 from gas.models import targets, class_data, classes, class_pr, first_show, searcher
+from gas.settings import USING_SOM, SHOWING
 
 
 def prepare_data(request, data, find):
@@ -57,7 +58,7 @@ def search(request):
     found = int(request.COOKIES.get('index')) if request.COOKIES.get('index') is not None else 0
     if found >= len(targets):  # control of end
         return redirect('/end')
-    data = first_show
+    data = first_show if USING_SOM else np.arange(1, SHOWING + 1)
 
     if request.GET.get('query'):
         data = searcher.text_search(request.GET['query'], request.session['session_id'], found,

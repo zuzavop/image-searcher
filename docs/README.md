@@ -22,8 +22,7 @@ without changing the settings. Therefore, they are stored in identically named f
 Therefore, clean the resulting folder from all such files before starting preprocessing.
 
 If any file or folder names are changed, it is necessary to overwrite their names
-in [the Logger](../gasearcher/gas/logger.py) and [Loader](../gasearcher/gas/data.py) class codes for the software to
-function properly.
+in [setting](../gasearcher/gas/settings.py) for the software to function properly.
 
 ## Log processing
 

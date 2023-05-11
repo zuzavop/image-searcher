@@ -363,13 +363,13 @@ class Logger:
         if not os.path.exists(self.result_path):
             os.makedirs(self.result_path)
 
-    def log_down(self, log_filename, new_scores, indexes, query, session, found):
+    def log_down(self, log_filename, new_result, indexes, query, session, found):
         """
         Writes the result of a query to a log file.
 
         Args:
             log_filename (str): The name of the log file.
-            new_scores (list): A list of indices of images sorted by similarity to the current query.
+            new_result (list): A list of indices (mapped to indexes list) sorted by similarity to the current query.
             indexes (list): A list of indices of all images in the dataset that are currently used.
             query (str): The text of the query.
             session (str): The id of the user session.
@@ -377,44 +377,28 @@ class Logger:
         """
         with open(self.result_path + log_filename, "a") as log:
             # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-            first = self.get_rank(new_scores, np.where(indexes == found)[0][0]) if found in indexes else sys.maxsize
+            first = self.get_rank(new_result, np.where(indexes == found)[0][0]) if found in indexes else sys.maxsize
             for i in list(set(indexes).intersection(set(self.same_video[found]))):
-                first = min(first, self.get_rank(new_scores, np.where(indexes == i)[0][0]))
+                first = min(first, self.get_rank(new_result, np.where(indexes == i)[0][0]))
 
-            log.write(f'"{query}";{found};{session};' + str(self.get_rank(new_scores, np.where(indexes == found)[0][
+            log.write(f'"{query}";{found};{session};' + str(self.get_rank(new_result, np.where(indexes == found)[0][
                 0]) if found in indexes else -1) + f';{first if first < sys.maxsize else -1}')
 
-    def is_in_same_video(self, new_showing, target):
-        """
-        Determines if the searched image and its surrounding is present in the shown result.
-
-        Args:
-            new_showing (list): A list of indices of images to be shown in the query result.
-            target (int): The index of the currently searching image.
-
-        Returns:
-            int: If the searched image is present in the context of any image in the shown result, returns 1.
-            Otherwise, returns 0.
-        """
-        # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-        return 1 if len(list(set(new_showing) & set(self.same_video[target]))) > 0 else 0
-
     @staticmethod
-    def get_rank(scores, index):
+    def get_rank(result, index):
         """
         Get rank (from 1) of image.
 
         Args:
-            scores (list): A list of indices of images sorted by similarity to the current query
+            result (list): A list of indices of images sorted by similarity to the current query
             index (int): The index of the image
 
         Returns:
             int: The rank of given image
         """
-        return scores.index(index) + 1
+        return result.index(index) + 1
 
 
-evaluator = Evaluator(".//", "..//gasearcher//static//data//clip", 60, True, 2,
-                      "..//gasearcher//static//data//videos_end.txt")
+evaluator = Evaluator(".//", "..//gasearcher//static//data//clip", 60, True, 2, "..//gasearcher//static//data//videos_end.txt")
 evaluator.evaluate_data("..//gasearcher//static//data//log.csv")
 evaluator.get_violin_plot(".//model_results//", "plot.png")

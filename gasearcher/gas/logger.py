@@ -1,6 +1,6 @@
 import numpy as np
 
-from gas.settings import SHOWING
+from gas.settings import SHOWING, PATH_LOG, PATH_LOG_SIMILARITY
 
 
 class Logger:
@@ -20,70 +20,52 @@ class Logger:
             same_video (dict): A dictionary containing the limit indices bounding images context (surrounding in same video).
             targets (list): The indexes of images which are searched for.
         """
-        self.path_log = path_data + ("sea_log.csv" if is_sea_database else "log.csv")
+        self.path_log = path_data + ("sea_log.csv" if is_sea_database else PATH_LOG)
+        self.path_log_similarity = path_data + ("sea_log_similarity.csv" if is_sea_database else PATH_LOG_SIMILARITY)
         self.same_video = same_video  # indexes of images in same video (high probability of same looking photos)
         self.targets = targets
 
-    def log_text_query(self, query, new_scores, target, session, activity):
+    def log_text_query(self, query, new_result, target, session, activity):
         """
         Logs a text query.
 
         Args:
             query (str): The query text.
-            new_scores (list): A list of indices of images sorted by similarity to the current text query.
+            new_result (list): A list of indices of images sorted (in order) by similarity to the current text query.
             target (int): The order of the currently searching image in targets.
             session (str): The unique session ID of the user.
             activity (str): The activity from the user.
         """
-        same = self.is_in_same_video(new_scores[:SHOWING], self.targets[target])
         # write down log
         with open(self.path_log, "a") as log:
-            log.write(query + ';' + str(self.targets[target]) + ';' + session + ';' + str(
-                self.get_rank(new_scores, self.targets[target]))
-                      + ';' + str(same) + ';"' + activity + '"\n')
+            log.write(f'{query};{str(self.targets[target])};{session};' + str(
+                self.get_rank(new_result, self.targets[target])) + f';"{activity}"\n')
 
-    def log_image_query(self, query_id, new_scores, target, session):
+    def log_image_query(self, query_id, new_result, target, session):
         """
         Logs an image query.
 
         Args:
             query_id (int): The query image ID.
-            new_scores (list): A list of indices of images sorted by similarity to the current image query.
+            new_result (list): A list of indices of images sorted (in order) by similarity to the current image query.
             target (int): The order of the currently searching image in targets.
             session (str): The unique session ID of the user.
         """
-        same = self.is_in_same_video(new_scores[:SHOWING], self.targets[target])
         # write down log
-        with open(self.path_log, "a") as log:
-            log.write(str(query_id) + ';' + str(self.targets[target]) + ';' + session + ';' + str(
-                self.get_rank(new_scores, self.targets[target])) + ';' + str(same) + ';""\n')
-
-    def is_in_same_video(self, new_showing, target):
-        """
-        Determines if the searched image and its surrounding is present in the shown result.
-
-        Args:
-            new_showing (list): A list of indices of images to be shown in the query result.
-            target (int): The index of the currently searching image.
-
-        Returns:
-            int: If the searched image is present in the context of any image in the shown result, returns 1.
-            Otherwise, returns 0.
-        """
-        surrounding = np.arange(self.same_video[target][0], self.same_video[target][1] + 1)
-        # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-        return 1 if len(list(set(new_showing) & set(surrounding))) > 0 else 0
+        with open(self.path_log_similarity, "a") as log:
+            log.write(f'{str(query_id)};{str(self.targets[target])};{session};' + str(
+                self.get_rank(new_result, self.targets[target])) + ';""\n')
 
     @staticmethod
-    def get_rank(scores, index):
+    def get_rank(result, index):
         """
         Get rank (from 1) of image.
 
         Args:
-            scores (list): A list of indices of images sorted by similarity to the current query
+            result (list): A list of indices of images sorted (in order) by similarity to the current query
             index (int): The index of the image
 
         Returns:
             int: The rank of given image
         """
-        return scores.index(index) + 1
+        return result.index(index) + 1

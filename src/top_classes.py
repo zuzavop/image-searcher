@@ -31,7 +31,7 @@ def classify_images(vectors_path, nounlist_path, result_file, top_k=10):
         # load image features get from clip
         image_features = torch.load(filename)
 
-        # get top 10 classes for image
+        # get top k classes for image
         similarity = (100.0 * image_features @ text_features.T)
         values, indices = similarity[0].topk(top_k)
 

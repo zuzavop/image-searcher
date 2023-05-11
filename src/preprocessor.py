@@ -20,7 +20,11 @@ class Preprocessor:
         self.videos_path = videos_path
         self.result_path = result_path
         self.photos_path = result_path + "photos//"
+        if not os.path.exists(self.photos_path):
+            os.makedirs(self.photos_path)
         self.vectors_path = result_path + "clip//"
+        if not os.path.exists(self.vectors_path):
+            os.makedirs(self.vectors_path)
 
     def parse_videos(self, enable_logging, log_path="videos.txt"):
         """
@@ -38,7 +42,7 @@ class Preprocessor:
 
     def images_to_vectors(self):
         """
-        Converts images to vectors using CLIP.
+        Converts images (.jpg) to vectors using CLIP.
         """
         for photo in os.listdir(self.photos_path):
             get_vector_from_photo(self.photos_path + photo, photo[:-4], self.vectors_path)
@@ -78,7 +82,8 @@ class Preprocessor:
         classify_images(self.vectors_path, self.result_path + "nounlist.pt", result_file)
         self.get_class_pr(nounlist_path, result_file, new_nounlist_name)
 
-    def get_class_pr(self, nounlist_path, classification_path, result_filename):
+    @staticmethod
+    def get_class_pr(nounlist_path, classification_path, result_filename):
         """
         Computes the probability distribution of image classifications in a dataset.
 
@@ -95,7 +100,7 @@ class Preprocessor:
 
         with open(classification_path) as f:
             for line in f:
-                line = line[7:-2].split(',')
+                line = (line.split(';')[1])[1:-2].split(',')
                 for i in line:
                     most_common[int(i)] += 1
                 photos_count += 1

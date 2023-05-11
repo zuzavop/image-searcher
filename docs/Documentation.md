@@ -31,4 +31,3 @@ GASearcher uses the following additional python libraries:
 * Torch
 * torchaudio
 * torchvision
-

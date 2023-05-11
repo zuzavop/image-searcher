@@ -30,6 +30,7 @@ can be used [class `Evaluator`](src/evaluator.py).
 The current version of the work associated with this software is available
 at [this link](https://www.overleaf.com/read/ffjzxjyhtznc). Software documentation is available in
 [the docs](docs) folder within information about reusing software with different dataset.
+It is important to note that this is a prototype that was used for experimental purposes in mention work.
 
 ## Dictionaries
 Currently, project includes two dictionaries of classes:

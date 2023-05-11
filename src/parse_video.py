@@ -27,6 +27,7 @@ def get_comm(video_path, output_path, start_index, is_wide=True):
         video_path (str): Path to the input video file.
         output_path (str): Path to the directory where the output image files will be saved.
         start_index (int): Index of the first image file.
+        is_wide (bool): Defines whether the video is landscape.
 
     Returns:
         str: The FFmpeg command to extract frames from the input video.
