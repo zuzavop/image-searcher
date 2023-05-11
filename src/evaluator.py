@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 import clip
 import matplotlib.pyplot as plt
@@ -149,25 +150,31 @@ class Evaluator:
             limit (float): The percentage limit for dataset after first query.
         """
         indexes = np.arange(len(self.clip_data))
+        min_search = self.min_search[session]
+        last_search = self.last_search[session]
+        multi_search = self.multi_search[session]
 
         if is_second:
             indexes = np.argsort(self.last_search[session])[:int(len(self.clip_data) * limit)]
             scores = scores[indexes]
+            min_search = min_search[indexes]
+            last_search = last_search[indexes]
+            multi_search = multi_search[indexes]
 
         self.logger.log_down(self.get_log_name("basic", with_som, is_sea, limit), list(np.argsort(scores)), indexes,
                              query, session, found)
         self.logger.log_down(self.get_log_name("min", with_som, is_sea, limit),
-                             list(np.argsort(np.min(np.array([scores, self.min_search[session]]), axis=0))), indexes,
+                             list(np.argsort(np.min(np.array([scores, min_search]), axis=0))), indexes,
                              query, session, found)
         self.logger.log_down(self.get_log_name("max", with_som, is_sea, limit),
-                             list(np.argsort(np.max(np.array([scores, self.last_search[session]]), axis=0))), indexes,
+                             list(np.argsort(np.max(np.array([scores, last_search]), axis=0))), indexes,
                              query, session, found)
         self.logger.log_down(self.get_log_name("sum", with_som, is_sea, limit),
-                             list(np.argsort(scores + self.last_search[session])), indexes, query, session, found)
+                             list(np.argsort(scores + last_search)), indexes, query, session, found)
         self.logger.log_down(self.get_log_name("multi", with_som, is_sea, limit),
-                             list(np.argsort(scores * self.multi_search[session])), indexes, query, session, found)
+                             list(np.argsort(scores * multi_search)), indexes, query, session, found)
         self.logger.log_down(self.get_log_name("avg", with_som, is_sea, limit),
-                             list(np.argsort((2 * scores) + self.last_search[session])), indexes, query, session, found)
+                             list(np.argsort((2 * scores) + last_search)), indexes, query, session, found)
 
     @staticmethod
     def get_log_name(name, is_som, is_sea, limit=1.0):
@@ -370,12 +377,12 @@ class Logger:
         """
         with open(self.result_path + log_filename, "a") as log:
             # if searching image is present in context (surrounding of image) of any image in shown result same is equal 1
-            first = self.get_rank(new_scores, np.where(indexes == found)[0][0])
+            first = self.get_rank(new_scores, np.where(indexes == found)[0][0]) if found in indexes else sys.maxsize
             for i in list(set(indexes).intersection(set(self.same_video[found]))):
                 first = min(first, self.get_rank(new_scores, np.where(indexes == i)[0][0]))
 
             log.write(f'"{query}";{found};{session};' + str(self.get_rank(new_scores, np.where(indexes == found)[0][
-                0]) if found in indexes else -1) + f';{first}')
+                0]) if found in indexes else -1) + f';{first if first < sys.maxsize else -1}')
 
     def is_in_same_video(self, new_showing, target):
         """
