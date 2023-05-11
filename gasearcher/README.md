@@ -23,7 +23,7 @@ a [javascript](static/js) files.
     ```
 
 2. To run whole project, including the virtual environment and required Python libraries,
-   use [start_server.bat](start_server.bat) for Windows or [start_server](start_server) for Linux.
+   use [start_server.bat](start_server.bat) for Windows or [start_server](start_server.sh) for Linux.
    For repeated start of project is possible used only this command:
    ```commandline
    python manage.py runserver

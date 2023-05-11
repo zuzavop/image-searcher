@@ -137,5 +137,5 @@ class Preprocessor:
         self.classify_images(nounlist_path, self.result_path + "result.csv", self.result_path + "nounlist.txt")
 
 
-preprocessor = Preprocessor("..//gasearcher//static//data//videos", "..//gasearcher//static//data//")
+preprocessor = Preprocessor(".//data//videos", ".//data//")
 preprocessor.preprocess_dataset("..//nounlists//nounlist.txt")

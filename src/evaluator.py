@@ -442,7 +442,7 @@ class Logger:
         return result.index(index) + 1
 
 
-evaluator = Evaluator(".//", "..//..//dataset//sea_clip", 60, True, 2, "..//..//dataset//sea_videos.txt")#"..//gasearcher//static//data//clip", 60, True, 2,
-                      #"..//gasearcher//static//data//videos_end.txt")
-#evaluator.evaluate_data("..//..//sea_combine_som.csv") #"..//gasearcher//static//data//log.csv")
+evaluator = Evaluator(".//", "..//gasearcher//static//data//clip", 60, True, 2,
+                      "..//gasearcher//static//data//videos_end.txt")
+evaluator.evaluate_data("..//gasearcher//static//data//log.csv")
 evaluator.get_violin_plot(".//model_results//", "plot.png")
