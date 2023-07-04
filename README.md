@@ -4,6 +4,8 @@ an image database using a text query. System show the results alongside their pr
 are intended to assist users in selecting suitable word combinations for formulating queries that more likely describe
 the desired image.
 
+You can try the online version [here](http://hmon.ms.mff.cuni.cz:8000/).
+
 Main features:
 * text-based search
 * similarity search based on a selected image from the currently displayed images
